@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "nasr",
   "description": "nasr (نثر): natural Persian prose and correct RTL documents. A writing workflow (concept → style cards → samples → final text) with styles measured on real Persian columnists and Iranian annual reports, plus register-aware prose, orthography, cleanup/spell-check scripts, RTL fixes for Word/PDF/PowerPoint/HTML/Excel/images, and bundled Vazirmatn/Lalezar fonts.",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "author": {
     "name": "mohsenkhan-dev",
     "url": "https://github.com/mohsenkhan-dev"

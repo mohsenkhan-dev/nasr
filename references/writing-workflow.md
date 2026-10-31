@@ -101,6 +101,32 @@ Ask the user to choose with one question (AskUserQuestion where available;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
+## Advanced settings (تنظیمات پیشرفته)
+
+When the user asks for «تنظیمات پیشرفته», wants to fine-tune a style, or the
+text is long or high-stakes and the user likes to choose, build the settings
+page instead of (or after) the style cards:
+
+```bash
+python3 scripts/settings.py --brief "<what the user wants to write>" \
+    --suggest "<recipe 1>|<one-line reason>" "<recipe 2>|<reason>" "<recipe 3>|<reason>" \
+    [--sections "<section type>" ...] --out <scratch>/nasr-settings.html
+```
+
+Send the page to the user. It lists all 14 recipes with your three suggestions
+in three colours, and for the chosen recipe a dropdown per parameter (purpose,
+evidence, position, structure, register, distance, certainty, warmth, rhythm).
+Options that make no sense for the recipe or the register are disabled; the
+recipe's default is marked «پیشنهادی», and values allowed only with a reason
+are marked «با احتیاط». For long texts the user also orders the sections and
+sets their tone; jumps of more than one step, or between non-neighbouring
+rhythms, are flagged. The page produces a «کارت تنظیمات» the user pastes back.
+
+Treat the pasted card as the user's decision: its values override the
+defaults. If it chooses a «با احتیاط» value, follow it and keep the reason in
+mind (say it once if it matters). The page's data is assets/style_matrix.json,
+the same source as tone-matrix.md, so the two cannot disagree.
+
 ## Stage 2b: the storyline (خلاصه‌ی روایت)
 
 Prose is written from a storyline, never from slots. Follow storyline.md.

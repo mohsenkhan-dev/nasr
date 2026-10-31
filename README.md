@@ -139,6 +139,16 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.5.0** — advanced settings. New scripts/settings.py builds an
+  advanced-settings page (تنظیمات پیشرفته): every recipe in a dropdown with the
+  writer's three suggestions coloured, a dropdown per parameter (purpose,
+  evidence, position, structure, register, distance, certainty, warmth, rhythm)
+  with meaningless options disabled and the recipe's defaults marked, an example
+  sentence for every value, section ordering and tone for long texts with
+  warnings on jumps, and a settings card to paste back. assets/style_matrix.json
+  is now the single source for the page and for references/tone-matrix.md,
+  which scripts/build_matrix_doc.py regenerates with examples for every value.
+  The review fixed seven inconsistencies in the matrix (listed in §8 of it).
 - **2.4.0** — register and tone matrix. New references/tone-matrix.md (in
   Persian): the order of decisions, every dimension with its single criterion
   (register, position, distance, certainty, warmth, rhythm) and its language

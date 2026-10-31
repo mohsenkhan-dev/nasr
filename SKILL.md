@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.4.0
+  version: 2.5.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
@@ -87,6 +87,10 @@ statements, explainers, long posts), follow `references/writing-workflow.md`:
    searching, never by inventing.
 2. **Propose styles.** Two to four style cards that differ on an axis
    (style-framework.md), the recommended one first; combinations are allowed.
+   For fine-tuning, build the advanced-settings page (`scripts/settings.py`,
+   writing-workflow.md «Advanced settings»): every recipe with your three
+   suggestions coloured, a dropdown per parameter with meaningless options
+   disabled, and a settings card the user pastes back.
 2b. **Storyline before prose** (`references/storyline.md`). For long texts,
    first the high-level storyline (6–10 claim sentences, each answering the
    question the previous one raises, opening situation → complication →
@@ -353,6 +357,8 @@ nasr/
 ├── scripts/
 │   ├── persian_cleanup.py      ← FIX: edit/clean/normalize/spell-check (paknevis+davat)
 │   ├── fa_lint.py              ← LINT: report issues needing contextual judgment
+│   ├── settings.py             ← build the advanced-settings page (تنظیمات پیشرفته) with three suggestions
+│   ├── build_matrix_doc.py     ← regenerate tone-matrix.md from assets/style_matrix.json
 │   ├── storyline.py            ← print headings and paragraph lead sentences; flag announcements
 │   ├── style_check.py          ← measure a draft against a rhythm profile
 │   ├── verify_docx.py          ← DOCX RTL checks (+ --fix for section bidi)
@@ -362,6 +368,8 @@ nasr/
 │   └── download_fonts.py       ← fetch extra families (needs GitHub access)
 └── assets/
     ├── fonts/                  ← Vazirmatn + Lalezar TTFs
+    ├── style_matrix.json       ← single source: dimensions, examples, recipes, sections, limits
+    ├── settings.html           ← template of the advanced-settings page
     ├── style_profiles.json     ← rhythm ranges per profile (from the reference corpus)
     └── persian_words.txt       ← 453K-word frequency dictionary (spell-check)
 ```

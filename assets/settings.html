@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تنظیمات پیشرفته‌ی نثر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafaf8;--card:#fff;--ink:#1f1f1f;--muted:#6b6b6b;--line:#e3e2dd;--soft:#f4f3ef;--accent:#2f5d50;--accent-soft:#e6efe9;--s1:#2f5d50;--s2:#2b5a8a;--s3:#7a4f9a;--warn:#9a5b00;--warnbg:#fff6e6;--no:#a3a3a3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161616;--card:#1f1f1f;--ink:#e8e6e1;--muted:#a3a19b;--line:#33322f;--soft:#1b1b1a;--accent:#8cc5b3;--accent-soft:#1f2b27;--s1:#8cc5b3;--s2:#8fb8e8;--s3:#c9a3e6;--warn:#f0b35a;--warnbg:#2a2214;--no:#5c5c5c}}
+:root[data-theme="dark"]{--bg:#161616;--card:#1f1f1f;--ink:#e8e6e1;--muted:#a3a19b;--line:#33322f;--soft:#1b1b1a;--accent:#8cc5b3;--accent-soft:#1f2b27;--s1:#8cc5b3;--s2:#8fb8e8;--s3:#c9a3e6;--warn:#f0b35a;--warnbg:#2a2214;--no:#5c5c5c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;font-size:15.5px}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 16px 90px}
+h1{font-size:1.45rem;margin:0}
+.sub{color:var(--muted);margin:2px 0 18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.panel h2{font-size:1.02rem;margin:0 0 10px;color:var(--accent)}
+textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);color:var(--ink);resize:vertical}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:3px 14px;cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2px solid var(--c);color:var(--c);border-radius:999px;padding:2px 12px;cursor:pointer;background:var(--card);font-weight:700;font-size:.92rem}
+.chip.on{background:var(--c);color:var(--bg)}
+.chip small{font-weight:400;opacity:.85}
+.why{font-size:.85rem;color:var(--muted);margin-top:6px}
+select{font:inherit;border:1px solid var(--line);border-radius:8px;padding:3px 8px;background:var(--bg);color:var(--ink);width:100%}
+option:disabled{color:var(--no)}
+.recipe-info{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;font-size:.88rem}
+.recipe-info div{background:var(--soft);border-radius:8px;padding:6px 10px}
+.recipe-info b{display:block;color:var(--muted);font-weight:500;font-size:.8rem}
+.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.group h3{font-size:.92rem;margin:0 0 6px;color:var(--muted)}
+.param{margin-bottom:12px}
+.param label{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem}
+.param label span{font-weight:400;color:var(--muted);font-size:.78rem}
+.ex{font-size:.82rem;color:var(--muted);margin-top:3px;line-height:1.7}
+.flag{font-size:.78rem;margin-inline-start:6px}
+.flag.rec{color:var(--accent)}.flag.cau{color:var(--warn)}
+.note{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:4px 10px;font-size:.85rem;margin-top:8px;display:none}
+table.sec{width:100%;border-collapse:collapse;font-size:.88rem}
+table.sec th,table.sec td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:start;vertical-align:middle}
+table.sec td select{min-width:90px}
+.warnline{color:var(--warn);font-size:.8rem}
+.legend{font-size:.82rem;color:var(--muted)}
+.legend b{color:var(--ink)}
+#card{font-family:inherit;min-height:220px;background:var(--soft)}
+@media (max-width:860px){.groups,.recipe-info{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.groups,.recipe-info{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>تنظیمات پیشرفته‌ی نثر</h1>
+<p class="sub">نسخه و پارامترهای متن را انتخاب کنید. گزینه‌هایی که برای نسخه یا سیاق انتخاب‌شده معنا ندارند غیرفعال‌اند، و پیشنهاد نثر برای هر پارامتر علامت خورده است. در پایان «کارت تنظیمات» را کپی کنید و در گفت‌وگو بچسبانید.</p>
+
+<div class="panel">
+<h2>۱. متنی که می‌خواهید بنویسید</h2>
+<textarea id="brief" rows="3" placeholder="موضوع، مخاطب و کاربرد متن را در چند خط بنویسید"></textarea>
+<div class="row"><button id="suggest" class="primary">پیشنهاد نسخه</button><span class="legend">سه پیشنهاد با سه رنگ مشخص می‌شوند. همه‌ی نسخه‌ها در فهرست هستند و می‌شود هر کدام را انتخاب کرد.</span></div>
+<div class="row chips" id="chips"></div>
+<div class="why" id="why"></div>
+</div>
+
+<div class="panel">
+<h2>۲. نسخه</h2>
+<select id="recipe"></select>
+<div class="recipe-info" id="rinfo"></div>
+</div>
+
+<div class="panel">
+<h2>۳. پارامترها</h2>
+<p class="legend"><b>(پیشنهادی)</b> پیش‌فرض این نسخه · <b>(با احتیاط)</b> مجاز ولی فقط با دلیل · گزینه‌ی خاکستری برای این نسخه یا این سیاق معنا ندارد.</p>
+<div class="groups" id="params"></div>
+<div class="note" id="pnote"></div>
+<div class="row"><button id="reset">بازگشت به پیشنهاد نسخه</button></div>
+</div>
+
+<div class="panel">
+<h2>۴. متن بلند و بخش‌ها</h2>
+<label><input type="checkbox" id="long"> متن بلند است و چند بخش دارد</label>
+<div id="secwrap" style="display:none;margin-top:10px">
+<p class="legend">بخش‌ها را به ترتیب انتخاب کنید. سیاق و جایگاه در کل متن ثابت‌اند؛ لحن هر بخش از جدول نوع بخش می‌آید و در هر مرز حداکثر یک پله جابه‌جا می‌شود.</p>
+<div style="overflow-x:auto"><table class="sec" id="sectable"></table></div>
+</div>
+</div>
+
+<div class="panel">
+<h2>۵. کارت تنظیمات</h2>
+<textarea id="card" readonly></textarea>
+<div class="row"><button id="copy" class="primary">کپی برای نثر</button><span id="msg" class="legend"></span></div>
+</div>
+</div>
+
+<script>
+const MATRIX = /*NASR_MATRIX*/null;
+const CONFIG = /*NASR_CONFIG*/null;
+const $ = id => document.getElementById(id);
+const DIM = Object.fromEntries(MATRIX.dims.map(d => [d.key, d]));
+const RECIPES = MATRIX.recipes;
+const STEP = {distance: ["دور","میانه","نزدیک"], certainty: ["قاطع","سنجیده","محتاط"], warmth: ["خنثی","گرم","پرشور"]};
+const GROUPS = [["سبک", ["purpose","evidence","position","structure"]], ["سیاق و لحن", ["register","distance","certainty","warmth"]], ["آهنگ", ["rhythm"]]];
+const SCOLORS = ["--s1","--s2","--s3"];
+const STRATEGY_SECTIONS = ["خلاصه‌ی مدیریتی","مسئله و وضعیت","استدلال و ضرورت","معرفی مدل یا راه‌حل","وضع موجود و یافته‌ها","برنامه و نقشه‌ی راه","ریسک‌ها","چشم‌انداز","درخواست یا فراخوان"];
+let state = {recipe: RECIPES[0].name, params: {}, suggestions: [], long: false, sections: []};
+try { const s = JSON.parse(localStorage.getItem("nasr-settings") || "null"); if (s && !CONFIG) state = Object.assign(state, s); } catch (e) {}
+const save = () => { try { localStorage.setItem("nasr-settings", JSON.stringify(state)); } catch (e) {} };
+const recipe = () => RECIPES.find(r => r.name === state.recipe);
+function level(key, v, rec, register) {
+  if (!rec.allow[key].includes(v)) return "no";
+  const lim = (MATRIX.register_limits[register] || {})[key] || {};
+  if (lim[v] === "no") return "no";
+  if (lim[v] === "caution" && rec.def[key] !== v) return "caution";
+  return "ok";
+}
+function suggest(text) {
+  const t = (text || "").replace(/\s+/g, " ");
+  const scored = RECIPES.map((r, i) => ({r, i, s: r.keywords.reduce((a, k) => a + (t.includes(k) ? 1 : 0), 0)}));
+  scored.sort((a, b) => b.s - a.s || a.i - b.i);
+  const top = scored.filter(x => x.s > 0).slice(0, 3).map(x => ({name: x.r.name, why: "واژه‌های کلیدی متن: " + x.r.keywords.filter(k => t.includes(k)).join("، ")}));
+  const fallback = ["تحلیل مفهومی","استدلال روزنامه‌ای","توضیح و آموزش"];
+  for (const n of fallback) if (top.length < 3 && !top.find(x => x.name === n)) top.push({name: n, why: "پیشنهاد عمومی؛ متن نشانه‌ی روشنی نداشت"});
+  return top;
+}
+function renderChips() {
+  $("chips").innerHTML = state.suggestions.map((s, i) => `<span class="chip ${s.name === state.recipe ? "on" : ""}" style="--c:var(${SCOLORS[i]})" data-n="${s.name}">پیشنهاد ${"۱۲۳"[i]} · ${s.name}</span>`).join("");
+  $("why").innerHTML = state.suggestions.map((s, i) => `<div><b style="color:var(${SCOLORS[i]})">${s.name}:</b> ${s.why || ""}</div>`).join("");
+  document.querySelectorAll(".chip").forEach(c => c.onclick = () => setRecipe(c.dataset.n));
+}
+function renderRecipeSelect() {
+  $("recipe").innerHTML = RECIPES.map(r => {
+    const i = state.suggestions.findIndex(s => s.name === r.name);
+    const tag = i >= 0 ? `★ پیشنهاد ${"۱۲۳"[i]} · ` : "";
+    const style = i >= 0 ? `style="color:var(${SCOLORS[i]});font-weight:700"` : "";
+    return `<option value="${r.name}" ${style}>${tag}${r.name} · ${r.use}</option>`;
+  }).join("");
+  $("recipe").value = state.recipe;
+  const r = recipe();
+  $("rinfo").innerHTML = `<div><b>کاربرد</b>${r.use}</div><div><b>واحد روایت</b>${r.unit}</div><div><b>پرسش پیونددهنده</b>${r.link}</div><div><b>جای نتیجه</b>${r.payoff}</div>`;
+}
+function renderParams() {
+  const r = recipe(), reg = state.params.register;
+  $("params").innerHTML = GROUPS.map(([g, keys]) => `<div class="group"><h3>${g}</h3>${keys.map(k => {
+    const d = DIM[k];
+    const opts = d.values.map(v => {
+      const lv = level(k, v.v, r, k === "register" ? null : reg);
+      const flag = r.def[k] === v.v ? " (پیشنهادی)" : (lv === "caution" ? " (با احتیاط)" : "");
+      return `<option value="${v.v}" ${lv === "no" ? "disabled" : ""} ${state.params[k] === v.v ? "selected" : ""}>${v.v}${flag}</option>`;
+    }).join("");
+    const cur = d.values.find(v => v.v === state.params[k]) || {};
+    const lv = level(k, state.params[k], r, k === "register" ? null : reg);
+    const f = r.def[k] === state.params[k] ? '<span class="flag rec">پیشنهادی</span>' : (lv === "caution" ? '<span class="flag cau">با احتیاط</span>' : "");
+    return `<div class="param"><label>${d.name}${f}<span>${d.when}</span></label><select data-k="${k}">${opts}</select><div class="ex">${cur.desc || ""}${cur.ex ? "<br>مثال: «" + cur.ex + "»" : ""}</div></div>`;
+  }).join("")}</div>`).join("");
+  document.querySelectorAll("#params select").forEach(s => s.onchange = () => { state.params[s.dataset.k] = s.value; normalise(); renderAll(); });
+}
+function normalise() {
+  const r = recipe(), notes = [];
+  for (const k of Object.keys(DIM)) {
+    const reg = k === "register" ? null : state.params.register;
+    if (!state.params[k] || level(k, state.params[k], r, reg) === "no") {
+      const old = state.params[k];
+      const pick = level(k, r.def[k], r, reg) !== "no" ? r.def[k] : DIM[k].values.map(v => v.v).find(v => level(k, v, r, reg) !== "no");
+      state.params[k] = pick;
+      if (old && old !== pick) notes.push(`${DIM[k].name} از «${old}» به «${pick}» تغییر کرد، چون با انتخاب تازه معنا نداشت.`);
+    }
+  }
+  $("pnote").style.display = notes.length ? "block" : "none";
+  $("pnote").innerHTML = notes.join("<br>");
+  state.sections.forEach(s => { for (const k of ["distance","certainty","warmth","rhythm"]) if (secLevel(k, s[k]) === "no") s[k] = DIM[k].values.map(v => v.v).find(v => secLevel(k, v) !== "no"); });
+}
+function setRecipe(name) {
+  state.recipe = name; state.params = Object.assign({}, recipe().def);
+  if (name === "سند راهبردی" && !state.sections.length) state.sections = STRATEGY_SECTIONS.map(secDefault);
+  normalise(); renderAll();
+}
+function secDefault(name) { const s = MATRIX.sections.find(x => x.name === name); return Object.assign({name}, s.def); }
+function secLevel(k, v) { const lim = (MATRIX.register_limits[state.params.register] || {})[k] || {}; return lim[v] || "ok"; }
+function renderSections() {
+  $("long").checked = state.long; $("secwrap").style.display = state.long ? "block" : "none";
+  if (!state.long) return;
+  const all = MATRIX.sections.map(s => s.name);
+  const rows = state.sections.map((s, i) => {
+    const sel = k => `<select data-i="${i}" data-k="${k}">${DIM[k].values.map(v => `<option ${secLevel(k, v.v) === "no" ? "disabled" : ""} ${s[k] === v.v ? "selected" : ""}>${v.v}</option>`).join("")}</select>`;
+    const prev = state.sections[i - 1];
+    const warns = [];
+    if (prev) {
+      for (const k of ["distance","certainty","warmth"]) { const a = STEP[k].indexOf(prev[k]), b = STEP[k].indexOf(s[k]); if (Math.abs(a - b) > 1) warns.push(`${DIM[k].name} دو پله پریده؛ یک پله کافی است`); }
+      if (prev.rhythm !== s.rhythm && !(MATRIX.neighbours[prev.rhythm] || []).includes(s.rhythm)) warns.push("آهنگ همسایه نیست، پس آغاز این بخش یک جمله‌ی پل می‌خواهد");
+    }
+    const job = (MATRIX.sections.find(x => x.name === s.name) || {}).job || "";
+    return `<tr><td><b>${s.name}</b><div class="legend">${job}</div>${warns.length ? `<div class="warnline">${warns.join(" · ")}</div>` : ""}</td><td>${sel("distance")}</td><td>${sel("certainty")}</td><td>${sel("warmth")}</td><td>${sel("rhythm")}</td><td><button data-up="${i}">▲</button> <button data-del="${i}">✕</button></td></tr>`;
+  }).join("");
+  $("sectable").innerHTML = `<tr><th>بخش</th><th>فاصله</th><th>قاطعیت</th><th>دما</th><th>آهنگ</th><th></th></tr>${rows}<tr><td colspan="6"><select id="addsec"><option value="">+ افزودن بخش</option>${all.map(n => `<option>${n}</option>`).join("")}</select></td></tr>`;
+  document.querySelectorAll("#sectable select[data-i]").forEach(s => s.onchange = () => { state.sections[+s.dataset.i][s.dataset.k] = s.value; renderAll(); });
+  document.querySelectorAll("[data-del]").forEach(b => b.onclick = () => { state.sections.splice(+b.dataset.del, 1); renderAll(); });
+  document.querySelectorAll("[data-up]").forEach(b => b.onclick = () => { const i = +b.dataset.up; if (i > 0) { [state.sections[i - 1], state.sections[i]] = [state.sections[i], state.sections[i - 1]]; renderAll(); } });
+  $("addsec").onchange = e => { if (e.target.value) { state.sections.push(secDefault(e.target.value)); renderAll(); } };
+}
+function renderCard() {
+  const r = recipe(), p = state.params;
+  const changed = Object.keys(DIM).filter(k => p[k] !== r.def[k]).map(k => DIM[k].name);
+  const lines = [
+    "تنظیمات نثر",
+    "موضوع: " + ($("brief").value.trim() || "—"),
+    "نسخه: " + r.name + (state.suggestions.findIndex(s => s.name === r.name) >= 0 ? " (از پیشنهادهای نثر)" : " (انتخاب کاربر)"),
+    `سبک: غایت ${p.purpose}، شاهد ${p.evidence}، جایگاه ${p.position}، ساخت ${p.structure}`,
+    `سیاق: ${p.register}`,
+    `لحن: فاصله ${p.distance}، قاطعیت ${p.certainty}، دما ${p.warmth}`,
+    `آهنگ: ${p.rhythm}`,
+    `روایت: واحد «${r.unit}»، پرسش پیونددهنده «${r.link}»، ${r.payoff}`,
+    "تغییر نسبت به پیشنهاد نسخه: " + (changed.length ? changed.join("، ") : "ندارد")
+  ];
+  if (state.long && state.sections.length) {
+    lines.push("بخش‌ها:");
+    state.sections.forEach((s, i) => lines.push(`  ${i + 1}. ${s.name} · فاصله ${s.distance}، قاطعیت ${s.certainty}، دما ${s.warmth} · آهنگ ${s.rhythm}`));
+  }
+  $("card").value = lines.join("\n");
+}
+function renderAll() { renderChips(); renderRecipeSelect(); renderParams(); renderSections(); renderCard(); save(); }
+$("recipe").onchange = e => setRecipe(e.target.value);
+$("suggest").onclick = () => { state.suggestions = suggest($("brief").value); setRecipe(state.suggestions[0].name); };
+$("reset").onclick = () => setRecipe(state.recipe);
+$("long").onchange = e => { state.long = e.target.checked; if (state.long && !state.sections.length) state.sections = ["خلاصه‌ی مدیریتی","مسئله و وضعیت","تحلیل و تبیین","چشم‌انداز"].map(secDefault); renderAll(); };
+$("brief").oninput = () => { state.brief = $("brief").value; renderCard(); save(); };
+$("copy").onclick = async () => { try { await navigator.clipboard.writeText($("card").value); $("msg").textContent = "کپی شد؛ در گفت‌وگو بچسبانید."; } catch (e) { $("card").select(); $("msg").textContent = "متن انتخاب شد؛ با Ctrl+C کپی کنید."; } };
+if (CONFIG) {
+  $("brief").value = CONFIG.brief || "";
+  state.suggestions = (CONFIG.suggestions || []).slice(0, 3);
+  state.long = !!CONFIG.long;
+  state.sections = (CONFIG.sections || []).map(n => typeof n === "string" ? secDefault(n) : n);
+  setRecipe(state.suggestions.length ? state.suggestions[0].name : RECIPES[0].name);
+} else {
+  $("brief").value = state.brief || "";
+  if (!state.suggestions.length) state.suggestions = suggest("");
+  if (!Object.keys(state.params).length) state.params = Object.assign({}, recipe().def);
+  normalise(); renderAll();
+}
+</script>
+</body>
+</html>
