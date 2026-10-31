@@ -1,22 +1,19 @@
 ---
 name: nasr
 description: >
-  Write natural, human-sounding Persian (Farsi) and build correct right-to-left
-  Persian deliverables. Use for ANY task involving Persian text or an Iranian
-  audience: writing, editing, translating, humanizing, SEO content and
-  copywriting (سئو، کپی‌رایتینگ، لندینگ), academic papers/theses, and Persian
-  output in Word/.docx, PDF, PowerPoint, HTML, Excel, images/posters, emails,
-  social posts. Covers register detection (رسمی/اداری/محاوره/علمی — errors here
-  are costly), Persian AI-tell removal, orthography (نیم‌فاصله/ZWNJ، اعداد
-  فارسی، «گیومه»), cleanup and spell-check (ویرایش، پاکسازی — bundled
-  paknevis+davat toolkit), RTL layout/pagination fixes, and Persian fonts
-  (Vazirmatn bundled). For longer prose it runs a writing workflow: understand
-  the concept, propose two to four style cards (combinable), write short
-  samples when useful, then draft and finalize, with styles from a four-axis
-  framework measured on real Persian writers and Iranian company reports
-  (سبک نوشتن، یادداشت، ستون، تحلیل، گزارش سالانه، متن نمونه). Trigger whenever you see Persian/Arabic script or words
-  like فارسی, Farsi, Persian, Iran, RTL, راست‌چین, نیم‌فاصله, ویرایش, مقاله,
-  پایان‌نامه, سئو, کپشن, Vazirmatn — even if the user never mentions this skill.
+  Write natural Persian (Farsi) prose and build correct right-to-left Persian
+  deliverables. For longer texts it runs a writing workflow: understand the
+  concept, propose 2–4 combinable style cards measured on real Persian writers
+  and Iranian reports, write short samples, then finalize (سبک نوشتن، یادداشت،
+  ستون، تحلیل، گزارش سالانه). Use for ANY Persian task: writing, editing,
+  translating, humanizing, SEO and copywriting, academic papers/theses, and
+  output in Word/.docx, PDF, PowerPoint, HTML, Excel, images, emails, social
+  posts. Covers register (رسمی/اداری/محاوره/علمی), AI-tell removal,
+  orthography (نیم‌فاصله، اعداد فارسی، «گیومه»), cleanup and spell-check
+  (ویرایش، پاکسازی), RTL layout fixes and bundled Vazirmatn fonts. Trigger
+  whenever you see Persian script or words like فارسی, Farsi, Persian, RTL,
+  راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
+  mentions this skill.
 metadata:
   version: 2.0.0
 license: MIT (bundled fonts under SIL OFL)
