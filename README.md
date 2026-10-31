@@ -139,6 +139,13 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.5.1** — no jolts in long texts. In the settings page, tone and rhythm
+  for a long text are set only per section (the whole-text fields are disabled
+  with a note), and each recipe that is usually long brings its own default
+  section plan. Default section sequences are smoothed: tone moves at most one
+  step between sections and rhythm only to a neighbour (خطابی is never used as
+  a bridge); reports keep one rhythm throughout. tone-matrix.md now lists the
+  smoothed default sequence of every long recipe.
 - **2.5.0** — advanced settings. New scripts/settings.py builds an
   advanced-settings page (تنظیمات پیشرفته): every recipe in a dropdown with the
   writer's three suggestions coloured, a dropdown per parameter (purpose,

@@ -82,8 +82,9 @@ table.sec td select{min-width:90px}
 <h2>۴. متن بلند و بخش‌ها</h2>
 <label><input type="checkbox" id="long"> متن بلند است و چند بخش دارد</label>
 <div id="secwrap" style="display:none;margin-top:10px">
-<p class="legend">بخش‌ها را به ترتیب انتخاب کنید. سیاق و جایگاه در کل متن ثابت‌اند؛ لحن هر بخش از جدول نوع بخش می‌آید و در هر مرز حداکثر یک پله جابه‌جا می‌شود.</p>
+<p class="legend">بخش‌ها را به ترتیب انتخاب کنید. سیاق و جایگاه در کل متن ثابت‌اند و از بخش ۳ می‌آیند. لحن و آهنگ هر بخش از جدول نوع بخش می‌آید و در هر مرز حداکثر یک پله جابه‌جا می‌شود، تا متن از لحنی به لحن دیگر نپرد.</p>
 <div style="overflow-x:auto"><table class="sec" id="sectable"></table></div>
+<div class="row"><button id="resetsec">بازگشت به پیش‌فرض هموار</button><span class="legend">پیش‌فرض‌ها هموارند؛ هشدار فقط وقتی می‌آید که خودتان لحن یا ترتیب را عوض کنید.</span></div>
 </div>
 </div>
 
@@ -101,9 +102,9 @@ const $ = id => document.getElementById(id);
 const DIM = Object.fromEntries(MATRIX.dims.map(d => [d.key, d]));
 const RECIPES = MATRIX.recipes;
 const STEP = {distance: ["دور","میانه","نزدیک"], certainty: ["قاطع","سنجیده","محتاط"], warmth: ["خنثی","گرم","پرشور"]};
+const PER_SECTION = ["distance","certainty","warmth","rhythm"];
 const GROUPS = [["سبک", ["purpose","evidence","position","structure"]], ["سیاق و لحن", ["register","distance","certainty","warmth"]], ["آهنگ", ["rhythm"]]];
 const SCOLORS = ["--s1","--s2","--s3"];
-const STRATEGY_SECTIONS = ["خلاصه‌ی مدیریتی","مسئله و وضعیت","استدلال و ضرورت","معرفی مدل یا راه‌حل","وضع موجود و یافته‌ها","برنامه و نقشه‌ی راه","ریسک‌ها","چشم‌انداز","درخواست یا فراخوان"];
 let state = {recipe: RECIPES[0].name, params: {}, suggestions: [], long: false, sections: []};
 try { const s = JSON.parse(localStorage.getItem("nasr-settings") || "null"); if (s && !CONFIG) state = Object.assign(state, s); } catch (e) {}
 const save = () => { try { localStorage.setItem("nasr-settings", JSON.stringify(state)); } catch (e) {} };
@@ -144,6 +145,9 @@ function renderParams() {
   const r = recipe(), reg = state.params.register;
   $("params").innerHTML = GROUPS.map(([g, keys]) => `<div class="group"><h3>${g}</h3>${keys.map(k => {
     const d = DIM[k];
+    if (state.long && PER_SECTION.includes(k)) {
+      return `<div class="param"><label>${d.name}<span>${d.when}</span></label><select disabled><option>در بخش ۴ تنظیم می‌شود</option></select><div class="ex">در متن بلند، ${d.name} از بخشی به بخش دیگر حرکت می‌کند و برای هر بخش جدا تعیین می‌شود.</div></div>`;
+    }
     const opts = d.values.map(v => {
       const lv = level(k, v.v, r, k === "register" ? null : reg);
       const flag = r.def[k] === v.v ? " (پیشنهادی)" : (lv === "caution" ? " (با احتیاط)" : "");
@@ -173,10 +177,35 @@ function normalise() {
 }
 function setRecipe(name) {
   state.recipe = name; state.params = Object.assign({}, recipe().def);
-  if (name === "سند راهبردی" && !state.sections.length) state.sections = STRATEGY_SECTIONS.map(secDefault);
+  // a new recipe brings its own section plan; the old one would not fit it
+  const recSecs = recipe().sections;
+  if (recSecs) state.sections = defaultSections(recSecs);
+  else if (state.sections.length) state.sections = defaultSections(state.sections.map(s => s.name));
   normalise(); renderAll();
 }
 function secDefault(name) { const s = MATRIX.sections.find(x => x.name === name); return Object.assign({name}, s.def); }
+// Defaults must never jolt the reader: each tone dimension moves at most one step
+// between consecutive sections, and rhythm moves only to a neighbour. A default
+// that would jump is pulled to the nearest value that does not.
+function smoothFrom(seq, start) {
+  for (let i = Math.max(1, start); i < seq.length; i++) {
+    const prev = seq[i - 1], cur = seq[i];
+    for (const k of ["distance","certainty","warmth"]) {
+      const a = STEP[k].indexOf(prev[k]), b = STEP[k].indexOf(cur[k]);
+      if (Math.abs(a - b) > 1) cur[k] = STEP[k][a + Math.sign(b - a)];
+    }
+    if (cur.rhythm !== prev.rhythm && !(MATRIX.neighbours[prev.rhythm] || []).includes(cur.rhythm)) {
+      const near = MATRIX.neighbours[prev.rhythm] || [];
+      cur.rhythm = near.find(r => r !== "خطابی" && (MATRIX.neighbours[cur.rhythm] || []).includes(r)) || prev.rhythm;
+    }
+  }
+  return seq;
+}
+function defaultSections(names) {
+  const seq = names.map(secDefault), rr = recipe().section_rhythm;
+  if (rr) seq.forEach(s => s.rhythm = rr);
+  return smoothFrom(seq, 1);
+}
 function secLevel(k, v) { const lim = (MATRIX.register_limits[state.params.register] || {})[k] || {}; return lim[v] || "ok"; }
 function renderSections() {
   $("long").checked = state.long; $("secwrap").style.display = state.long ? "block" : "none";
@@ -197,19 +226,18 @@ function renderSections() {
   document.querySelectorAll("#sectable select[data-i]").forEach(s => s.onchange = () => { state.sections[+s.dataset.i][s.dataset.k] = s.value; renderAll(); });
   document.querySelectorAll("[data-del]").forEach(b => b.onclick = () => { state.sections.splice(+b.dataset.del, 1); renderAll(); });
   document.querySelectorAll("[data-up]").forEach(b => b.onclick = () => { const i = +b.dataset.up; if (i > 0) { [state.sections[i - 1], state.sections[i]] = [state.sections[i], state.sections[i - 1]]; renderAll(); } });
-  $("addsec").onchange = e => { if (e.target.value) { state.sections.push(secDefault(e.target.value)); renderAll(); } };
+  $("addsec").onchange = e => { if (e.target.value) { state.sections.push(secDefault(e.target.value)); smoothFrom(state.sections, state.sections.length - 1); renderAll(); } };
 }
 function renderCard() {
   const r = recipe(), p = state.params;
-  const changed = Object.keys(DIM).filter(k => p[k] !== r.def[k]).map(k => DIM[k].name);
+  const changed = Object.keys(DIM).filter(k => !(state.long && PER_SECTION.includes(k)) && p[k] !== r.def[k]).map(k => DIM[k].name);
   const lines = [
     "تنظیمات نثر",
     "موضوع: " + ($("brief").value.trim() || "—"),
     "نسخه: " + r.name + (state.suggestions.findIndex(s => s.name === r.name) >= 0 ? " (از پیشنهادهای نثر)" : " (انتخاب کاربر)"),
     `سبک: غایت ${p.purpose}، شاهد ${p.evidence}، جایگاه ${p.position}، ساخت ${p.structure}`,
     `سیاق: ${p.register}`,
-    `لحن: فاصله ${p.distance}، قاطعیت ${p.certainty}، دما ${p.warmth}`,
-    `آهنگ: ${p.rhythm}`,
+    ...(state.long ? ["لحن و آهنگ: برای هر بخش جدا (پایین)"] : [`لحن: فاصله ${p.distance}، قاطعیت ${p.certainty}، دما ${p.warmth}`, `آهنگ: ${p.rhythm}`]),
     `روایت: واحد «${r.unit}»، پرسش پیونددهنده «${r.link}»، ${r.payoff}`,
     "تغییر نسبت به پیشنهاد نسخه: " + (changed.length ? changed.join("، ") : "ندارد")
   ];
@@ -223,14 +251,15 @@ function renderAll() { renderChips(); renderRecipeSelect(); renderParams(); rend
 $("recipe").onchange = e => setRecipe(e.target.value);
 $("suggest").onclick = () => { state.suggestions = suggest($("brief").value); setRecipe(state.suggestions[0].name); };
 $("reset").onclick = () => setRecipe(state.recipe);
-$("long").onchange = e => { state.long = e.target.checked; if (state.long && !state.sections.length) state.sections = ["خلاصه‌ی مدیریتی","مسئله و وضعیت","تحلیل و تبیین","چشم‌انداز"].map(secDefault); renderAll(); };
+$("long").onchange = e => { state.long = e.target.checked; if (state.long && !state.sections.length) state.sections = defaultSections(recipe().sections || ["خلاصه‌ی مدیریتی","مسئله و وضعیت","تحلیل و تبیین","چشم‌انداز"]); renderAll(); };
+$("resetsec").onclick = () => { state.sections = defaultSections(recipe().sections || state.sections.map(s => s.name)); renderAll(); };
 $("brief").oninput = () => { state.brief = $("brief").value; renderCard(); save(); };
 $("copy").onclick = async () => { try { await navigator.clipboard.writeText($("card").value); $("msg").textContent = "کپی شد؛ در گفت‌وگو بچسبانید."; } catch (e) { $("card").select(); $("msg").textContent = "متن انتخاب شد؛ با Ctrl+C کپی کنید."; } };
 if (CONFIG) {
   $("brief").value = CONFIG.brief || "";
   state.suggestions = (CONFIG.suggestions || []).slice(0, 3);
   state.long = !!CONFIG.long;
-  state.sections = (CONFIG.sections || []).map(n => typeof n === "string" ? secDefault(n) : n);
+  state.sections = defaultSections((CONFIG.sections || []).map(n => typeof n === "string" ? n : n.name));
   setRecipe(state.suggestions.length ? state.suggestions[0].name : RECIPES[0].name);
 } else {
   $("brief").value = state.brief || "";

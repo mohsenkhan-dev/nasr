@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.5.0
+  version: 2.5.1
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,

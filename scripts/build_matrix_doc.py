@@ -29,6 +29,28 @@ def reg_cell(reg, key):
     return " / ".join(SYM[lim.get(v["v"], "ok")] for v in DIM[key]["values"])
 
 
+STEP = {k: [v["v"] for v in DIM[k]["values"]] for k in TONE}
+
+
+def smooth(names, recipe_rhythm=None):
+    """Same rule as settings.html: tone moves one step, rhythm only to a neighbour."""
+    secs = {s["name"]: s for s in M["sections"]}
+    seq = [dict(secs[n]["def"], name=n) for n in names]
+    if recipe_rhythm:
+        for s in seq:
+            s["rhythm"] = recipe_rhythm
+    for i in range(1, len(seq)):
+        prev, cur = seq[i - 1], seq[i]
+        for k in TONE:
+            a, b = STEP[k].index(prev[k]), STEP[k].index(cur[k])
+            if abs(a - b) > 1:
+                cur[k] = STEP[k][a + (1 if b > a else -1)]
+        if cur["rhythm"] != prev["rhythm"] and cur["rhythm"] not in M["neighbours"].get(prev["rhythm"], []):
+            near = M["neighbours"].get(prev["rhythm"], [])
+            cur["rhythm"] = next((r for r in near if r != "خطابی" and r in M["neighbours"].get(cur["rhythm"], [])), prev["rhythm"])
+    return seq
+
+
 def recipe_cell(r, key):
     d = r["def"][key]
     others = [v for v in r["allow"][key] if v != d]
@@ -102,13 +124,29 @@ out.append("""## ۷. قاعده‌ی حرکت لحن میان بخش‌ها
 
 """ + table(["آهنگ", "همسایه‌ها"], [[k, "، ".join(v)] for k, v in M["neighbours"].items()]) + """
 
-در سند راهبردی با بخش‌های پیش‌فرض، از «معرفی مدل» (تحلیلی میانه) به «وضع موجود» (گزارشی برند) و از «برنامه» (گزارشی برند) به «ریسک‌ها» (تحلیلی میانه) پرش آهنگ هست، پس هر دو بخش با جمله‌ی پل آغاز می‌شوند.""")
+""" + M["smoothing_rule"] + """
+
+### ترتیب پیش‌فرض بخش‌ها برای نسخه‌های بلند (هموارشده)
+
+این ترتیب‌ها همان‌هایی‌اند که صفحه‌ی تنظیمات پیشنهاد می‌دهد. مقدارهایی که هموارسازی از پیش‌فرض نوع بخش عوض کرده، با ⇠ علامت خورده‌اند.""")
+
+secs_by_name = {s["name"]: s for s in M["sections"]}
+for r in M["recipes"]:
+    if not r.get("sections"):
+        continue
+    rows = []
+    for s in smooth(r["sections"], r.get("section_rhythm")):
+        base = secs_by_name[s["name"]]["def"]
+        rows.append([s["name"]] + [s[k] + (" ⇠" if s[k] != base[k] else "") for k in TONE + ["rhythm"]])
+    out.append(f"**{r['name']}**\n\n" + table(["بخش", "فاصله", "قاطعیت", "دما", "آهنگ"], rows))
 
 out.append("""## ۸. آنچه در بازبینی این ماتریس اصلاح شد
 
 - **استدلال روزنامه‌ای:** سیاق پیش‌فرضش رسمی‌انسانی بود و فاصله‌اش نزدیک، در حالی که نزدیک در رسمی‌انسانی «با احتیاط» است. سیاق پیش‌فرض به نیمه‌رسمی تغییر کرد.
 - **سوگ‌نامه:** قاطعیت پیش‌فرض «قاطع» بود؛ سوگ‌نامه ادعای بحث‌برانگیز ندارد و «سنجیده» درست‌تر است.
 - **ریسک‌ها:** «محتاط» بود و در سند راهبردی میان «برنامه» و «چشم‌انداز» که هر دو قاطع‌اند، دو پله پرش می‌ساخت. به «سنجیده» تغییر کرد.
+- **پرش آهنگ در پیش‌فرض‌ها:** در سند راهبردی، آهنگ از «معرفی مدل» به «وضع موجود» و از «برنامه» به «ریسک‌ها» به آهنگی غیرهمسایه می‌پرید. حالا پیش‌فرض‌ها هموار می‌شوند و این دو بخش آهنگ گزارشی نهادی می‌گیرند، که همسایه‌ی هر دو طرف است. در دو نسخه‌ی گزارشی، همه‌ی بخش‌ها آهنگ خود نسخه را دارند.
+- **لحن کلی در متن بلند:** در صفحه‌ی تنظیمات، لحن و آهنگ کلی متن در متن بلند بی‌اثر بود و صفحه این را نمی‌گفت. حالا در متن بلند فقط در بخش‌ها تنظیم می‌شود.
 - **نمونه یا روایت مشتری:** از فهرست نوع بخش‌ها بیرون آمد، چون با قاعده‌ی یک‌پله‌ای ناسازگار بود. حالا یک پاراگراف مجاز درون بخش است.
 - **خبر کوتاه:** آهنگ فشرده در سیاق رسمی‌انسانی «با احتیاط» علامت خورده بود، در حالی که پیش‌فرض همین نسخه است. محدودیت برداشته شد.
 - **سیاق علمی:** به هیچ نسخه‌ای وصل نبود. حالا در تحلیل مفهومی، جدل، عبرت تاریخی، توضیح و آموزش، توجیه راهبردی و گزارش نهادی مجاز است.
