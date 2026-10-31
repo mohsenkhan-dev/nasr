@@ -18,6 +18,7 @@ PARTS = [
     ('writing-workflow.md', 'Writing workflow: concept to final text'),
     ('style-framework.md',  'Prose styles: axes, recipes, rhythm'),
     ('storyline.md',        'Storyline first'),
+    ('tone-matrix.md',      'Register and tone matrix'),
     ('style-skeletons.md',  'Style arcs: think before writing'),
     ('style-moves.md',      'Signature moves per style'),
     ('orthography.md',      'Orthography (نگارش و رسم‌الخط)'),

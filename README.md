@@ -139,6 +139,16 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.4.0** — register and tone matrix. New references/tone-matrix.md (in
+  Persian): the order of decisions, every dimension with its single criterion
+  (register, position, distance, certainty, warmth, rhythm) and its language
+  markers, and four matrices: register × tone, the 14 recipes with their
+  defaults and storyline units, section types for long texts, and the rules for
+  moving tone between sections. storyline.md now covers every style family
+  (claims, findings, tasks, moments, emotional steps, facts), fixes register and
+  position before the storyline, and puts each heading's job, tone and rhythm
+  into the level-1 storyline, replacing the separate section map. fa_lint
+  accepts bold line labels («**گام اول:** …»).
 - **2.3.0** — storyline first. New references/storyline.md: long texts are
   built in three levels, the high-level storyline (6–10 claim sentences, each
   answering the question the previous one raises, opening situation →

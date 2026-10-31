@@ -103,7 +103,11 @@ options in the user's language, the recommended card first). Allow «ترکیب 
 
 ## Stage 2b: the storyline (خلاصه‌ی روایت)
 
-Prose is written from a storyline, never from slots. Follow storyline.md:
+Prose is written from a storyline, never from slots. Follow storyline.md.
+The order of decisions is fixed: register and position first, then the
+level-1 storyline with each heading's job, tone and rhythm, then each
+section's storyline with the certainty of each claim, then prose
+(tone-matrix.md §1).
 
 1. **Level 1.** The high-level storyline: 6–10 claim sentences, each answering
    the question the previous one raises, opening situation → complication →

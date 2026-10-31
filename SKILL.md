@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.3.0
+  version: 2.4.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
@@ -94,7 +94,11 @@ statements, explainers, long posts), follow `references/writing-workflow.md`:
    storyline of each section, with each claim marked [سند]، [شاهد بیرونی]،
    [استدلال] or [کمبود]. Then prose: every storyline sentence opens a
    paragraph. The recipe's arc (`style-skeletons.md`) says which claims are
-   needed and where the payoff goes. Check with `scripts/storyline.py`.
+   needed and where the payoff goes; non-argument styles chain other units
+   (findings, moments, tasks, facts). Register and position are fixed before
+   the storyline; each heading's tone (distance, certainty, warmth) and rhythm
+   are set at level 1 from `references/tone-matrix.md`. Check with
+   `scripts/storyline.py`.
    Never open with an announcement or a teaser.
 3. **Sample text, when it helps.** One opening paragraph per card on the same
    real facts, so the user compares style alone.
@@ -330,6 +334,7 @@ nasr/
 │   ├── writing-style.md        ← registers, Persian AI tells, colloquial patterns
 │   ├── writing-workflow.md     ← concept → style cards → samples → final text
 │   ├── style-framework.md      ← four style axes, recipes, rhythm profiles, choosing and combining
+│   ├── tone-matrix.md          ← registers × tone dimensions × recipes × section types, order of decisions
 │   ├── storyline.md            ← storyline first: level 1 and headings, level 2 per section, lead-sentence test
 │   ├── style-skeletons.md      ← the thinking skeleton of each style: slots, payoff, fit test
 │   ├── style-moves.md          ← signature moves per recipe (invented examples)

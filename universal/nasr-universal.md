@@ -98,7 +98,11 @@ statements, explainers, long posts), follow the «Writing workflow: concept to f
    storyline of each section, with each claim marked [سند]، [شاهد بیرونی]،
    [استدلال] or [کمبود]. Then prose: every storyline sentence opens a
    paragraph. The recipe's arc (the «Style arcs: think before writing» part) says which claims are
-   needed and where the payoff goes. Check with `scripts/storyline.py`.
+   needed and where the payoff goes; non-argument styles chain other units
+   (findings, moments, tasks, facts). Register and position are fixed before
+   the storyline; each heading's tone (distance, certainty, warmth) and rhythm
+   are set at level 1 from the «Register and tone matrix» part below. Check with
+   `scripts/storyline.py`.
    Never open with an announcement or a teaser.
 3. **Sample text, when it helps.** One opening paragraph per card on the same
    real facts, so the user compares style alone.
@@ -835,7 +839,11 @@ options in the user's language, the recommended card first). Allow «ترکیب 
 
 ## Stage 2b: the storyline (خلاصه‌ی روایت)
 
-Prose is written from a storyline, never from slots. Follow storyline.md:
+Prose is written from a storyline, never from slots. Follow storyline.md.
+The order of decisions is fixed: register and position first, then the
+level-1 storyline with each heading's job, tone and rhythm, then each
+section's storyline with the certainty of each claim, then prose
+(tone-matrix.md §1).
 
 1. **Level 1.** The high-level storyline: 6–10 claim sentences, each answering
    the question the previous one raises, opening situation → complication →
@@ -1163,8 +1171,9 @@ Rules for each boundary:
 - **Keep the concept visible across the move.** The named concept of the opening (writing-workflow.md, stage 1) should reappear in the report sections as the reason the figures matter.
 
 ### 5.3 The section map
-For any text with sections, write a section map before drafting: one line per
-section with its job, the axis values that change, and its rhythm profile. Then
+The section map is now part of the level-1 storyline (storyline.md): under
+each main heading, one line with the section's job, the axis values that
+change, its tone (tone-matrix.md) and its rhythm profile. Then
 mark each section in the draft with a comment under its heading.
 `style_check.py --sections` reads these, measures each section against its own
 profile, and warns when two consecutive sections are not neighbours:
@@ -1271,6 +1280,37 @@ descriptions, so the paragraphs sat side by side instead of following from
 one another. Style-skeleton slots alone («diagnosis», «crux») did not fix
 this, because a slot names a role, not a claim.
 
+## Before the storyline: register and position
+
+Two parts of tone are fixed before the storyline, because they change what
+the claims are, not how they sound:
+- **Register** (سیاق), from writing-style.md Part 1. It decides which claims can be said at all.
+- **Position** (من، ما، بیرونی). «ما دیده‌ایم» and «تجربه نشان داده» are different claims.
+
+Everything else about tone (distance, certainty, warmth) is planned per
+heading at level 1, set per claim at level 2 (certainty), and realised in
+prose. The storyline itself is written in plain, neutral Persian, so that only
+its logic is judged; final tone comes with the prose. The full matrix of
+registers, tone dimensions, recipes and section types is in tone-matrix.md.
+
+## The storyline differs by style
+
+Every style has a storyline: a chain of units, each following from the one
+before. What changes is the unit and the question that links two units:
+
+| Recipe family | Unit | Linking question |
+|---|---|---|
+| strategy, analysis, argument, rebuttal | a claim | «چرا؟»، «پس چه؟»، «بهایش چیست؟» |
+| brand or institutional report | a finding: a figure and its meaning | «یعنی چه؟»، «چرا شد؟»، «بعدش چه؟» |
+| explainer | a task for the reader | «چطور؟»، «بعد چه کنم؟» |
+| witness narrative, obituary, reflection | a moment or event, and one turn | «بعد چه شد؟»، «یعنی چه؟» |
+| خطابه | an emotional step: situation, stake, commitment, call | «حالا چه باید کرد؟» |
+| short news | a fact, by importance | «دیگر چه؟» |
+
+The rules below are written for claims; for other units, read «claim» as the
+recipe's unit. The test is the same: read only the units, in order, and the
+text must already work.
+
 ## Level 1: the high-level storyline and the main headings
 
 Write 6–10 sentences. Each sentence must:
@@ -1291,6 +1331,13 @@ Then group the sentences under the **main headings**: three to seven, each
 covering one or more storyline sentences. Headings are plain: a short topic
 or a short claim, no colon, no question mark, no slogan.
 
+Under each heading, add one line that sets the section's **job, tone and
+rhythm**: its distance, certainty and warmth, and its rhythm profile. Start
+from the section-type defaults in tone-matrix.md §5 and keep each step between
+neighbouring sections small (tone-matrix.md §6). This line replaces the
+separate section map; in the draft, mark the section with
+`<!-- سبک: <profile> -->` so `style_check.py --sections` can measure its rhythm.
+
 The recipe's arc (style-skeletons.md) tells you what kind of claims the
 storyline needs and where the payoff goes: a strategy needs a diagnosis, a
 crux and a trade-off; a report puts targets at the end. The arc is the plan;
@@ -1303,8 +1350,11 @@ compared with correcting prose.
 ## Level 2: the storyline of each section
 
 Under each heading, write the section's own chain: 3–6 claim sentences,
-which will become the first sentences of its paragraphs. Next to each one,
-note its support:
+which will become the first sentences of its paragraphs. Set the certainty of
+each claim here («باید» or «پیشنهاد می‌شود», «است» or «احتمالاً»): certainty
+is content, not decoration. If one paragraph will depart from the section's
+tone (a warmer customer story, a cautious risk), mark it now. Next to each
+claim, note its support:
 - **[سند]**: a fact in the user's material;
 - **[شاهد بیرونی]**: an external source, with its name and year, to be verified before use;
 - **[استدلال]**: the writer's reasoning, which needs no source but must follow;
@@ -1335,7 +1385,123 @@ is two paragraphs.
 
 ---
 
-# PART 5 — Style arcs: think before writing
+# PART 5 — Register and tone matrix
+
+# ماتریس سیاق، لحن و سبک
+
+This file holds every dimension the skill uses to decide how a text sounds, in
+the order in which they are decided, with one criterion per dimension. It is
+written in Persian because its tables are meant for the user as much as for
+the model. How the dimensions are measured, and how far to trust each one, is
+in the last section.
+
+## ۱. ترتیب تصمیم‌ها
+
+| گام | چه چیزی تعیین می‌شود | کی | ثابت یا متغیر |
+|---|---|---|---|
+| ۱ | سیاق | پیش از روایت | در کل متن ثابت |
+| ۲ | جایگاه (من، ما، بیرونی) | پیش از روایت | ثابت؛ فقط در مرز بخش و با دلیل عوض می‌شود |
+| ۳ | نسخه و قوس سبک | پیش از روایت | در کل متن یک غایت |
+| ۴ | روایت سطح ۱ و تیترها، با کار و لحن و آهنگ هر تیتر | سطح ۱ | لحن و آهنگ از بخشی به بخش دیگر حرکت می‌کنند |
+| ۵ | روایت هر بخش و قاطعیت هر ادعا | سطح ۲ | ادعا به ادعا |
+| ۶ | دمای جمله‌ها، تصویر، مثل، آهنگ واقعی | نوشتن متن | جمله به جمله، درون مرز بخش |
+
+روایت با زبان ساده و خنثی نوشته می‌شود تا فقط منطقش داوری شود. لحن نهایی در گام ۶ می‌آید.
+
+## ۲. بُعدها، هر کدام با یک مقسم
+
+| بُعد | مقسم | مقدارها |
+|---|---|---|
+| سیاق | نوع سند و رابطه‌ی رسمی نویسنده با خواننده | رسمی‌انسانی · اداری · نیمه‌رسمی · محاوره‌ی نوشتاری · علمی |
+| جایگاه | شخص دستوری ادعاهای اصلی | من · ما · بیرونی |
+| فاصله | نویسنده چطور خواننده را خطاب می‌کند | دور · میانه · نزدیک |
+| قاطعیت | نشانه‌های یقین در ادعاها | قاطع · سنجیده · محتاط |
+| دما | رنگ عاطفی، تصویر و ارزش‌گذاری | خنثی · گرم · پرشور |
+| آهنگ | طول جمله و پاراگراف و تراکم ربط (سنجیده‌شده) | تحلیلی میانه · استدلالی پیوسته · گفت‌وگویی شخصی · خطابی · گزارشی برند · گزارشی نهادی · فشرده |
+
+«لحن» در این اسکیل نام سه بُعد فاصله، قاطعیت و دماست. سیاق جداست، چون مقسمش نوع سند است، نه حال‌وهوای جمله‌ها.
+
+### نشانه‌های زبانی هر مقدار
+
+| بُعد | مقدار | نشانه در متن فارسی |
+|---|---|---|
+| فاصله | دور | خواننده خطاب نمی‌شود؛ جمله‌ها غیرشخصی‌اند و سازمان با نام خودش می‌آید |
+| فاصله | میانه | خطاب گاه‌به‌گاه و ضمنی، در فعل؛ بدون پرسش از خواننده |
+| فاصله | نزدیک | فعل‌های دوم‌شخص، «فرض کنید»، پرسش مستقیم از خواننده |
+| قاطعیت | قاطع | «است»، «باید»، «نشان می‌دهد»؛ بدون قید تردید |
+| قاطعیت | سنجیده | یک قید تردید فقط جایی که واقعاً نامعلوم است: «احتمالاً»، «به نظر می‌رسد» |
+| قاطعیت | محتاط | قید تردید، شرط و بازه در بیشتر ادعاها: «اگر…»، «دست‌کم»، «تا جایی که داده نشان می‌دهد» |
+| دما | خنثی | صفت ارزشی فقط وقتی واقعیت آن را بخرد؛ بدون تصویر |
+| دما | گرم | یک جزئیات انسانی، یک تصویر، یک جمله‌ی پایانی گرم |
+| دما | پرشور | «ما»، تکرار آغازین، تصویر مشترک، فراخوان؛ بدون علامت تعجب پشت هم |
+
+## ۳. ماتریس سیاق در برابر لحن
+
+● مناسب و پیش‌فرض · ○ با احتیاط و فقط با دلیل · ✗ نامناسب
+
+| سیاق | فاصله: دور / میانه / نزدیک | قاطعیت: قاطع / سنجیده / محتاط | دما: خنثی / گرم / پرشور | جایگاه | آهنگ‌های رایج |
+|---|---|---|---|---|---|
+| رسمی‌انسانی | ● / ● / ○ | ● / ● / ● | ● / ● / ○ (فقط خطابه) | من، ما، بیرونی | تحلیلی میانه، استدلالی پیوسته، گزارشی برند |
+| اداری | ● / ○ / ✗ | ● / ● / ○ | ● / ○ (فقط جمله‌ی پایانی) / ✗ | ما (فرستنده)، بیرونی | گزارشی نهادی، فشرده |
+| نیمه‌رسمی | ○ / ● / ● | ● / ● / ● | ● / ● / ○ | من، ما | گفت‌وگویی شخصی، تحلیلی میانه، استدلالی پیوسته |
+| محاوره‌ی نوشتاری | ✗ / ○ / ● | ● / ● / ● | ○ / ● / ● | من، ما | گفت‌وگویی شخصی، فشرده |
+| علمی | ● / ○ / ✗ | ○ (فقط یافته‌ی خود پژوهش) / ● / ● | ● / ✗ / ✗ | بیرونی، «ما»ی پژوهشگران ○ | تحلیلی میانه، گزارشی نهادی |
+
+## ۴. ماتریس نسخه‌ها
+
+| نسخه | سیاق پیش‌فرض | جایگاه | فاصله | قاطعیت | دما | آهنگ | واحد روایت | پرسش پیونددهنده | جای نتیجه |
+|---|---|---|---|---|---|---|---|---|---|
+| تحلیل مفهومی | رسمی‌انسانی | بیرونی | میانه | سنجیده | خنثی | تحلیلی میانه | ادعا | چرا؟ یعنی چه؟ | پیش‌بینی در پایان |
+| توجیه راهبردی | رسمی‌انسانی | بیرونی | دور | سنجیده | خنثی | تحلیلی میانه | سناریو و نشانه | اگر این شود چه؟ | حرکت مقاوم در پایان |
+| سند راهبردی | رسمی‌انسانی | بیرونی، سازمان با نام | میانه | قاطع در تشخیص، سنجیده در پیش‌بینی | خنثی؛ تصویر پایانی گرم | تحلیلی میانه، سپس گزارشی برند | ادعا | چرا؟ پس چه؟ بهایش چیست؟ | پاسخ در خلاصه، درخواست در پایان |
+| استدلال روزنامه‌ای | نیمه‌رسمی یا رسمی‌انسانی | من | نزدیک | قاطع | گرم | استدلالی پیوسته | ادعا | چرا؟ ولی چه؟ | توصیه در پایان |
+| جدل | رسمی‌انسانی | من یا بیرونی | میانه | قاطع | خنثی، یک خط کنایه | استدلالی پیوسته | ادعای طرف و پاسخ | درست است؟ | پرسش از طرف مقابل |
+| عبرت تاریخی | رسمی‌انسانی | بیرونی | میانه | سنجیده | خنثی | تحلیلی میانه | رویداد تاریخ‌دار | بعد چه شد؟ قاعده چیست؟ | امروز در پایان |
+| روایت شاهد | نیمه‌رسمی | من | نزدیک | سنجیده | گرم | گفت‌وگویی شخصی | لحظه | بعد چه شد؟ یعنی چه؟ | معنا پس از صحنه |
+| خطابه | رسمی‌انسانی | ما | نزدیک | قاطع | پرشور | خطابی | گام عاطفی | حالا چه باید کرد؟ | فراخوان در پایان |
+| توضیح و آموزش | نیمه‌رسمی | من | نزدیک | سنجیده | گرم | گفت‌وگویی شخصی | کار خواننده | چطور؟ بعد چه کنم؟ | حد ابزار در پایان |
+| تأمل شخصی | نیمه‌رسمی | من | نزدیک | محتاط | گرم | گفت‌وگویی شخصی | پرسش و راه میانه | پس چه؟ | پایان باز |
+| سوگ‌نامه | رسمی‌انسانی یا نیمه‌رسمی | من | نزدیک | قاطع | گرم | گفت‌وگویی شخصی | خاطره | بعد؟ | تسلیت در پایان |
+| گزارش داده‌محور برند | رسمی‌انسانی | ما یا بیرونی | میانه | قاطع | گرم | گزارشی برند | یافته (عدد و معنا) | یعنی چه؟ چرا شد؟ | چشم‌انداز در پایان |
+| گزارش نهادی | رسمی‌انسانی، نه اداری | بیرونی | دور | قاطع | خنثی | گزارشی نهادی | یافته با استاندارد | طبق چه؟ | هدف‌های سال بعد در پایان |
+| خبر کوتاه | رسمی‌انسانی | بیرونی | دور | قاطع | خنثی | فشرده | واقعیت | دیگر چه؟ | خبر اصلی در جمله‌ی اول، گام بعد در پایان |
+
+## ۵. ماتریس نوع بخش در متن بلند
+
+این جدول پیش‌فرض لحن و آهنگ هر تیتر در روایت سطح ۱ است.
+
+| نوع بخش | کار بخش | فاصله | قاطعیت | دما | آهنگ | واحد روایت |
+|---|---|---|---|---|---|---|
+| خلاصه‌ی مدیریتی | پاسخ و درخواست در کوتاه‌ترین شکل | میانه | قاطع | خنثی | تحلیلی میانه، فشرده‌تر | ادعا |
+| مسئله و وضعیت | آنچه خواننده می‌پذیرد، و گره | میانه | قاطع در واقعیت، سنجیده در علت | خنثی | تحلیلی میانه | ادعا |
+| تحلیل و تبیین | سازوکار | میانه | سنجیده | خنثی | تحلیلی میانه | ادعا |
+| استدلال و ضرورت | قبولاندن یک داوری | میانه یا نزدیک | قاطع | خنثی تا گرم | استدلالی پیوسته | ادعا |
+| معرفی مدل یا راه‌حل | اجزا و پیوندشان | میانه | قاطع | خنثی | تحلیلی میانه | جزء |
+| وضع موجود و یافته‌ها | عدد و معنای آن | دور یا میانه | قاطع | خنثی | گزارشی برند | یافته |
+| برنامه و نقشه‌ی راه | فاز، شاخص، شرط پایان | دور | قاطع | خنثی | گزارشی برند | گام |
+| نمونه یا روایت مشتری | یک صحنه‌ی واقعی | نزدیک | سنجیده | گرم | گفت‌وگویی شخصی | لحظه |
+| ریسک‌ها | آنچه ممکن است خراب شود | میانه | محتاط | خنثی | تحلیلی میانه | سناریو |
+| چشم‌انداز | صحنه‌ی موفقیت | میانه | قاطع | گرم | تحلیلی میانه | صحنه |
+| درخواست یا فراخوان | تصمیم یا اقدام | نزدیک | قاطع | گرم | کوتاه‌تر از بقیه | درخواست |
+
+## ۶. قاعده‌ی حرکت لحن میان بخش‌ها
+
+- **ثابت در کل متن:** سیاق و جایگاه. جایگاه فقط در مرز بخش و با دلیل عوض می‌شود.
+- **در هر مرز:** فاصله، قاطعیت و دما هر کدام حداکثر یک پله جابه‌جا می‌شوند، و آهنگ فقط به همسایه‌اش می‌رود (style-framework.md §5.2). پرش بزرگ‌تر، یک بخش میانی یا یک جمله‌ی پل می‌خواهد.
+- **درون یک بخش:** فقط یک پاراگراف می‌تواند از لحن بخش جدا شود، مثلاً پاراگراف نمونه‌ی واقعی که گرم‌تر است.
+- **سیاق بر همه مقدم است:** اگر لحن بخشی با سیاق متن در خانه‌ی ✗ ماتریس ۳ بیفتد، لحن بخش عوض می‌شود، نه سیاق.
+
+## ۷. شواهد و حد اعتماد
+
+- **آهنگ** سنجیده شده است، روی پیکره‌ی ۶۲۰ متن نُه نویسنده و یازده گزارش شرکت‌ها (style-evidence.md).
+- **سیاق** از قاعده‌های تشخیص سیاق در writing-style.md آمده و با تجربه‌ی متن‌های فارسی حرفه‌ای ساخته شده است، نه با سنجش آماری.
+- **فاصله، قاطعیت و دما** و پیش‌فرض‌های جدول‌های ۴ و ۵ قرارداد اسکیل‌اند. از خواندن پیکره، سه مقاله‌ی دیلویت و آزمون‌های سبک با کاربر بیرون آمده‌اند و هنوز سنجیده نشده‌اند. ابزار `style_check` امروز فقط آهنگ را می‌سنجد.
+
+
+
+---
+
+# PART 6 — Style arcs: think before writing
 
 # Style arcs: think in the style before writing in it
 
@@ -1488,7 +1654,7 @@ Fit first: a speaker with standing, a «ما» audience, an occasion (a launch, 
 
 ---
 
-# PART 6 — Signature moves per style
+# PART 7 — Signature moves per style
 
 # Signature moves per recipe
 
@@ -1615,7 +1781,7 @@ Provisional (style-framework.md §2). Built from one rewritten roadmap; the sect
 
 ---
 
-# PART 7 — Orthography (نگارش و رسم‌الخط)
+# PART 8 — Orthography (نگارش و رسم‌الخط)
 
 # Persian orthography: the mechanical layer
 
@@ -1890,7 +2056,7 @@ needs RLM.
 
 ---
 
-# PART 8 — Content craft: POV, structure, honesty
+# PART 9 — Content craft: POV, structure, honesty
 
 # Persian content craft: point of view, structure, and honesty
 
@@ -2148,7 +2314,7 @@ engineering, design, cooking — not just technology.
 
 ---
 
-# PART 9 — Academic writing (نگارش علمی)
+# PART 10 — Academic writing (نگارش علمی)
 
 # Persian academic writing (نگارش علمی فارسی)
 
@@ -2496,7 +2662,7 @@ evidence of having done the work — rather than trying to satisfy the tool.
 
 ---
 
-# PART 10 — Social channels: Telegram & Instagram
+# PART 11 — Social channels: Telegram & Instagram
 
 # Persian social channels: Telegram, Instagram, and repurposing
 
@@ -2762,7 +2928,7 @@ the fa_lint script (full package; chat-only AIs apply the equivalent rules manua
 
 ---
 
-# PART 11 — SEO writing & copywriting
+# PART 12 — SEO writing & copywriting
 
 # Persian SEO writing & copywriting
 
@@ -2976,7 +3142,7 @@ carry genuinely unique content (no doorway clones)?
 
 ---
 
-# PART 12 — Fonts
+# PART 13 — Fonts
 
 # Persian fonts: catalog, pairing, embedding
 
@@ -3083,7 +3249,7 @@ after the fact, but checking first is cheaper.
 
 ---
 
-# PART 13 — Word/DOCX + PDF
+# PART 14 — Word/DOCX + PDF
 
 # Persian DOCX + PDF: RTL and pagination recipes
 
@@ -3752,7 +3918,7 @@ the verify_pdf script (full package; chat-only AIs apply the equivalent rules ma
 
 ---
 
-# PART 14 — PowerPoint
+# PART 15 — PowerPoint
 
 # Persian PowerPoint: RTL slides with python-pptx
 
@@ -3864,7 +4030,7 @@ bidi bugs in HTML pipelines show up as scrambled punctuation at line edges.
 
 ---
 
-# PART 15 — HTML / CSS / email
+# PART 16 — HTML / CSS / email
 
 # Persian HTML/CSS: RTL web pages, emails, and HTML→PDF
 
@@ -4006,7 +4172,7 @@ p { orphans: 2; widows: 2; }                   /* no lonely lines */
 
 ---
 
-# PART 16 — Images, reportlab PDFs, Excel
+# PART 17 — Images, reportlab PDFs, Excel
 
 # Persian patches for format-skill toolchains
 

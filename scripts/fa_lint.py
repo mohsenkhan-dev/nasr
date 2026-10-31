@@ -353,6 +353,8 @@ def check_remaining(text):
             elif '|' not in body:
                 # editorial notes in [brackets] are not prose
                 prose = re.sub(r'\[[^\]]*\]', '', body)
+                # a bold label at the start of a line («**گام اول:** …») is a label, not prose
+                prose = re.sub(r'^(?:[-*]\s+)?\*\*[^*]+?:\*\*|^(?:[-*]\s+)?\*\*[^*]+?\*\*:', '', prose)
                 for m in re.finditer(':', prose):
                     rest = prose[m.end():].strip()
                     head = prose[:m.start()]

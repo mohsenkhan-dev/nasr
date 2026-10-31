@@ -19,6 +19,37 @@ descriptions, so the paragraphs sat side by side instead of following from
 one another. Style-skeleton slots alone («diagnosis», «crux») did not fix
 this, because a slot names a role, not a claim.
 
+## Before the storyline: register and position
+
+Two parts of tone are fixed before the storyline, because they change what
+the claims are, not how they sound:
+- **Register** (سیاق), from writing-style.md Part 1. It decides which claims can be said at all.
+- **Position** (من، ما، بیرونی). «ما دیده‌ایم» and «تجربه نشان داده» are different claims.
+
+Everything else about tone (distance, certainty, warmth) is planned per
+heading at level 1, set per claim at level 2 (certainty), and realised in
+prose. The storyline itself is written in plain, neutral Persian, so that only
+its logic is judged; final tone comes with the prose. The full matrix of
+registers, tone dimensions, recipes and section types is in tone-matrix.md.
+
+## The storyline differs by style
+
+Every style has a storyline: a chain of units, each following from the one
+before. What changes is the unit and the question that links two units:
+
+| Recipe family | Unit | Linking question |
+|---|---|---|
+| strategy, analysis, argument, rebuttal | a claim | «چرا؟»، «پس چه؟»، «بهایش چیست؟» |
+| brand or institutional report | a finding: a figure and its meaning | «یعنی چه؟»، «چرا شد؟»، «بعدش چه؟» |
+| explainer | a task for the reader | «چطور؟»، «بعد چه کنم؟» |
+| witness narrative, obituary, reflection | a moment or event, and one turn | «بعد چه شد؟»، «یعنی چه؟» |
+| خطابه | an emotional step: situation, stake, commitment, call | «حالا چه باید کرد؟» |
+| short news | a fact, by importance | «دیگر چه؟» |
+
+The rules below are written for claims; for other units, read «claim» as the
+recipe's unit. The test is the same: read only the units, in order, and the
+text must already work.
+
 ## Level 1: the high-level storyline and the main headings
 
 Write 6–10 sentences. Each sentence must:
@@ -39,6 +70,13 @@ Then group the sentences under the **main headings**: three to seven, each
 covering one or more storyline sentences. Headings are plain: a short topic
 or a short claim, no colon, no question mark, no slogan.
 
+Under each heading, add one line that sets the section's **job, tone and
+rhythm**: its distance, certainty and warmth, and its rhythm profile. Start
+from the section-type defaults in tone-matrix.md §5 and keep each step between
+neighbouring sections small (tone-matrix.md §6). This line replaces the
+separate section map; in the draft, mark the section with
+`<!-- سبک: <profile> -->` so `style_check.py --sections` can measure its rhythm.
+
 The recipe's arc (style-skeletons.md) tells you what kind of claims the
 storyline needs and where the payoff goes: a strategy needs a diagnosis, a
 crux and a trade-off; a report puts targets at the end. The arc is the plan;
@@ -51,8 +89,11 @@ compared with correcting prose.
 ## Level 2: the storyline of each section
 
 Under each heading, write the section's own chain: 3–6 claim sentences,
-which will become the first sentences of its paragraphs. Next to each one,
-note its support:
+which will become the first sentences of its paragraphs. Set the certainty of
+each claim here («باید» or «پیشنهاد می‌شود», «است» or «احتمالاً»): certainty
+is content, not decoration. If one paragraph will depart from the section's
+tone (a warmer customer story, a cautious risk), mark it now. Next to each
+claim, note its support:
 - **[سند]**: a fact in the user's material;
 - **[شاهد بیرونی]**: an external source, with its name and year, to be verified before use;
 - **[استدلال]**: the writer's reasoning, which needs no source but must follow;

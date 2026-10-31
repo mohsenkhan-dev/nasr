@@ -190,8 +190,9 @@ Rules for each boundary:
 - **Keep the concept visible across the move.** The named concept of the opening (writing-workflow.md, stage 1) should reappear in the report sections as the reason the figures matter.
 
 ### 5.3 The section map
-For any text with sections, write a section map before drafting: one line per
-section with its job, the axis values that change, and its rhythm profile. Then
+The section map is now part of the level-1 storyline (storyline.md): under
+each main heading, one line with the section's job, the axis values that
+change, its tone (tone-matrix.md) and its rhythm profile. Then
 mark each section in the draft with a comment under its heading.
 `style_check.py --sections` reads these, measures each section against its own
 profile, and warns when two consecutive sections are not neighbours:
