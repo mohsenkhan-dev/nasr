@@ -67,8 +67,11 @@ ceremony; real professional writing is closer to a smart person talking carefull
 
 - **است، شد، کرد** — never می‌باشد، گردید، به عمل آورد. The می‌باشد register is
   a government-office fossil; in a proposal it reads as either lazy or machine.
-- Short sentences. One idea per sentence. Persian tolerates long chains of
-  که-clauses; readers don't.
+- Clear sentences: one main idea each, and no long chains of که-clauses.
+  In proposals, e-mails and web copy keep them short. In analytical columns,
+  essays and reports do NOT chop them: real Persian columnists write 15–23-word
+  sentences joined by connectives (اما، چون، بنابراین، یعنی). Follow the rhythm
+  profile in style-framework.md §3.
 - Address the reader: «شما» and second-person verbs, not «کاربران محترم می‌توانند».
 - Concrete over ceremonial: «سایت شما در ۳ ثانیه باز می‌شود» beats
   «بهبود چشمگیر سرعت بارگذاری را تجربه خواهید کرد».

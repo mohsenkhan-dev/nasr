@@ -1,11 +1,11 @@
-# Persian Writing — universal single-file edition
+# nasr (نثر) — universal single-file edition
 # نگارش فارسی حرفه‌ای برای هر هوش مصنوعی
 
-This is the complete persian-writing skill compiled into one file, for AI
+This is the complete nasr skill compiled into one file, for AI
 systems without file access. Give it to the AI as a system prompt, project
 knowledge, or an attached document, with an instruction like:
 
-> Follow the persian-writing guide for every task that involves Persian
+> Follow the nasr guide for every task that involves Persian
 > (Farsi) text or documents.
 
 Two adaptations for this edition:
@@ -28,7 +28,7 @@ party and signals conflict, ask one short question instead of guessing.
 
 # PART 0 — Core rules and routing
 
-# Persian Writing & RTL Documents
+# nasr (نثر): Persian prose and RTL documents
 
 Two failure modes make Persian output look machine-made, and they are independent:
 
@@ -48,6 +48,7 @@ read the reference file for your output format before generating anything.
 |---|---|
 | Any Persian prose (always) | the «Writing style: registers & de-AI-ing» part below |
 | Mechanical correctness (always) | the «Orthography (نگارش و رسم‌الخط)» part below |
+| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | the «Writing workflow: concept to final text» part below, then the «Prose styles: axes, recipes, rhythm» part + the «Signature moves per style» part |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | the «Academic writing (نگارش علمی)» part below |
 | Educational/technical content, docs, product pages, how-to | the «Content craft: POV, structure, honesty» part below |
 | Telegram, Instagram, captions, carousels, reels, stories | the «Social channels: Telegram & Instagram» part below |
@@ -78,6 +79,30 @@ colors, those win on aesthetics; this skill still governs RTL mechanics and
 orthography. This skill itself is brand-neutral: colors in the code examples are
 placeholders, and Vazirmatn is just the default font, not a requirement.
 
+## Writing workflow: concept → styles → samples → final text
+
+For any text that will be read as prose (columns, analyses, essays, reports,
+statements, explainers, long posts), follow the «Writing workflow: concept to final text» part below:
+
+1. **Understand the concept.** Find the one sentence the reader should keep,
+   the audience, the purpose and the material (facts, figures, experiences,
+   quotations). Show a 4–6-line «برداشت من» and ask at most three questions
+   whose answers change the text. Thin material is fixed here, by asking or
+   searching, never by inventing.
+2. **Propose styles.** Two to four style cards that differ on an axis
+   (style-framework.md), the recommended one first; combinations are allowed.
+3. **Sample text, when it helps.** One opening paragraph per card on the same
+   real facts, so the user compares style alone.
+4. **Write and finalize.** Draft to the chosen card, check facts, run
+   `style_check.py`, `persian_cleanup.py --edit` and `fa_lint.py --check`, read
+   it as a native reader, then deliver in the requested format (DOCX, PDF,
+   HTML, slides) with the verifiers below.
+
+Depth scales with the job: short transactional texts skip the workflow; a
+300–600-word text with a clear purpose gets a one-line restatement and a
+stated style; long, public or high-stakes texts get all four stages. If the
+user names a style or says «فقط بنویس», state the style in one line and write.
+
 ## Writing: the five-second summary
 
 Full guide in the «Writing style: registers & de-AI-ing» part below. The core moves:
@@ -101,6 +126,18 @@ Full guide in the «Writing style: registers & de-AI-ing» part below. The core 
    - Paper, thesis, university report → **academic** (نگارش علمی): measured,
      hedged, passive acceptable, zero تعارف — read the «Academic writing (نگارش علمی)» part below.
    - SEO/sales copy → register per artifact as above, plus the «SEO writing & copywriting» part below.
+1b. **For longer prose, choose a style before writing**: style-framework.md.
+   A style is four independent choices: purpose (گزارش، تبیین، اقناع، فراخوان،
+   یادمان), dominant evidence (تجربه، واقعیت جاری، تاریخ، مفهوم، مرجع), position
+   (من، ما، بیرونی) and structure (زمانی، زنجیره‌ای، فهرستی، تقابلی، شاخه‌ای).
+   Named recipes (جدل، توجیه راهبردی، گزارش داده‌محور برند…) are common
+   combinations. Rhythm is chosen separately, from profiles measured on real
+   Persian columnists and annual reports. Columnists write 15–23-word sentences
+   joined by connectives, so do not chop analytical prose into short lines.
+   For long or high-stakes texts, offer two or three style cards. Otherwise
+   state the chosen style in one line. Specificity outranks rhythm: secure real
+   names, figures and dates first. Never invent experiences or quotations to
+   fill the evidence axis.
 2. **Ban the bureaucratic tells:** می‌باشد، لازم به ذکر است، در راستای،
    از اهمیت ویژه‌ای برخوردار است، نقش بسزایی ایفا می‌کند.
 3. **Ban the AI tells:** em dashes (—), rule-of-three triads (سریع، آسان و مطمئن),
@@ -267,7 +304,9 @@ It checks: near-empty pages, "undefined"/template leaks, non-embedded or fallbac
 fonts, Arabic ي/ك in extracted text, and page count. Fix every warning, regenerate,
 re-verify. For prose, re-read your final text against the native test — one pass of
 `persian_cleanup.py --edit` + `fa_lint.py --check` plus one honest read-aloud
-catches most disasters.
+catches most disasters. For styled prose, also run
+`python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --recipe "<recipe>"` and revise any
+feature outside its band; it checks rhythm, not quality, so read the draft too.
 
 
 
@@ -344,8 +383,11 @@ ceremony; real professional writing is closer to a smart person talking carefull
 
 - **است، شد، کرد** — never می‌باشد، گردید، به عمل آورد. The می‌باشد register is
   a government-office fossil; in a proposal it reads as either lazy or machine.
-- Short sentences. One idea per sentence. Persian tolerates long chains of
-  که-clauses; readers don't.
+- Clear sentences: one main idea each, and no long chains of که-clauses.
+  In proposals, e-mails and web copy keep them short. In analytical columns,
+  essays and reports do NOT chop them: real Persian columnists write 15–23-word
+  sentences joined by connectives (اما، چون، بنابراین، یعنی). Follow the rhythm
+  profile in style-framework.md §3.
 - Address the reader: «شما» and second-person verbs, not «کاربران محترم می‌توانند».
 - Concrete over ceremonial: «سایت شما در ۳ ثانیه باز می‌شود» beats
   «بهبود چشمگیر سرعت بارگذاری را تجربه خواهید کرد».
@@ -657,7 +699,448 @@ exactly why the audit step exists.)
 
 ---
 
-# PART 2 — Orthography (نگارش و رسم‌الخط)
+# PART 2 — Writing workflow: concept to final text
+
+# Writing workflow: from concept to final text
+
+This is the path for any Persian text that someone will actually read as prose:
+columns, analyses, essays, reports, statements, explainers, long posts, letters
+that argue a case. It has four stages. Each stage ends with something the user
+can see and redirect cheaply, so a wrong turn costs one message, not a rewrite.
+
+```
+۱. فهم مفهوم      → برداشت من (۴ تا ۶ خط) + حداکثر سه پرسش
+۲. پیشنهاد سبک    → ۲ تا ۴ کارت سبک، یکی پیشنهادی
+۳. متن نمونه      → (اختیاری) پاراگراف آغازین هر کارت روی همان مصالح
+۴. نگارش نهایی   → پیش‌نویس، بررسی‌ها، بازنویسی، تحویل در قالب خواسته‌شده
+```
+
+## Choosing the depth
+
+| Situation | Path |
+|---|---|
+| Long (over ~600 words), high-stakes, public, or the user asked for options | All four stages |
+| 300–600 words, purpose clear | Stage 1 as a short restatement, stage 2 as one stated choice, then stage 4 |
+| Under 300 words, transactional (email, caption, UI copy, notice) | Skip to writing; register rules in writing-style.md are enough |
+| The user named the style or said «فقط بنویس» | State the style in one line and go to stage 4 |
+| Editing the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
+
+When in doubt, run stages 1 and 2 in one message: a restatement plus style cards.
+That is one exchange and it prevents most rewrites.
+
+## Stage 1: understand the concept (فهم مفهوم)
+
+The concept is what the text says, not what it is about. «جنگ ایران و آمریکا» is
+a topic. «احتمال حمله‌ی دوباره را باید از آماده‌سازی‌های پرهزینه خواند، نه از
+سخنان» is a concept. A text without a concept fills space; with one, every
+paragraph has a job.
+
+Extract these from the request, attachments and conversation:
+
+| Item | Question | If missing |
+|---|---|---|
+| مفهوم مرکزی | The one sentence the reader should remember | Propose one or two, as named concepts when the purpose is تبیین («جنگ معلق»، «اقتصاد انتظار») |
+| مخاطب | Who reads it, and what they already know | Infer from the channel; ask only if it changes register |
+| غایت | After reading, the reader should know / understand / accept / act / remember | Infer; ask if explain vs. persuade is open (style-framework.md §1) |
+| مصالح | Facts, figures, dates, documents, experiences, quotations available | Ask the user or search; never invent (rule below) |
+| قالب و طول | Column, report, post, letter; word count; output file | Default from channel |
+| مجرا و لحن | Where it is published; register | writing-style.md Part 1 |
+| محدودیت‌ها | What must or must not be said, legal or political lines, house style | Ask if the text is public and the topic is sensitive |
+
+Then show the restatement, in the user's language:
+
+```
+برداشت من
+- مفهوم مرکزی: …
+- مخاطب: …
+- غایت: خواننده بعد از خواندن … (تبیین / اقناع / …)
+- مصالح موجود: … · کمبود: …
+- قالب: … حدود … کلمه، خروجی …
+```
+
+Ask at most three questions, and only ones whose answer changes the text. A
+question about a fact you could look up is not one of them: search instead.
+
+**Material comes first.** In blind tests, specificity outranked every style
+choice (style-framework.md §7). If the material is thin, say so here and fix it
+(search, ask for figures, ask for the user's own experience) before choosing a
+style. A good style on generic content still reads as machine-written.
+
+**Never fabricate.** No invented experience, quotation, statistic, date or
+source. If a recipe needs evidence that does not exist (روایت شاهد without a
+real scene, خطابه without a verified quotation), drop that recipe at stage 2.
+
+## Stage 2: propose styles (پیشنهاد سبک)
+
+Use style-framework.md §4 to derive the candidates and §6 for the card. Offer
+two to four cards that differ on at least one axis (purpose, evidence, position
+or structure). Three rhythm variants of one recipe are not three styles.
+
+A good default set:
+1. **The recipe the request implies**, marked «(پیشنهادی)».
+2. **One that changes the evidence or the structure**: the same purpose built on history instead of current facts, or scenarios instead of one argument.
+3. **One combination** (style-framework.md §5): for example a scene that opens into analysis, or figures, then their meaning, then what should follow.
+4. Optional: **a deliberately plainer card** (فشرده or گزارشی) when the material is fact-dense and the reader is busy.
+
+Each card, in Persian:
+
+```
+کارت ۱ · استدلال روزنامه‌ای (پیشنهادی)
+- غایت: اقناع · شاهد: واقعیت جاری · جایگاه: من · ساخت: زنجیره‌ای
+- آهنگ: استدلالی پیوسته (جمله‌ها حدود ۱۸ کلمه، پیوسته با ربط‌ها)
+- نقشه: واقعیت تازه ← سه نکته ← توصیه به تصمیم‌گیرنده
+- حس خواننده: «یک نفر با استدلال روشن نظرش را می‌گوید»
+- ریسک یا کمبود: به دست‌کم یک منبع رسمی دیگر نیاز دارد
+```
+
+Ask the user to choose with one question (AskUserQuestion where available;
+options in the user's language, the recommended card first). Allow «ترکیب ۱ و
+۳» as an answer: combining is normal (style-framework.md §5).
+
+## Stage 3: sample text (متن نمونه), when it helps
+
+Write samples when the user cannot choose from the cards, when the text is
+long and public, or when they ask «یک نمونه ببینم». Skip them when a card was
+chosen with confidence.
+
+- **One opening paragraph per card**, 80–150 words, on the real material.
+- **Same facts in every sample**, so the difference the user sees is the style alone.
+- Label each sample with its card number and recipe name, nothing else. No commentary inside the sample.
+- Real prose, not an outline: the sample must already meet the card's rhythm, so the user is judging what they will get.
+- At most four samples. If none works, go back to stage 1: usually the concept or the material is the problem, not the style.
+
+Then ask once: which sample, or which mix («آغاز ۲ با ساخت ۱»).
+
+## Stage 4: write and finalize (نگارش نهایی)
+
+1. **Section plan** (texts over ~600 words): one line per section with its job and its axis values if they change. Show it only if the user asked to see the structure.
+2. **Draft** to the chosen card. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
+3. **Checks**, in this order:
+   - Facts: every name, figure, date and quotation traces to the user, a document or a source you found. Mark anything unverified.
+   - Rhythm: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --recipe "<recipe>"` (or `--profile`). Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).
+   - Orthography: `python3 the persian_cleanup script (full package; chat-only AIs apply the equivalent rules manually) --edit`, then `python3 the fa_lint script (full package; chat-only AIs apply the equivalent rules manually) --check`.
+   - Reading pass: the native test in writing-style.md. At most one single-sentence paragraph. No run of short punchlines. No AI tells.
+4. **Revise** at most two rounds for rhythm. If the draft still fails, the card was wrong for the material: say so and offer the nearer card rather than forcing it.
+5. **Deliver** in the format asked for. For Word or PDF, follow docx-pdf.md and run verify_docx.py / verify_pdf.py. For HTML, html-css.md. For slides, pptx.md.
+6. **Closing note**, short: the style line («سبک: … · آهنگ: …»), what was not verified, and one offer if relevant (a shorter version, a headline set, the same text for another channel).
+
+## Feedback after delivery
+
+- «زیادی خشک است / زیادی شعاری است»: move one step on the rhythm or position axis, not a new recipe.
+- «این را نگفتم / این درست نیست»: a material problem. Fix the fact; do not restyle.
+- «شبیه هوش مصنوعی است»: run the AI-tell list in writing-style.md §3.5 first; then check for missing specifics.
+- Keep what the user did not criticise. A full rewrite for a local complaint loses what worked.
+
+
+
+---
+
+# PART 3 — Prose styles: axes, recipes, rhythm
+
+# Persian prose style: choosing and combining styles
+
+Register (writing-style.md) decides how formal a text is. This file decides
+*how the text works*: what it does to the reader, what it rests on, who speaks,
+how its parts are ordered, and at what rhythm. It was built from a reference
+corpus of signed Persian prose (nine columnists and essayists, 620 texts)
+and eleven Iranian corporate annual reports; the evidence and its limits are in
+style-evidence.md, the signature moves in style-moves.md.
+
+Read this file for any text longer than about 300 words whose job is to
+explain, argue, report, mobilize or commemorate: columns, analyses, essays,
+reports, annual and sustainability reports, statements, explainers. Short
+transactional texts (emails, captions, UI copy) do not need it.
+
+## 1. Why styles are described on four axes
+
+An earlier list of named styles («جدل»، «تحلیل مفهومی»، «روایت شاهد»...) mixed
+five different criteria (method, structure, material, voice, purpose), so the
+names overlapped: 20 of 34 hand-labelled texts needed two or three of them.
+A usable classification needs one criterion per division. So a style is
+described by four independent axes. Each axis answers one question, and its
+values exclude each other. A text takes the value that DOMINATES; the test for
+each axis says how to decide.
+
+### Axis 1: purpose (غایت)
+Question: after reading, what does the reader have that they did not have before?
+
+| Value | The reader gains | Test: the conclusion is… |
+|---|---|---|
+| گزارش | knowledge of what happened | a fact or a figure |
+| تبیین | understanding of why or how | a relation, a mechanism, a set of options |
+| اقناع | acceptance of a disputed judgement | «پس فلان درست/نادرست است» |
+| فراخوان | an intention to act | an imperative to the reader or to «ما» |
+| یادمان | a feeling or a memory | honouring, grieving, reflecting |
+
+Boundary rules:
+- تبیین vs اقناع: if the text defends a judgement against another view, it is اقناع; if it explains without taking a side on a disputed point, تبیین.
+- اقناع vs فراخوان: فراخوان only when the one who must act is the reader or «ما». A recommendation addressed to an official is اقناع (the reader is asked to accept that the official should act).
+
+### Axis 2: dominant evidence (شاهد غالب)
+Question: what source of authority does the conclusion rest on?
+
+| Value | Who vouches | Condition |
+|---|---|---|
+| تجربه | the writer's own eyes | **only real experience supplied by the user**; never invent it |
+| واقعیت جاری | today's record: event, figure, document | sourced and dated |
+| تاریخ | the record of a past the writer did not witness | dates verified |
+| مفهوم | reason: definition, distinction, framework | |
+| مرجع | an authority: scripture, poetry, a named thinker | quotations exact and verified |
+
+Boundary rule: «was the writer there?» If yes, it is تجربه, even when it happened long ago.
+
+### Axis 3: position (جایگاه)
+Question: whose place does the writer speak from?
+
+| Value | |
+|---|---|
+| من | a personal witness or opinion holder |
+| ما | spokesperson of a group: a community, a nation, an organization |
+| بیرونی | impersonal observer; an organization may refer to itself by name |
+
+Decide by the grammatical person of the main claims. Keep one position per
+section; content-structures.md §1 says how «ما»، «شما» and impersonal voice
+divide the work inside organizational texts.
+
+### Axis 4: structure (ساخت)
+Question: on what basis do the sections follow one another?
+
+| Value | Ordering principle | Typical |
+|---|---|---|
+| زمانی | earlier, then later | narrative, history, memoir |
+| زنجیره‌ای | each section follows from the previous one | argument, analysis |
+| فهرستی | parallel, independent points | reports, numbered points, explainers |
+| تقابلی | someone's claim, then the answer | rebuttal |
+| شاخه‌ای | several possibilities side by side | scenarios, options |
+
+### What the axes do NOT decide
+- **Register** (formal / colloquial / academic): writing-style.md.
+- **Rhythm** (sentence and paragraph length, connective density): §3. In the
+  corpus, rhythm follows the writer family and the genre, not the axis values:
+  three different recipes anchored on the same writers produced near-identical
+  numbers. So rhythm is chosen separately.
+
+## 2. Recipes: common combinations with a name
+
+A recipe is a named, frequent combination of axis values plus the moves that
+make it work (style-moves.md). Recipes are shortcuts, not categories: a text is
+classified by its axis values; the recipe name only says which combination it is.
+
+| Recipe | Purpose | Evidence | Position | Structure | Default rhythm | Use for |
+|---|---|---|---|---|---|---|
+| تحلیل مفهومی | تبیین | مفهوم | بیرونی | زنجیره‌ای | تحلیلی میانه | explaining a phenomenon through a concept |
+| توجیه راهبردی | تبیین | واقعیت جاری | بیرونی | شاخه‌ای | تحلیلی میانه | briefing a decision-maker: scenarios, indicators |
+| استدلال روزنامه‌ای | اقناع | واقعیت جاری | من | زنجیره‌ای | استدلالی پیوسته | an opinion column on a current issue |
+| جدل | اقناع | varies | من / بیرونی | تقابلی | استدلالی پیوسته | answering a published claim |
+| عبرت تاریخی | اقناع | تاریخ | بیرونی | زمانی | تحلیلی میانه | drawing a rule for today from history |
+| روایت شاهد | تبیین / اقناع | تجربه | من | زمانی then زنجیره‌ای | گفت‌وگویی شخصی | starting from a scene the writer lived |
+| خطابه | فراخوان | مرجع | ما | فهرستی | خطابی | statements, calls to a community |
+| توضیح و آموزش | تبیین | مفهوم | من | فهرستی | گفت‌وگویی شخصی | giving the reader a tool or method |
+| تأمل شخصی | یادمان | تجربه | من | زنجیره‌ای | گفت‌وگویی شخصی | a personal, hedged reflection |
+| سوگ‌نامه | یادمان | تجربه | من | زمانی | گفت‌وگویی شخصی | commemorating a person |
+| گزارش داده‌محور برند | گزارش | واقعیت جاری | ما / بیرونی | فهرستی | گزارشی برند | annual or yearly reports of consumer companies |
+| گزارش نهادی | گزارش | واقعیت جاری | بیرونی | فهرستی | گزارشی نهادی | sustainability, board and institutional reports |
+| خبر کوتاه | گزارش | واقعیت جاری | بیرونی | فهرستی | فشرده | announcements, news briefs, release notes |
+
+The same writer uses several recipes: one columnist wrote a witness narrative,
+a numbered argument and a rebuttal within one month. Choose the recipe from the
+job of the text, never from a writer's name.
+
+## 3. Rhythm profiles
+
+Numbers are the 20th, 50th and 80th percentile across the anchor texts
+(assets/style_profiles.json; measured by the style_check script (full package; chat-only AIs apply the equivalent rules manually)). Aim for the
+middle; stay inside the 20–80 band. Pushing one feature to its extreme to make
+a style recognisable produces caricature, which readers rate worse than the
+plain version.
+
+| Profile | Sentence median (words) | Paragraph median (words) | Connectives per 1000 words | «که» per sentence | Anchors |
+|---|---|---|---|---|---|
+| تحلیلی میانه | 14.5 · 18 · 23 | 40 · 67 · 90 | 12 · 16 · 22 | 0.22 · 0.35 · 0.50 | analytic columnists |
+| استدلالی پیوسته | 15 · 18.5 · 22.5 | 57 · 71 · 82 | 15 · 20 · 25 | 0.47 · 0.66 · 0.86 | argumentative columnists |
+| گفت‌وگویی شخصی | 12 · 15 · 18 | 30 · 41 · 56 | 9 · 13 · 17 | 0.37 · 0.51 · 0.66 | personal essayists, teaching blogs |
+| خطابی | 12.5 · 17 · 19 | 28 · 42 · 69 | 4 · 9 · 14 | 0.15 · 0.31 · 0.50 | one writer, 22 texts: weak evidence |
+| گزارشی برند | 19 · 23 · 27 | 42 · 53 · 63 | 3 · 5 · 9 | 0.17 · 0.24 · 0.38 | Digikala, Snapp reports |
+| گزارشی نهادی | 22 · 25.5 · 29 | 81 · 120 · 167 | 4 · 6 · 12 | 0.17 · 0.29 · 0.41 | Mobarakeh Steel, Irancell, bank reports |
+| فشرده | 6 · 9 · 12 | 15 · 25 · 40 | 2 · 6 · 12 | 0.05 · 0.15 · 0.30 | no corpus anchor; unvalidated |
+
+What the numbers mean in practice:
+- **Columnists** write 15–23-word sentences joined by connectives (اما، چون، بنابراین، یعنی، البته). Their paragraphs develop one idea over 3–4 sentences.
+- **Reports** write longer sentences (20–29 words) with few connectives: long noun chains and enumerations, carried by figures (15–85 digits per 1000 words). That is the genre, not a fault; but in a brand report keep sentences nearer 20 than 29.
+- **Mix lengths.** In the columnist profiles 15–30% of sentences run past 30 words and 10–25% stay under 10. A draft with the right median but no long sentences still reads choppy. A draft whose sentences are all long reads like a report.
+- **Short texts are noisy.** Under about 400 words one sentence moves every percentage; style_check.py then flags only clear deviations. Do not chase each band sentence by sentence: in a test, doing so swung a draft from too choppy to too heavy.
+- **Single-sentence paragraphs**: at most one per text, normally the last. A reader perceives a run of them as text broken after every sentence.
+- **فشرده** (6–12-word sentences) works only when every sentence carries a fact. On generic content it reads as machine-written.
+
+## 4. Choosing a style: the procedure
+
+1. **Register first** (writing-style.md Part 1).
+2. **Purpose**: answer «after reading, the reader should…» from the request. If the request fits two purposes (explain vs. persuade is the common one), ask one short question.
+3. **Evidence inventory**: list what material exists — the user's facts, documents, experiences, quotations, data, or what a search can verify. The evidence axis can only take values you actually have material for. No real experience → no تجربه. No verified quotation → no مرجع.
+4. **Position**: from who is writing — a person (من), an organization or community (ما), or a neutral author (بیرونی).
+5. **Structure**: from purpose and evidence. Defaults: تاریخ or تجربه → زمانی; a claim to answer → تقابلی; options or uncertainty → شاخه‌ای; several independent results → فهرستی; one argument → زنجیره‌ای.
+6. **Recipe**: the nearest row in §2. If nothing fits, keep the axis values and skip the name.
+7. **Rhythm**: the recipe's default, unless the user's own prose, a house style or the channel says otherwise.
+8. **Section plan** for texts over about 600 words: give each section its own values; see §5.
+
+### When to ask and when to decide
+- **Long or high-stakes text, or the user asked for options**: show two or three style cards (§6) with one line each on what the reader will feel, then write the one chosen. A good default set: the recipe the request implies, one that changes the purpose or the evidence, and one combination.
+- **Otherwise**: choose, and state the choice in one line before the text (for example «سبک: استدلال روزنامه‌ای، آهنگ استدلالی پیوسته»). The user can redirect cheaply.
+
+## 5. Combining styles in one text
+
+Long texts are usually combinations. The rules:
+- **The whole text has one purpose**, the one the final section serves. A witness opening that leads to a call to action is a فراخوان text with a روایت شاهد opening.
+- **Each section may change evidence and structure.** Typical sequences:
+  - روایت شاهد → تحلیل مفهومی → استدلال: a scene, the concept it reveals, the argument.
+  - گزارش (figures) → تبیین (what they mean) → اقناع (what should follow): the strong pattern of data-driven reports.
+  - عبرت تاریخی → توجیه راهبردی: history, then today's scenarios.
+- **Position changes only at a section boundary** and with a reason (content-structures.md §1).
+- **Rhythm follows the dominant recipe**; a short narrative section may run shorter.
+
+## 6. The style card
+
+Write the card before drafting a long text, and show it when options are offered:
+
+```
+سبک پیشنهادی
+- غایت: اقناع
+- شاهد غالب: واقعیت جاری (گزارش سنتکام، قیمت نفت، اظهارات رسمی)
+- جایگاه: من
+- ساخت: زنجیره‌ای
+- نسخه: استدلال روزنامه‌ای · آهنگ: استدلالی پیوسته
+- نقشه: آغاز با یک واقعیت تازه ← سه نکته ← توصیه به تصمیم‌گیرنده
+- مصالح لازم: ۴ تا ۶ واقعیت مشخص با منبع؛ اگر نیست، پیش از نوشتن بپرس یا جست‌وجو کن
+```
+
+## 7. Rules the evidence supports
+
+1. **Specificity beats rhythm.** In blind tests, a plain short-sentence text full of sourced facts was rated as high as the best styles, while well-rhythmed text on a generic topic was rated low. Before styling, secure the facts: names, figures, dates, events. Every paragraph needs at least one concrete anchor, except in خطابه and تأمل شخصی.
+2. **Never fabricate the evidence axis.** Experience, quotations and historical dates come from the user, a document or a verified source. If missing, ask, or choose a recipe whose evidence you have.
+3. **No caricature.** Stay inside the 20–80 band for every feature. Overcorrecting is the common failure: after learning that columnists use connectives, a draft used twice as many as any columnist.
+4. **Recipes are not writers.** Writers are calibration anchors, not voices to impersonate. When the user asks for «به سبک X», use the closest recipe and rhythm, do not copy X's idioms, and never present the text as X's.
+<!-- fa-lint-ignore-next-line -->
+5. **Corporate reports: formal-but-human, not bureaucratic.** The institutional reports in the corpus carry 4–6 bureaucratic forms (می‌باشد، گردید، نموده، در راستای) per 1000 words; the brand reports almost none, and read better. Use است، شد، کرد; name the actor instead of an agentless passive; keep figures, and give each important figure its meaning («۲۱ میلیون کاربر، یعنی…»).
+6. **Check the draft**: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --profile "استدلالی پیوسته"` (or `--recipe`). Revise features outside the band, then run fa_lint as usual.
+
+
+
+---
+
+# PART 4 — Signature moves per style
+
+# Signature moves per recipe
+
+A move is something a writer does with a sentence or a paragraph: how they open,
+turn, persuade and close. Numbers (style-framework.md §3) set the rhythm; moves
+make a recipe recognisable. They were found by reading the reference corpus and
+checked by counting them across all writers (style-evidence.md). Every example
+below is invented for this file; none is quoted from a source text.
+
+How to use: pick two to four moves from the recipe, not all of them. One move
+used well reads as style; every move at once reads as a template.
+
+## Shared toolkit (every analytic recipe)
+
+These appear in most writers, so they mark good analytic prose in general, not a
+particular recipe:
+- A first-person stance at the turning point: «به نظر من…»، «به گمانم…»
+- Concede, then turn: «البته … اما/ولی …»
+- A rhetorical question that sets up the next paragraph (not a chain of them).
+- The negation cascade «نه … نه … بلکه …» to clear wrong explanations before the right one.
+- A short historical comparison in one clause.
+- At most one line of irony per text.
+
+## تحلیل مفهومی
+- **Define before use.** Introduce the concept in «» and define it in the next sentence: «آنچه می‌توان آن را «جنگ معلق» نامید، وضعیتی است که…»
+- **Distinguish it from its neighbour.** «جنگ معلق با بن‌بست فرق دارد: در بن‌بست…»
+- **Read the case through it**, with dated facts.
+- **Close on what the concept predicts**, not on a summary.
+- Optional: an English equivalent in parentheses for a technical term, at most once or twice.
+
+## توجیه راهبردی
+- **Frame as levels or scenarios**, each a paragraph: «سناریوی نخست…».
+- **Give indicators for each scenario**: what would we see if this one is happening.
+- **Read the other side's intent**, attributed to evidence: «اگر … پس طرف مقابل احتمالاً…».
+- **End with an assessment and a risk**: which scenario is likeliest and which is most dangerous, and why they differ.
+
+## استدلال روزنامه‌ای
+- **Announce the point in first person**: «در این یادداشت می‌خواهم به یک نکته بپردازم.»
+- **From observation to generalisation**: a concrete case, then «این رفتار در … بیشتر دیده می‌شود».
+- **Concede and turn**: «البته … ولی …».
+- **A folk analogy or proverb at the close**, one only: «تا تنور داغ است…».
+- **A recommendation to a named actor**: «وزارت … باید …».
+
+## جدل
+- **State the claim fairly and attribute it**: who said what, when.
+- **Numbered rebuttal**: ۱، ۲، ۳, each point resting on one checkable fact.
+- **Concede what is true in the other side**: it makes the rebuttal credible.
+- **One line of irony**, never a tone of contempt.
+- **Close with a question the other side must answer.**
+
+## عبرت تاریخی
+- **Numbered chronological review** with exact dates; verify every date.
+- **Extract a rule**: «هر جا … ، … ؛ هر جا … ، …».
+- **Return to today** in the last paragraph: what the rule says about the present case.
+
+## روایت شاهد
+Requires an experience the user supplied. Do not invent one.
+- **Open with the scene or a news hook**: «امروز…»، «سال هشتاد و هشت، یک روز…».
+- **First-person past tense and reported dialogue**: «به او گفتم…».
+- **Move from the scene to analysis** in the second half.
+- **A short verdict sentence at the end**.
+
+## خطابه
+- **«ما»** throughout, and one image of the shared situation.
+- **Anaphora**, three times at most: «یادمان باشد… یادمان باشد… یادمان باشد…».
+- **An authority or a verse**, quoted exactly and verified.
+- **A call to action addressed to «ما»**. Stay non-partisan unless the user sets the side.
+
+## توضیح و آموزش
+- **«پیش‌نوشت:»** to set the frame and limits («این نوشته تحلیل سیاسی نیست…»).
+- **Name the tool or framework** and define it.
+- **Numbered steps or questions** the reader can apply.
+- **One worked example** using the reader's real case.
+- **A hedged conclusion**: what the tool can and cannot decide.
+
+## تأمل شخصی
+- **«پیش‌نوشت:»** stating it is a personal report, not advice.
+- **Hedges that are honest, not decorative**: «به گمانم»، «دست‌کم برای خودم».
+- **Two errors to avoid**, and the narrow path between them.
+- **An open ending**: a question or a provisional conclusion.
+
+## سوگ‌نامه
+- **The shared history in order**, with years and places.
+- **Two or three specific memories**, from the user.
+- **The person's work named exactly** (titles, roles).
+- **Condolence at the end**, one paragraph.
+
+## گزارش داده‌محور برند
+- **A headline and a one-sentence lead per section**: «سرویس‌هاب؛ همه‌ی ابزارها زیر یک سقف».
+- **Figure → meaning → cause**: «فروش کنسرو در ده روز اول اسفند دو برابر شد؛ یعنی خانوارها پیش از آغاز جنگ ذخیره کردند.»
+- **The record sentence**, used sparingly: «رکورد سفارش روزانه در ۱۷ اسفند ثبت شد».
+- **Category framing**: «طرح‌های ما در سه دسته جای می‌گیرند: …».
+- **Definitional caveats** that build trust: «هر حساب کاربری الزاماً یک نفر نیست.»
+- **A real customer or employee vignette** from the source material, never invented.
+
+## گزارش نهادی
+- **Name the standard or framework** behind each claim (GRI، ISO 22301).
+- **Describe processes with the actor named**: «واحد حسابرسی داخلی هر سال … را بررسی می‌کند», not «بررسی به عمل می‌آید».
+- **One value statement per section**, followed by evidence: «برای ما شکایت مشتری پایان کار نیست؛ … در ۱۴۰۴، …».
+<!-- fa-lint-ignore-next-line -->
+- **Replace bureaucratic forms**: می‌باشد → است، گردید → شد، نموده → کرده، صورت پذیرفت → انجام شد، در راستای → برای.
+
+## خبر کوتاه
+- **The lead fact first**: who, what, when, in the first sentence.
+- **One fact per sentence**, figures exact.
+- **No adjectives that the facts do not earn.**
+- **The next step or source at the end.**
+
+
+
+---
+
+# PART 5 — Orthography (نگارش و رسم‌الخط)
 
 # Persian orthography: the mechanical layer
 
@@ -932,7 +1415,7 @@ needs RLM.
 
 ---
 
-# PART 3 — Content craft: POV, structure, honesty
+# PART 6 — Content craft: POV, structure, honesty
 
 # Persian content craft: point of view, structure, and honesty
 
@@ -1190,7 +1673,7 @@ engineering, design, cooking — not just technology.
 
 ---
 
-# PART 4 — Academic writing (نگارش علمی)
+# PART 7 — Academic writing (نگارش علمی)
 
 # Persian academic writing (نگارش علمی فارسی)
 
@@ -1538,7 +2021,7 @@ evidence of having done the work — rather than trying to satisfy the tool.
 
 ---
 
-# PART 5 — Social channels: Telegram & Instagram
+# PART 8 — Social channels: Telegram & Instagram
 
 # Persian social channels: Telegram, Instagram, and repurposing
 
@@ -1804,7 +2287,7 @@ the fa_lint script (full package; chat-only AIs apply the equivalent rules manua
 
 ---
 
-# PART 6 — SEO writing & copywriting
+# PART 9 — SEO writing & copywriting
 
 # Persian SEO writing & copywriting
 
@@ -2018,7 +2501,7 @@ carry genuinely unique content (no doorway clones)?
 
 ---
 
-# PART 7 — Fonts
+# PART 10 — Fonts
 
 # Persian fonts: catalog, pairing, embedding
 
@@ -2125,7 +2608,7 @@ after the fact, but checking first is cheaper.
 
 ---
 
-# PART 8 — Word/DOCX + PDF
+# PART 11 — Word/DOCX + PDF
 
 # Persian DOCX + PDF: RTL and pagination recipes
 
@@ -2794,7 +3277,7 @@ the verify_pdf script (full package; chat-only AIs apply the equivalent rules ma
 
 ---
 
-# PART 9 — PowerPoint
+# PART 12 — PowerPoint
 
 # Persian PowerPoint: RTL slides with python-pptx
 
@@ -2906,7 +3389,7 @@ bidi bugs in HTML pipelines show up as scrambled punctuation at line edges.
 
 ---
 
-# PART 10 — HTML / CSS / email
+# PART 13 — HTML / CSS / email
 
 # Persian HTML/CSS: RTL web pages, emails, and HTML→PDF
 
@@ -3048,7 +3531,7 @@ p { orphans: 2; widows: 2; }                   /* no lonely lines */
 
 ---
 
-# PART 11 — Images, reportlab PDFs, Excel
+# PART 14 — Images, reportlab PDFs, Excel
 
 # Persian patches for format-skill toolchains
 

@@ -18,7 +18,8 @@ verification. Bundled Vazirmatn and Lalezar fonts (SIL OFL).
 
 1. Read `SKILL.md` first — it is the entry point and source of truth. Its
    routing table says which file in `references/` to read for the task at
-   hand. Do not skip register detection (writing-style.md, Part 1).
+   hand. Do not skip register detection (writing-style.md, Part 1). For
+   longer prose, follow references/writing-workflow.md.
 2. If you can execute code: use the scripts —
    `scripts/persian_cleanup.py --edit` (fix), `scripts/fa_lint.py --check`
    (lint), `scripts/verify_pdf.py` (PDF QA), `scripts/install_fonts.sh`
@@ -27,7 +28,7 @@ verification. Bundled Vazirmatn and Lalezar fonts (SIL OFL).
    scripts enforce is also stated in prose in `references/orthography.md`
    and `references/writing-style.md` — apply them manually. A fully inlined
    single-file version for paste/upload use is at
-   `universal/persian-writing-universal.md` (regenerate with
+   `universal/nasr-universal.md` (regenerate with
    `scripts/build_universal.py`).
 4. Fonts: reference by family name (`Vazirmatn`, `Lalezar`); files live in
    `assets/fonts/`. Install them into the OS/font cache before rendering
@@ -36,13 +37,15 @@ verification. Bundled Vazirmatn and Lalezar fonts (SIL OFL).
 ## Layout
 
 - `SKILL.md` — entry point (YAML frontmatter + core rules + routing)
-- `references/` — depth: writing-style, orthography, academic,
+- `references/` — depth: writing-workflow (concept → style cards → samples →
+  final text), style-framework, style-moves, style-evidence, writing-style,
+  orthography, academic,
   seo-copywriting, fonts, docx-pdf, pptx, html-css, format-skills-fa,
   cleanup/ (paknevis+davat docs)
-- `scripts/` — persian_cleanup.py, fa_lint.py, verify_pdf.py,
+- `scripts/` — persian_cleanup.py, fa_lint.py, style_check.py, verify_pdf.py,
   install_fonts.sh, download_fonts.py, build_universal.py
 - `assets/` — fonts/ (TTFs), persian_words.txt (453K-word frequency
-  dictionary for spell-check)
+  dictionary for spell-check), style_profiles.json (rhythm bands)
 - `universal/` — generated single-file edition for chat-only AIs
 - `.claude-plugin/` — optional Claude Code plugin manifests
 - `evals/` — test prompts for regression-testing the skill
@@ -60,7 +63,8 @@ verification. Bundled Vazirmatn and Lalezar fonts (SIL OFL).
   `grep -rn '__version__\|"version"\|version:' SKILL.md .claude-plugin scripts`
 - Keep wording harness-neutral; name specific tools as examples, not limits.
 - Keep the package brand-free: no company names, no real client stats,
-  placeholder colors only.
+  placeholder colors only. Exception: style-evidence.md and the profile
+  anchors name the public sources the rhythm profiles were measured on.
 - Run `python3 scripts/fa_lint.py --check` on any Persian example text you
   add to the docs — the skill must pass its own linter.
 - When documentation intentionally shows an invalid Persian form, mark it with

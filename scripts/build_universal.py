@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 """
-build_universal.py — compile the persian-writing skill into ONE self-contained
+build_universal.py — compile the nasr skill (persian-writing + style workflow) into ONE self-contained
 Markdown file for chat-only AIs (ChatGPT, Gemini, any LLM without file access).
 
-Output: universal/persian-writing-universal.md
+Output: universal/nasr-universal.md
 Run after ANY edit to SKILL.md or references/.
 """
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / 'universal' / 'persian-writing-universal.md'
+OUT = ROOT / 'universal' / 'nasr-universal.md'
 
 # Order matters: always-apply layers first, then genres, then formats.
 PARTS = [
     ('writing-style.md',    'Writing style: registers & de-AI-ing'),
+    ('writing-workflow.md', 'Writing workflow: concept to final text'),
+    ('style-framework.md',  'Prose styles: axes, recipes, rhythm'),
+    ('style-moves.md',      'Signature moves per style'),
     ('orthography.md',      'Orthography (نگارش و رسم‌الخط)'),
     ('content-structures.md', 'Content craft: POV, structure, honesty'),
     ('academic.md',         'Academic writing (نگارش علمی)'),
@@ -28,14 +31,14 @@ PARTS = [
 ]
 
 HEADER = """\
-# Persian Writing — universal single-file edition
+# nasr (نثر) — universal single-file edition
 # نگارش فارسی حرفه‌ای برای هر هوش مصنوعی
 
-This is the complete persian-writing skill compiled into one file, for AI
+This is the complete nasr skill compiled into one file, for AI
 systems without file access. Give it to the AI as a system prompt, project
 knowledge, or an attached document, with an instruction like:
 
-> Follow the persian-writing guide for every task that involves Persian
+> Follow the nasr guide for every task that involves Persian
 > (Farsi) text or documents.
 
 Two adaptations for this edition:
@@ -79,7 +82,7 @@ def rewire_paths(text: str) -> str:
         text = text.replace(f'`{fname}`', f'the «{title}» part')
     text = text.replace('`references/cleanup/paknevis-rules.md` + `usage-patterns.md`',
                         'the Orthography part (script docs ship with the full package)')
-    text = re.sub(r'`?scripts/(persian_cleanup|fa_lint|verify_pdf|install_fonts|download_fonts|build_universal)\.(py|sh)`?',
+    text = re.sub(r'`?scripts/(persian_cleanup|fa_lint|verify_pdf|style_check|install_fonts|download_fonts|build_universal)\.(py|sh)`?',
                   r'the \1 script (full package; chat-only AIs apply the equivalent rules manually)',
                   text)
     return text

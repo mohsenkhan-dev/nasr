@@ -1,28 +1,68 @@
-<p align="center">
-  <img src="docs/banner.png" alt="persian-writing — فارسی، به زبان خودمان" width="100%">
-</p>
+# nasr (نثر)
 
-# persian-writing
-
-**نگارش فارسی حرفه‌ای برای هوش مصنوعی — Professional Persian (Farsi) writing & RTL documents for any AI**
+**از مفهوم تا متن نهایی: سبک‌های نثر فارسی و اسناد راست‌چین برای هوش مصنوعی**
+**Persian prose styles and RTL documents for Claude and any AI agent**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Skill](https://img.shields.io/badge/Claude-Skill-cc785c)](https://claude.ai)
 [![Works with any agent](https://img.shields.io/badge/agents-any-blue)](AGENTS.md)
 [![Fonts: Vazirmatn + Lalezar](https://img.shields.io/badge/fonts-Vazirmatn%20%2B%20Lalezar-8A2BE2)](references/fonts.md)
 
-AI output in Persian has two chronic failures: prose that screams «متن هوش
-مصنوعی» (می‌باشد، لازم به ذکر است، rule-of-three triads, em dashes) and
-documents that betray the text (left-aligned "RTL", broken نیم‌فاصله, Arabic
-ي/ك, orphan headings, DejaVu fallback glyphs). This skill fixes both, in one
-package, for any AI that can read Markdown.
+<div dir="rtl">
 
-![Sample output: fully RTL Persian proposal, Vazirmatn, verified](docs/preview.png)
+## نثر چه می‌کند
+
+متن فارسیِ هوش مصنوعی معمولاً یا بوی ماشین می‌دهد (می‌باشد، سه‌گانه‌ها، خط تیره)
+یا کوتاه و بریده است: جمله‌های پنج‌شش‌کلمه‌ای پشت هم، بی‌آن‌که فکری را پیش ببرند.
+نثر این مهارت را به هوش مصنوعی می‌دهد که پیش از نوشتن بفهمد متن قرار است چه بگوید،
+چند سبک برای گفتنش پیشنهاد کند و متن را تا نسخه‌ی نهایی و فایل تحویلی پیش ببرد.
+
+گردش کار چهار مرحله دارد:
+
+۱. **فهم مفهوم.** جمله‌ای که خواننده باید به خاطر بسپارد، مخاطب، غایت و مصالح
+   (واقعیت، عدد، تجربه، نقل‌قول). خروجی این مرحله یک «برداشت من» چندخطی است و
+   حداکثر سه پرسش. کمبود مصالح همین‌جا با پرسیدن یا جست‌وجو جبران می‌شود، نه با
+   ساختن.
+۲. **پیشنهاد سبک.** دو تا چهار کارت سبک که دست‌کم در یک محور با هم فرق دارند؛
+   ترکیب سبک‌ها هم مجاز است.
+۳. **متن نمونه** (در صورت نیاز). پاراگراف آغازین هر کارت روی همان واقعیت‌ها، تا
+   تفاوت فقط در سبک دیده شود.
+۴. **نگارش نهایی.** پیش‌نویس، بررسی واقعیت‌ها، سنجش آهنگ با `style_check.py`،
+   ویرایش نگارشی با `persian_cleanup.py` و `fa_lint.py`، و تحویل در قالب
+   خواسته‌شده: Word، PDF، HTML یا اسلاید.
+
+### سبک‌ها از کجا آمده‌اند
+
+سبک‌ها حدس نیستند. هر سبک روی چهار محور مستقل تعریف شده و هر محور یک معیار دارد:
+غایت (گزارش، تبیین، اقناع، فراخوان، یادمان)، شاهد غالب (تجربه، واقعیت جاری، تاریخ،
+مفهوم، مرجع)، جایگاه (من، ما، بیرونی) و ساخت (زمانی، زنجیره‌ای، فهرستی، تقابلی،
+شاخه‌ای). سیزده «نسخه» مثل جدل، توجیه راهبردی، تحلیل مفهومی، روایت شاهد، گزارش
+داده‌محور برند و گزارش نهادی ترکیب‌های رایج همین محورها هستند.
+
+آهنگ متن (طول جمله و پاراگراف، تراکم ربط‌ها) جداگانه انتخاب می‌شود. هفت نیم‌رخ آهنگ
+از سنجش ۶۲۰ متن امضادار نُه نویسنده و ستون‌نویس فارسی و یازده گزارش سالانه و
+پایداری شرکت‌های ایرانی ساخته شده است. روش، آزمون‌های کور و محدودیت‌ها در
+[`references/style-evidence.md`](references/style-evidence.md) آمده است. هیچ متنی
+از منابع در این مخزن بازتولید نشده؛ فقط سنجه‌ها و مثال‌های ساختگی.
+
+</div>
+
+## Built on persian-writing
+
+nasr is an extended edition of
+[**persian-writing**](https://github.com/ali2000hos/persian-writing) by
+ali2000hos and contributors (MIT). Everything in it is kept: register detection,
+Persian AI-tell removal, orthography, the paknevis + davat cleanup toolkit, RTL
+fixes for Word/PDF/PowerPoint/HTML/Excel/images, the verifiers and the bundled
+fonts. nasr adds the writing workflow and the evidence-based style layer on top.
+The upstream history is preserved in this repository.
 
 ## What it does
 
 | Layer | Coverage |
 |---|---|
+| **Writing workflow** (nasr) | concept → 2–4 style cards → optional opening samples → draft, checks and delivery (references/writing-workflow.md) |
+| **Prose styles** (nasr) | four axes, 13 recipes, 7 rhythm profiles measured on real Persian prose; `style_check.py` measures a draft against its band |
 | **Register detection** | ۶-step procedure: رسمی / اداری / محاوره / علمی — classifies the deliverable, not the request tone; asks when stakes are high |
 | **De-AI-ing (humanizer-fa)** | 18 Persian AI-tell patterns with before/after fixes، مکانیزم زیربنایی، و گزارش ریتم جمله |
 | **Orthography** | نیم‌فاصله (ZWNJ)، ی/ک فارسی، اعداد فارسی، «گیومه»، کسره‌ی اضافه، **هکسره** |
@@ -36,22 +76,24 @@ package, for any AI that can read Markdown.
 
 ## Install
 
-**Claude.ai / Cowork:** download `persian-writing.skill` from
-[Releases](../../releases) → open in Claude → **Save skill**.
+**Claude.ai / Cowork:** zip this folder as `nasr.skill` (or download it from
+[Releases](../../releases)) → open in Claude → **Save skill**.
 
 **Claude Code:**
 ```bash
-git clone https://github.com/ali2000hos/persian-writing ~/.claude/skills/persian-writing
+git clone https://github.com/mohsenkhan-dev/nasr ~/.claude/skills/nasr
 ```
-or as a plugin: `/plugin marketplace add ali2000hos/persian-writing`
+or as a plugin: `/plugin marketplace add mohsenkhan-dev/nasr`, then `/plugin install nasr@nasr`.
+Installed under `~/.claude/skills/`, it is available in every project.
+Do not keep persian-writing installed next to it: both trigger on Persian text.
 
 **Cursor / Windsurf / other agents:** clone into your repo (e.g.
-`skills/persian-writing/`) and add one rule line:
-`For any Persian/Farsi task, read skills/persian-writing/SKILL.md and follow it.`
+`skills/nasr/`) and add one rule line:
+`For any Persian/Farsi task, read skills/nasr/SKILL.md and follow it.`
 See [AGENTS.md](AGENTS.md).
 
 **ChatGPT / Gemini / chat-only AIs:** upload
-[`universal/persian-writing-universal.md`](universal/persian-writing-universal.md)
+[`universal/nasr-universal.md`](universal/nasr-universal.md)
 as knowledge (GPTs / Projects / Gems) — the whole skill in one self-contained file.
 
 **No AI at all (plain CLI):**
@@ -60,6 +102,7 @@ python3 scripts/persian_cleanup.py --edit --spellcheck draft.txt   # fix + spell
 python3 scripts/fa_lint.py --check draft.txt                       # lint report
 python3 scripts/verify_docx.py out.docx --fix --sanitize            # DOCX RTL + integrity
 python3 scripts/verify_pdf.py out.pdf --expect-font Vazirmatn      # PDF QA
+python3 scripts/style_check.py draft.md --recipe "جدل"              # rhythm vs profile
 ```
 Python 3.8+, standard library only.
 
@@ -76,12 +119,13 @@ Python 3.8+, standard library only.
 ```
 SKILL.md                 entry point: routing + non-negotiables
 AGENTS.md                guidance for any AI agent
-references/              writing-style, orthography, content-structures, academic,
+references/              writing-workflow, style-framework, style-moves, style-evidence,
+                         writing-style, orthography, content-structures, academic,
                          social-channels, seo-copywriting, fonts, docx-pdf, pptx,
                          html-css, format-skills-fa, cleanup/
-scripts/                 persian_cleanup, fa_lint, verify_docx, verify_pdf,
+scripts/                 persian_cleanup, fa_lint, style_check, verify_docx, verify_pdf,
                          check_version, install_fonts, download_fonts, build_universal
-assets/                  fonts (TTF) + 453K-word dictionary
+assets/                  fonts (TTF), 453K-word dictionary, style_profiles.json
 universal/               single-file edition for chat-only AIs
 .claude-plugin/          Claude Code plugin manifests
 evals/                   regression test prompts
@@ -92,6 +136,27 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.0.0** — nasr. Renamed and published as its own repository. New writing
+  workflow (references/writing-workflow.md): understand the concept and show a
+  short restatement, propose two to four style cards that differ on an axis,
+  write opening samples on the same facts when the choice is hard, then draft,
+  check (facts, style_check, cleanup, lint, read-aloud) and deliver. Depth
+  scales with the job: short transactional texts skip it. The single-file
+  edition now includes the workflow and the style framework.
+- **1.5.0** — prose styles from evidence. A new style layer for columns,
+  analyses, essays and corporate reports. Each style is described on four axes,
+  each with a single criterion: purpose, dominant evidence, position, and
+  structure. Named recipes (جدل، توجیه راهبردی، روایت شاهد، گزارش داده‌محور
+  برند، گزارش نهادی…) are common combinations, and long texts can combine them
+  section by section. Rhythm is chosen separately, from seven profiles built
+  from a reference corpus of 620 signed texts by nine Persian writers and
+  eleven Iranian annual and sustainability reports. New files:
+  references/style-framework.md (choosing, combining, the style card),
+  references/style-moves.md (signature moves, invented examples),
+  references/style-evidence.md (corpus, tests, limits),
+  scripts/style_check.py (measure a draft against a profile) and
+  assets/style_profiles.json. The formal-but-human rule «short sentences» now
+  applies to proposals and web copy only; analytical prose follows its profile.
 - **1.4.0** — source-faithful academic paraphrase. Rewriting a paper into a
   thesis chapter now follows one rule: change wording and structure only. No
   inference or bridging link is added, nothing is dropped, and every qualifier

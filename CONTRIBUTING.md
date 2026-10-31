@@ -25,7 +25,7 @@ channels that all expect exactly that:
 | Claude skill (`.skill`) | the directory, unpacked |
 | Claude Code plugin | the git repo |
 | Cursor / Windsurf / other agents | the cloned folder |
-| ChatGPT / Gemini | `universal/persian-writing-universal.md` |
+| ChatGPT / Gemini | `universal/nasr-universal.md` |
 
 Adding `pip install` adds a fifth channel with its own release cadence,
 its own version number and its own copy of every file. If you want it, open an
@@ -64,7 +64,7 @@ anything in `references/`:
 python3 scripts/build_universal.py
 ```
 
-`universal/persian-writing-universal.md` is generated. Do not hand-edit it.
+`universal/nasr-universal.md` is generated. Do not hand-edit it.
 
 ## Writing rules for the documentation itself
 

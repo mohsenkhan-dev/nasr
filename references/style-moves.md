@@ -1,0 +1,106 @@
+# Signature moves per recipe
+
+A move is something a writer does with a sentence or a paragraph: how they open,
+turn, persuade and close. Numbers (style-framework.md §3) set the rhythm; moves
+make a recipe recognisable. They were found by reading the reference corpus and
+checked by counting them across all writers (style-evidence.md). Every example
+below is invented for this file; none is quoted from a source text.
+
+How to use: pick two to four moves from the recipe, not all of them. One move
+used well reads as style; every move at once reads as a template.
+
+## Shared toolkit (every analytic recipe)
+
+These appear in most writers, so they mark good analytic prose in general, not a
+particular recipe:
+- A first-person stance at the turning point: «به نظر من…»، «به گمانم…»
+- Concede, then turn: «البته … اما/ولی …»
+- A rhetorical question that sets up the next paragraph (not a chain of them).
+- The negation cascade «نه … نه … بلکه …» to clear wrong explanations before the right one.
+- A short historical comparison in one clause.
+- At most one line of irony per text.
+
+## تحلیل مفهومی
+- **Define before use.** Introduce the concept in «» and define it in the next sentence: «آنچه می‌توان آن را «جنگ معلق» نامید، وضعیتی است که…»
+- **Distinguish it from its neighbour.** «جنگ معلق با بن‌بست فرق دارد: در بن‌بست…»
+- **Read the case through it**, with dated facts.
+- **Close on what the concept predicts**, not on a summary.
+- Optional: an English equivalent in parentheses for a technical term, at most once or twice.
+
+## توجیه راهبردی
+- **Frame as levels or scenarios**, each a paragraph: «سناریوی نخست…».
+- **Give indicators for each scenario**: what would we see if this one is happening.
+- **Read the other side's intent**, attributed to evidence: «اگر … پس طرف مقابل احتمالاً…».
+- **End with an assessment and a risk**: which scenario is likeliest and which is most dangerous, and why they differ.
+
+## استدلال روزنامه‌ای
+- **Announce the point in first person**: «در این یادداشت می‌خواهم به یک نکته بپردازم.»
+- **From observation to generalisation**: a concrete case, then «این رفتار در … بیشتر دیده می‌شود».
+- **Concede and turn**: «البته … ولی …».
+- **A folk analogy or proverb at the close**, one only: «تا تنور داغ است…».
+- **A recommendation to a named actor**: «وزارت … باید …».
+
+## جدل
+- **State the claim fairly and attribute it**: who said what, when.
+- **Numbered rebuttal**: ۱، ۲، ۳, each point resting on one checkable fact.
+- **Concede what is true in the other side**: it makes the rebuttal credible.
+- **One line of irony**, never a tone of contempt.
+- **Close with a question the other side must answer.**
+
+## عبرت تاریخی
+- **Numbered chronological review** with exact dates; verify every date.
+- **Extract a rule**: «هر جا … ، … ؛ هر جا … ، …».
+- **Return to today** in the last paragraph: what the rule says about the present case.
+
+## روایت شاهد
+Requires an experience the user supplied. Do not invent one.
+- **Open with the scene or a news hook**: «امروز…»، «سال هشتاد و هشت، یک روز…».
+- **First-person past tense and reported dialogue**: «به او گفتم…».
+- **Move from the scene to analysis** in the second half.
+- **A short verdict sentence at the end**.
+
+## خطابه
+- **«ما»** throughout, and one image of the shared situation.
+- **Anaphora**, three times at most: «یادمان باشد… یادمان باشد… یادمان باشد…».
+- **An authority or a verse**, quoted exactly and verified.
+- **A call to action addressed to «ما»**. Stay non-partisan unless the user sets the side.
+
+## توضیح و آموزش
+- **«پیش‌نوشت:»** to set the frame and limits («این نوشته تحلیل سیاسی نیست…»).
+- **Name the tool or framework** and define it.
+- **Numbered steps or questions** the reader can apply.
+- **One worked example** using the reader's real case.
+- **A hedged conclusion**: what the tool can and cannot decide.
+
+## تأمل شخصی
+- **«پیش‌نوشت:»** stating it is a personal report, not advice.
+- **Hedges that are honest, not decorative**: «به گمانم»، «دست‌کم برای خودم».
+- **Two errors to avoid**, and the narrow path between them.
+- **An open ending**: a question or a provisional conclusion.
+
+## سوگ‌نامه
+- **The shared history in order**, with years and places.
+- **Two or three specific memories**, from the user.
+- **The person's work named exactly** (titles, roles).
+- **Condolence at the end**, one paragraph.
+
+## گزارش داده‌محور برند
+- **A headline and a one-sentence lead per section**: «سرویس‌هاب؛ همه‌ی ابزارها زیر یک سقف».
+- **Figure → meaning → cause**: «فروش کنسرو در ده روز اول اسفند دو برابر شد؛ یعنی خانوارها پیش از آغاز جنگ ذخیره کردند.»
+- **The record sentence**, used sparingly: «رکورد سفارش روزانه در ۱۷ اسفند ثبت شد».
+- **Category framing**: «طرح‌های ما در سه دسته جای می‌گیرند: …».
+- **Definitional caveats** that build trust: «هر حساب کاربری الزاماً یک نفر نیست.»
+- **A real customer or employee vignette** from the source material, never invented.
+
+## گزارش نهادی
+- **Name the standard or framework** behind each claim (GRI، ISO 22301).
+- **Describe processes with the actor named**: «واحد حسابرسی داخلی هر سال … را بررسی می‌کند», not «بررسی به عمل می‌آید».
+- **One value statement per section**, followed by evidence: «برای ما شکایت مشتری پایان کار نیست؛ … در ۱۴۰۴، …».
+<!-- fa-lint-ignore-next-line -->
+- **Replace bureaucratic forms**: می‌باشد → است، گردید → شد، نموده → کرده، صورت پذیرفت → انجام شد، در راستای → برای.
+
+## خبر کوتاه
+- **The lead fact first**: who, what, when, in the first sentence.
+- **One fact per sentence**, figures exact.
+- **No adjectives that the facts do not earn.**
+- **The next step or source at the end.**

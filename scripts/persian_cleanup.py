@@ -80,7 +80,7 @@ from typing import Callable, Iterable, List, Optional, Sequence, Union
 # Constants
 # ---------------------------------------------------------------------------
 
-__version__ = "1.4.0"  # keep in sync with SKILL.md and .claude-plugin/plugin.json
+__version__ = "2.0.0"  # keep in sync with SKILL.md and .claude-plugin/plugin.json
 
 # Zero-Width Non-Joiner (نیم‌فاصله) — the heart of Persian typography
 ZWNJ = "\u200c"
@@ -353,6 +353,7 @@ def dictionary_candidates() -> List[str]:
         os.path.join(os.path.dirname(here), "assets"),     # repo layout
         os.path.join(here, "assets"),                      # script beside assets
         os.path.join(os.getcwd(), "assets"),               # run from repo root
+        os.path.expanduser("~/.claude/skills/nasr/assets"),
         os.path.expanduser("~/.claude/skills/persian-writing/assets"),
     ]
     out = []

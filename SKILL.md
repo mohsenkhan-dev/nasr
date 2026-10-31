@@ -1,5 +1,5 @@
 ---
-name: persian-writing
+name: nasr
 description: >
   Write natural, human-sounding Persian (Farsi) and build correct right-to-left
   Persian deliverables. Use for ANY task involving Persian text or an Iranian
@@ -10,20 +10,24 @@ description: >
   are costly), Persian AI-tell removal, orthography (نیم‌فاصله/ZWNJ، اعداد
   فارسی، «گیومه»), cleanup and spell-check (ویرایش، پاکسازی — bundled
   paknevis+davat toolkit), RTL layout/pagination fixes, and Persian fonts
-  (Vazirmatn bundled). Trigger whenever you see Persian/Arabic script or words
+  (Vazirmatn bundled). For longer prose it runs a writing workflow: understand
+  the concept, propose two to four style cards (combinable), write short
+  samples when useful, then draft and finalize, with styles from a four-axis
+  framework measured on real Persian writers and Iranian company reports
+  (سبک نوشتن، یادداشت، ستون، تحلیل، گزارش سالانه، متن نمونه). Trigger whenever you see Persian/Arabic script or words
   like فارسی, Farsi, Persian, Iran, RTL, راست‌چین, نیم‌فاصله, ویرایش, مقاله,
   پایان‌نامه, سئو, کپشن, Vazirmatn — even if the user never mentions this skill.
 metadata:
-  version: 1.4.0
+  version: 2.0.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
-  custom harnesses; chat-only AIs via universal/persian-writing-universal.md).
+  custom harnesses; chat-only AIs via universal/nasr-universal.md).
   Scripts: Python 3.8+ stdlib only. docx/pptx→PDF conversion: LibreOffice +
   installed fonts. PDF checks: poppler-utils, pypdf, or PyMuPDF (any one).
 ---
 
-# Persian Writing & RTL Documents
+# nasr (نثر): Persian prose and RTL documents
 
 Two failure modes make Persian output look machine-made, and they are independent:
 
@@ -43,6 +47,7 @@ read the reference file for your output format before generating anything.
 |---|---|
 | Any Persian prose (always) | `references/writing-style.md` |
 | Mechanical correctness (always) | `references/orthography.md` |
+| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | `references/writing-workflow.md`, then `style-framework.md` + `style-moves.md` |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | `references/academic.md` |
 | Educational/technical content, docs, product pages, how-to | `references/content-structures.md` |
 | Telegram, Instagram, captions, carousels, reels, stories | `references/social-channels.md` |
@@ -73,6 +78,30 @@ colors, those win on aesthetics; this skill still governs RTL mechanics and
 orthography. This skill itself is brand-neutral: colors in the code examples are
 placeholders, and Vazirmatn is just the default font, not a requirement.
 
+## Writing workflow: concept → styles → samples → final text
+
+For any text that will be read as prose (columns, analyses, essays, reports,
+statements, explainers, long posts), follow `references/writing-workflow.md`:
+
+1. **Understand the concept.** Find the one sentence the reader should keep,
+   the audience, the purpose and the material (facts, figures, experiences,
+   quotations). Show a 4–6-line «برداشت من» and ask at most three questions
+   whose answers change the text. Thin material is fixed here, by asking or
+   searching, never by inventing.
+2. **Propose styles.** Two to four style cards that differ on an axis
+   (style-framework.md), the recommended one first; combinations are allowed.
+3. **Sample text, when it helps.** One opening paragraph per card on the same
+   real facts, so the user compares style alone.
+4. **Write and finalize.** Draft to the chosen card, check facts, run
+   `style_check.py`, `persian_cleanup.py --edit` and `fa_lint.py --check`, read
+   it as a native reader, then deliver in the requested format (DOCX, PDF,
+   HTML, slides) with the verifiers below.
+
+Depth scales with the job: short transactional texts skip the workflow; a
+300–600-word text with a clear purpose gets a one-line restatement and a
+stated style; long, public or high-stakes texts get all four stages. If the
+user names a style or says «فقط بنویس», state the style in one line and write.
+
 ## Writing: the five-second summary
 
 Full guide in `references/writing-style.md`. The core moves:
@@ -96,6 +125,18 @@ Full guide in `references/writing-style.md`. The core moves:
    - Paper, thesis, university report → **academic** (نگارش علمی): measured,
      hedged, passive acceptable, zero تعارف — read `references/academic.md`.
    - SEO/sales copy → register per artifact as above, plus `references/seo-copywriting.md`.
+1b. **For longer prose, choose a style before writing**: style-framework.md.
+   A style is four independent choices: purpose (گزارش، تبیین، اقناع، فراخوان،
+   یادمان), dominant evidence (تجربه، واقعیت جاری، تاریخ، مفهوم، مرجع), position
+   (من، ما، بیرونی) and structure (زمانی، زنجیره‌ای، فهرستی، تقابلی، شاخه‌ای).
+   Named recipes (جدل، توجیه راهبردی، گزارش داده‌محور برند…) are common
+   combinations. Rhythm is chosen separately, from profiles measured on real
+   Persian columnists and annual reports. Columnists write 15–23-word sentences
+   joined by connectives, so do not chop analytical prose into short lines.
+   For long or high-stakes texts, offer two or three style cards. Otherwise
+   state the chosen style in one line. Specificity outranks rhythm: secure real
+   names, figures and dates first. Never invent experiences or quotations to
+   fill the evidence axis.
 2. **Ban the bureaucratic tells:** می‌باشد، لازم به ذکر است، در راستای،
    از اهمیت ویژه‌ای برخوردار است، نقش بسزایی ایفا می‌کند.
 3. **Ban the AI tells:** em dashes (—), rule-of-three triads (سریع، آسان و مطمئن),
@@ -262,15 +303,21 @@ It checks: near-empty pages, "undefined"/template leaks, non-embedded or fallbac
 fonts, Arabic ي/ك in extracted text, and page count. Fix every warning, regenerate,
 re-verify. For prose, re-read your final text against the native test — one pass of
 `persian_cleanup.py --edit` + `fa_lint.py --check` plus one honest read-aloud
-catches most disasters.
+catches most disasters. For styled prose, also run
+`python3 scripts/style_check.py draft.md --recipe "<recipe>"` and revise any
+feature outside its band; it checks rhythm, not quality, so read the draft too.
 
 ## Files
 
 ```
-persian-writing/
+nasr/
 ├── SKILL.md                    ← you are here
 ├── references/
 │   ├── writing-style.md        ← registers, Persian AI tells, colloquial patterns
+│   ├── writing-workflow.md     ← concept → style cards → samples → final text
+│   ├── style-framework.md      ← four style axes, recipes, rhythm profiles, choosing and combining
+│   ├── style-moves.md          ← signature moves per recipe (invented examples)
+│   ├── style-evidence.md       ← the reference corpus behind the styles, and its limits
 │   ├── academic.md             ← نگارش علمی: papers, theses, citations, formulas
 │   ├── orthography.md          ← ZWNJ, characters, digits, punctuation, ezafe
 │   ├── cleanup/                ← paknevis rules, davat API, usage patterns
@@ -285,6 +332,7 @@ persian-writing/
 ├── scripts/
 │   ├── persian_cleanup.py      ← FIX: edit/clean/normalize/spell-check (paknevis+davat)
 │   ├── fa_lint.py              ← LINT: report issues needing contextual judgment
+│   ├── style_check.py          ← measure a draft against a rhythm profile
 │   ├── verify_docx.py          ← DOCX RTL checks (+ --fix for section bidi)
 │   ├── verify_pdf.py           ← post-generation PDF checks
 │   ├── check_version.py        ← verify the version matches in all four places
@@ -292,5 +340,6 @@ persian-writing/
 │   └── download_fonts.py       ← fetch extra families (needs GitHub access)
 └── assets/
     ├── fonts/                  ← Vazirmatn + Lalezar TTFs
+    ├── style_profiles.json     ← rhythm ranges per profile (from the reference corpus)
     └── persian_words.txt       ← 453K-word frequency dictionary (spell-check)
 ```

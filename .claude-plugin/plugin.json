@@ -1,14 +1,29 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "persian-writing",
-  "description": "Professional Persian (Farsi) writing and RTL documents: register-aware human prose, orthography (ZWNJ, Persian digits), cleanup/spell-check scripts, RTL fixes for Word/PDF/PowerPoint/HTML/Excel/images, Persian SEO & copywriting, bundled Vazirmatn/Lalezar fonts.",
-  "version": "1.4.0",
+  "name": "nasr",
+  "description": "nasr (نثر): natural Persian prose and correct RTL documents. A writing workflow (concept → style cards → samples → final text) with styles measured on real Persian columnists and Iranian annual reports, plus register-aware prose, orthography, cleanup/spell-check scripts, RTL fixes for Word/PDF/PowerPoint/HTML/Excel/images, and bundled Vazirmatn/Lalezar fonts.",
+  "version": "2.0.0",
   "author": {
-    "name": "ali2000hos",
-    "url": "https://github.com/ali2000hos"
+    "name": "mohsenkhan-dev",
+    "url": "https://github.com/mohsenkhan-dev"
   },
-  "homepage": "https://github.com/ali2000hos/persian-writing",
-  "repository": "https://github.com/ali2000hos/persian-writing",
+  "homepage": "https://github.com/mohsenkhan-dev/nasr",
+  "repository": "https://github.com/mohsenkhan-dev/nasr",
   "license": "MIT",
-  "keywords": ["persian", "farsi", "rtl", "writing", "humanize", "seo", "copywriting", "docx", "zwnj", "vazirmatn"]
+  "keywords": [
+    "persian",
+    "farsi",
+    "rtl",
+    "writing",
+    "humanize",
+    "seo",
+    "copywriting",
+    "docx",
+    "zwnj",
+    "vazirmatn",
+    "style",
+    "prose",
+    "columns",
+    "annual-report"
+  ]
 }

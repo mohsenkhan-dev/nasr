@@ -1,18 +1,26 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace-manifest.json",
-  "name": "persian-writing",
+  "name": "nasr",
   "owner": {
-    "name": "ali2000hos",
-    "url": "https://github.com/ali2000hos"
+    "name": "mohsenkhan-dev",
+    "url": "https://github.com/mohsenkhan-dev"
   },
-  "description": "The persian-writing skill, installable as a Claude Code plugin.",
+  "description": "The nasr skill (Persian prose styles + RTL documents), installable as a Claude Code plugin.",
   "plugins": [
     {
-      "name": "persian-writing",
+      "name": "nasr",
       "source": "./",
-      "description": "Professional Persian (Farsi) writing and RTL documents: register-aware prose, orthography, cleanup scripts, RTL document fixes, Persian SEO & copywriting, bundled fonts.",
+      "description": "Persian writing workflow and RTL documents: concept → style cards → samples → final text, register-aware prose, orthography, cleanup scripts, RTL document fixes, bundled fonts.",
       "license": "MIT",
-      "keywords": ["persian", "farsi", "rtl", "writing", "humanize", "seo", "copywriting"]
+      "keywords": [
+        "persian",
+        "farsi",
+        "rtl",
+        "writing",
+        "humanize",
+        "seo",
+        "copywriting"
+      ]
     }
   ]
 }
