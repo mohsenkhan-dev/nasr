@@ -219,6 +219,18 @@ one for contrast; your deliverables get zero.)
 شایسته است بدانید → cut. If a phrase only exists as an English idiom's shadow,
 an Iranian didn't write it.
 
+**Think in Persian: collocations.** A verb must fit its noun in Persian, not
+in English. تحول را «ایجاد می‌کنند»، «پدید می‌آورند»؛ تحول «بردنی» نیست
+(«تحول را به سازمان‌ها ببرد» is wrong). Other English shadows: «هزینه‌ای که
+نمی‌توان پرداخت» (cannot afford), «نقش بازی کردن» → نقش داشتن،
+«از معیار رد شدن» (ambiguous: passed or failed?), «نقش حسگر را دارد». Read
+each verb–noun pair aloud and ask whether an Iranian writer would pair them.
+
+### T13b. Colons, headings and announcing openers
+- **Colons are rare in Persian prose.** Use «:» only before a list or a quotation. Mid-sentence, replace it with «،»، «یعنی» or a new sentence.
+- **Headings are plain and descriptive**: no «عنوان: زیرعنوان», no question headings, no dramatic phrasing («تصمیمی که پیش روست»، «سقف ظرفیت»). «پیشنهاد تغییر مأموریت کلمه» is a heading; a slogan is not.
+- **No announcing openers in series.** Paragraphs that each begin «معیار نخست این است که…»، «مسیر دوم…»، «این سند از مخاطبش می‌خواهد…» read as a template, not a style. Say the thing itself; vary how paragraphs open.
+
 ### T14. همچنین pileup
 همچنین، علاوه بر این، افزون بر آن opening consecutive sentences. Persian
 connects naturally with و، هم، تازه (casual), or nothing.

@@ -34,7 +34,7 @@ particular recipe:
 - **End with an assessment and a risk**: which scenario is likeliest and which is most dangerous, and why they differ.
 
 ## استدلال روزنامه‌ای
-- **Announce the point in first person**: «در این یادداشت می‌خواهم به یک نکته بپردازم.»
+- **State the claim in first person**, inside the argument rather than as an announcement: «به نظر من…». The corpus columnists sometimes open with «در این یادداشت می‌خواهم…»; use it once at most, never as a pattern.
 - **From observation to generalisation**: a concrete case, then «این رفتار در … بیشتر دیده می‌شود».
 - **Concede and turn**: «البته … ولی …».
 - **A folk analogy or proverb at the close**, one only: «تا تنور داغ است…».
@@ -66,14 +66,14 @@ Requires an experience the user supplied. Do not invent one.
 - **A call to action addressed to «ما»**. Stay non-partisan unless the user sets the side.
 
 ## توضیح و آموزش
-- **«پیش‌نوشت:»** to set the frame and limits («این نوشته تحلیل سیاسی نیست…»).
+- **Open on the reader's problem**, as a situation in the reader's terms. Do not open with a disclaimer («این نوشته … نیست»); the limits of the tool go at the end.
 - **Name the tool or framework** and define it.
 - **Numbered steps or questions** the reader can apply.
 - **One worked example** using the reader's real case.
 - **A hedged conclusion**: what the tool can and cannot decide.
 
 ## تأمل شخصی
-- **«پیش‌نوشت:»** stating it is a personal report, not advice.
+- **One honest hedge where it matters**, not a disclaimer at the top.
 - **Hedges that are honest, not decorative**: «به گمانم»، «دست‌کم برای خودم».
 - **Two errors to avoid**, and the narrow path between them.
 - **An open ending**: a question or a provisional conclusion.
@@ -85,10 +85,10 @@ Requires an experience the user supplied. Do not invent one.
 - **Condolence at the end**, one paragraph.
 
 ## گزارش داده‌محور برند
-- **A headline and a one-sentence lead per section**: «سرویس‌هاب؛ همه‌ی ابزارها زیر یک سقف».
+- **A plain headline and a one-sentence lead per section**: «ابزارهای فروشندگان در یک سامانه», then the lead. No slogan, no colon in the headline.
 - **Figure → meaning → cause**: «فروش کنسرو در ده روز اول اسفند دو برابر شد؛ یعنی خانوارها پیش از آغاز جنگ ذخیره کردند.»
 - **The record sentence**, used sparingly: «رکورد سفارش روزانه در ۱۷ اسفند ثبت شد».
-- **Category framing**: «طرح‌های ما در سه دسته جای می‌گیرند: …».
+- **Category framing** in prose: «طرح‌های ما در سه دسته جای می‌گیرند که …», or a list after the sentence.
 - **Definitional caveats** that build trust: «هر حساب کاربری الزاماً یک نفر نیست.»
 - **A real customer or employee vignette** from the source material, never invented.
 
@@ -107,8 +107,9 @@ Requires an experience the user supplied. Do not invent one.
 
 ## سند راهبردی
 Provisional (style-framework.md §2). Built from one rewritten roadmap; the section map is in style-framework.md §5.3.
-- **The decision in the first paragraph**: what the reader is asked to approve, and the horizon («نقشه‌ی راه پنج‌ساله‌ی این سند، از … تا …»).
+- **Open on the diagnosis, not the proposal.** The situation and its tension come first; the decision asked of the reader comes after it has been earned. A first sentence of the form «پیشنهاد … این است که…» was judged the weakest opening in the calibration test (style-skeletons.md).
 - **Name the concept the case rests on** and return to it in later sections: «مهاجرت به هوش مصنوعی دو بال دارد: سامانه و آمادگی پذیرش».
+- **Name the crux and the trade-off**: the one obstacle the strategy removes, and what the organization will stop doing to remove it. A plan without something given up is a list of goals.
 - **Lessons before plans**: what the organization learned, stated as findings; the plan follows as their consequence.
 - **The ceiling argument**: today's model works but has a concrete limit; the proposed change removes it.
 - **Problem before solution**: the «why now» section comes before the model.

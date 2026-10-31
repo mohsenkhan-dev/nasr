@@ -186,7 +186,7 @@ profiles are neighbours. Neighbours were computed from the profile medians
 Rules for each boundary:
 - **Change one or two axes, not all four.** From an argument (اقناع، زنجیره‌ای) to a results list (گزارش، فهرستی) is two axes: fine. From a personal scene (تجربه، من، زمانی، گفت‌وگویی) to an institutional table (واقعیت جاری، بیرونی، فهرستی، نهادی) is four: put a section between them or open with a bridge paragraph.
 - **Move rhythm to a neighbour.** تحلیلی میانه → گزارشی برند is a jump: the first paragraph of the new section should still connect (one «یعنی» or «بنابراین»), and sentences lengthen over the section, not in its first line.
-- **Announce the change in the first sentence of the section**, in content, not as meta-talk: «این تصویر کلی است؛ عددهای سال این‌طورند:» rather than «در این بخش به بررسی … می‌پردازیم».
+- **Let the first sentence of the new section make the change in content**, never as an announcement. «عددهای سال همین تصویر را دقیق‌تر می‌کنند.» works; «در این بخش به بررسی … می‌پردازیم» and «این سند پیشنهاد می‌کند…» do not.
 - **Keep the concept visible across the move.** The named concept of the opening (writing-workflow.md, stage 1) should reappear in the report sections as the reason the figures matter.
 
 ### 5.3 The section map

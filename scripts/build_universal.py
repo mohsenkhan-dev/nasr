@@ -17,6 +17,7 @@ PARTS = [
     ('writing-style.md',    'Writing style: registers & de-AI-ing'),
     ('writing-workflow.md', 'Writing workflow: concept to final text'),
     ('style-framework.md',  'Prose styles: axes, recipes, rhythm'),
+    ('style-skeletons.md',  'Style skeletons: think before writing'),
     ('style-moves.md',      'Signature moves per style'),
     ('orthography.md',      'Orthography (نگارش و رسم‌الخط)'),
     ('content-structures.md', 'Content craft: POV, structure, honesty'),

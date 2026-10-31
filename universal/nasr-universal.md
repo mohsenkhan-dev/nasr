@@ -48,7 +48,7 @@ read the reference file for your output format before generating anything.
 |---|---|
 | Any Persian prose (always) | the «Writing style: registers & de-AI-ing» part below |
 | Mechanical correctness (always) | the «Orthography (نگارش و رسم‌الخط)» part below |
-| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | the «Writing workflow: concept to final text» part below, then the «Prose styles: axes, recipes, rhythm» part + the «Signature moves per style» part |
+| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | the «Writing workflow: concept to final text» part below, then the «Prose styles: axes, recipes, rhythm» part, the «Style skeletons: think before writing» part + the «Signature moves per style» part |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | the «Academic writing (نگارش علمی)» part below |
 | Educational/technical content, docs, product pages, how-to | the «Content craft: POV, structure, honesty» part below |
 | Telegram, Instagram, captions, carousels, reels, stories | the «Social channels: Telegram & Instagram» part below |
@@ -91,6 +91,11 @@ statements, explainers, long posts), follow the «Writing workflow: concept to f
    searching, never by inventing.
 2. **Propose styles.** Two to four style cards that differ on an axis
    (style-framework.md), the recommended one first; combinations are allowed.
+2b. **Build the skeleton before writing.** A style is a way of thinking:
+   fill every slot of the recipe's skeleton (the «Style skeletons: think before writing» part below)
+   with real content, and let the skeleton decide where the payoff goes.
+   An empty slot means the style does not fit or material is missing. Never
+   shout the style in the first line.
 3. **Sample text, when it helps.** One opening paragraph per card on the same
    real facts, so the user compares style alone.
 4. **Write and finalize.** Draft to the chosen card, check facts, run
@@ -543,6 +548,18 @@ one for contrast; your deliverables get zero.)
 شایسته است بدانید → cut. If a phrase only exists as an English idiom's shadow,
 an Iranian didn't write it.
 
+**Think in Persian: collocations.** A verb must fit its noun in Persian, not
+in English. تحول را «ایجاد می‌کنند»، «پدید می‌آورند»؛ تحول «بردنی» نیست
+(«تحول را به سازمان‌ها ببرد» is wrong). Other English shadows: «هزینه‌ای که
+نمی‌توان پرداخت» (cannot afford), «نقش بازی کردن» → نقش داشتن،
+«از معیار رد شدن» (ambiguous: passed or failed?), «نقش حسگر را دارد». Read
+each verb–noun pair aloud and ask whether an Iranian writer would pair them.
+
+### T13b. Colons, headings and announcing openers
+- **Colons are rare in Persian prose.** Use «:» only before a list or a quotation. Mid-sentence, replace it with «،»، «یعنی» or a new sentence.
+- **Headings are plain and descriptive**: no «عنوان: زیرعنوان», no question headings, no dramatic phrasing («تصمیمی که پیش روست»، «سقف ظرفیت»). «پیشنهاد تغییر مأموریت کلمه» is a heading; a slogan is not.
+- **No announcing openers in series.** Paragraphs that each begin «معیار نخست این است که…»، «مسیر دوم…»، «این سند از مخاطبش می‌خواهد…» read as a template, not a style. Say the thing itself; vary how paragraphs open.
+
 ### T14. همچنین pileup
 همچنین، علاوه بر این، افزون بر آن opening consecutive sentences. Persian
 connects naturally with و، هم، تازه (casual), or nothing.
@@ -812,6 +829,37 @@ Ask the user to choose with one question (AskUserQuestion where available;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
+## Stage 2b: build the skeleton (اسکلت)
+
+A style is a way of thinking before it is a way of writing. Before any prose,
+fill the chosen recipe's skeleton (style-skeletons.md) with real content: one
+note per slot. Check it:
+- **Every slot filled with real content.** An empty slot means the style does not fit or material is missing. Change the style or ask; do not write around the gap.
+- **The payoff is where the style puts it.** Reports end on targets; strategy opens on the diagnosis and ends on the ask; narratives give the meaning after the scene.
+- **The thinking slots are filled boldly**: diagnosis, crux, trade-off, drivers, indicators. These are the writer's reasoning and are expected; facts stay as the material gives them.
+
+For long or high-stakes texts, show the skeleton before drafting.
+
+## Calibrating styles on a topic
+
+When the user wants to know which styles suit a topic, or doubts whether a
+style «came through», write one short sample (150–250 words) per suitable style
+on the same material. For each sample show:
+- the style's essence in one line (what must be present for the style to be recognisable);
+- its filled skeleton;
+- the text.
+
+Let the user judge each sample «درآمده / نیمه / درنیامده» with a note, and
+revise only the ones that did not come through, skeleton first. Styles whose
+skeleton cannot be filled from the material are listed as unsuitable, not
+written. An illustrative scene for روایت شاهد may be invented in a calibration
+sample when the user asks, marked as invented; never in a deliverable.
+
+What the first calibration on a real strategy topic taught:
+- Tone and rhythm were right in most samples; the failures were thinking failures (no crux or trade-off in the strategy, targets given away in a report's opening, a disclaimer as an explainer's first line, scenarios not derived from drivers).
+- A rewrite is not a copy edit. Rebuilding the skeleton changes the text; polishing the original's sentences does not.
+- Shortening paragraphs to fit a rhythm band made the text choppier, not better. Bands are a check, not a target.
+
 ## Stage 3: sample text (متن نمونه), when it helps
 
 Write samples when the user cannot choose from the cards, when the text is
@@ -829,7 +877,7 @@ Then ask once: which sample, or which mix («آغاز ۲ با ساخت ۱»).
 ## Stage 4: write and finalize (نگارش نهایی)
 
 1. **Section map** (texts over ~600 words or with headings): one line per section with its job, its axis values if they change, and its rhythm profile (style-framework.md §5.3). Move to a near style at each boundary. Mark each section with `<!-- سبک: … -->` under its heading so the check below can measure it. Show the map only if the user asked to see the structure.
-2. **Draft** to the chosen card. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
+2. **Draft from the skeleton** (stage 2b), slot by slot. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
 3. **Checks**, in this order:
    - Facts: every name, figure, date and quotation traces to the user, a document or a source you found. Mark anything unverified.
    - Rhythm: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --recipe "<recipe>"` (or `--profile`); for a sectioned text, `--sections`, which measures each section against its declared profile and flags jumps between non-neighbouring profiles. Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).
@@ -1097,7 +1145,7 @@ profiles are neighbours. Neighbours were computed from the profile medians
 Rules for each boundary:
 - **Change one or two axes, not all four.** From an argument (اقناع، زنجیره‌ای) to a results list (گزارش، فهرستی) is two axes: fine. From a personal scene (تجربه، من، زمانی، گفت‌وگویی) to an institutional table (واقعیت جاری، بیرونی، فهرستی، نهادی) is four: put a section between them or open with a bridge paragraph.
 - **Move rhythm to a neighbour.** تحلیلی میانه → گزارشی برند is a jump: the first paragraph of the new section should still connect (one «یعنی» or «بنابراین»), and sentences lengthen over the section, not in its first line.
-- **Announce the change in the first sentence of the section**, in content, not as meta-talk: «این تصویر کلی است؛ عددهای سال این‌طورند:» rather than «در این بخش به بررسی … می‌پردازیم».
+- **Let the first sentence of the new section make the change in content**, never as an announcement. «عددهای سال همین تصویر را دقیق‌تر می‌کنند.» works; «در این بخش به بررسی … می‌پردازیم» and «این سند پیشنهاد می‌کند…» do not.
 - **Keep the concept visible across the move.** The named concept of the opening (writing-workflow.md, stage 1) should reappear in the report sections as the reason the figures matter.
 
 ### 5.3 The section map
@@ -1186,7 +1234,151 @@ Write the card before drafting a long text, and show it when options are offered
 
 ---
 
-# PART 4 — Signature moves per style
+# PART 4 — Style skeletons: think before writing
+
+# Style skeletons: think in the style before writing in it
+
+A style is a way of thinking, not a vocabulary. In the calibration test on a
+real strategy topic, the samples that failed had the right tone and rhythm but
+the wrong thinking: a «strategic» text that opened by stating its proposal, a
+brand report that gave away its targets in the first paragraph, an explainer
+that opened by announcing what it was not, scenarios that were not derived from
+anything. The words were arranged in the style; the content was not built in it.
+
+So every text is built in two steps:
+
+1. **Build the skeleton.** Take the recipe's skeleton below and fill every slot
+   with real content from the material: a sentence or a note per slot, not prose.
+   If a slot cannot be filled, the style does not fit this content (or the
+   material is missing): change the style or ask. Do not write around an empty slot.
+2. **Write from the skeleton.** Each slot becomes a paragraph or part of one.
+   The skeleton decides where the payoff goes; the prose never moves it forward
+   to announce it.
+
+For long or high-stakes texts, show the skeleton to the user before drafting.
+It is shorter than a draft and cheaper to correct.
+
+## Rules that hold for every skeleton
+
+- **Where the payoff goes is part of the style.** Reports end on what comes next; arguments state the claim early and earn it; narratives give the meaning after the scene; strategy opens on the situation, not on the answer.
+- **Never shout the style in the first line.** No «این یادداشت … نیست», no «این سند پیشنهاد می‌کند…» as an opener, no «در این بخش به … می‌پردازیم». The first line does the style's first move.
+- **No announcing openers in series.** Paragraphs that each begin «معیار نخست…»، «مسیر دوم…» read as a form. Enumeration belongs in the skeleton, not in the prose.
+- **Fit test.** A style fits when its slots can be filled with real content. خطابه needs a speaker with standing, a «ما» and an occasion; روایت شاهد needs a scene; توجیه راهبردی needs real uncertainties. When the fit is weak, say so and propose the nearer style.
+- **Reasoning is free, facts are fixed.** Slots like «diagnosis», «crux», «trade-off» and «indicator» are the writer's thinking and should be filled boldly; names, figures, dates and quotations come only from the material.
+
+## Skeletons per recipe
+
+### تحلیل مفهومی
+1. The phenomenon the usual words do not explain.
+2. The concept, named in «» and defined in one sentence.
+3. Its neighbour, and the one difference that matters.
+4. The case read through the concept, with facts.
+5. What the concept predicts or changes in how we act. (Payoff at the end.)
+
+### توجیه راهبردی (scenarios for a decision)
+1. The decision and its horizon: who must choose what, by when.
+2. **Drivers**: the two uncertainties that most change the answer. They must come from the material, and each must be genuinely open.
+3. Scenarios built from the drivers (two to four); each gets a short name, what it looks like, and the **leading indicators** that would show it is arriving.
+4. For each scenario, what it implies for the decision.
+5. Assessment: likeliest versus most dangerous, and why they differ.
+6. **The robust move**: what to do now that is right in every scenario, and the trigger that would justify the bigger move. (Payoff at the end.)
+
+Weak signs: scenarios that are just good and bad outcomes; indicators that cannot be observed; no link from scenarios back to the decision.
+
+### سند راهبردی (strategy document)
+Built on the kernel of strategy (Rumelt, *Good Strategy / Bad Strategy*, 2011):
+diagnosis, guiding policy, coherent actions.
+1. **Diagnosis**: what is really going on. The situation and its tension, from the material; this is the opening, not the proposal.
+2. **The crux**: the one obstacle that, once overcome, unlocks the rest. Name it.
+3. **Guiding policy**: the approach to the crux, including **what will no longer be done** and the price of that choice. A strategy without a trade-off is a wish.
+4. **Alternatives considered** and why each fails on the crux, stated fairly.
+5. **Coherent actions**: phases that reinforce each other, each with an exit criterion.
+6. **Why now**: the cost of waiting.
+7. **What must be true** for it to work, resources and risks, and the decision asked of the reader. (The ask comes last, after it has been earned.)
+
+Weak signs: the first sentence is «پیشنهاد … این است که»; no trade-off; goals listed as strategy («رهبری بازار» is an aim, not a policy); actions that do not follow from the diagnosis.
+
+### استدلال روزنامه‌ای
+1. A hook: a fresh fact or observation.
+2. The claim, in first person.
+3. Two or three reasons, each resting on one checkable fact.
+4. The strongest objection, conceded honestly.
+5. The turn: why the claim survives the objection.
+6. A recommendation to a named actor; optionally one proverb.
+
+### جدل
+1. The opposing claim, stated fairly and attributed (who, where, when).
+2. What is right in it.
+3. Numbered rebuttals, each on one fact.
+4. A question the other side must answer.
+
+### عبرت تاریخی
+1. Today's puzzle.
+2. Past cases in order, dated and verified.
+3. The rule they share.
+4. What the rule says about today.
+
+### روایت شاهد
+1. The scene: time, place, people, one concrete detail.
+2. The moment of surprise or friction.
+3. What it revealed: the turn from scene to analysis.
+4. The generalisation, checked against more than this one scene.
+5. A short verdict.
+The meaning comes after the scene; never explain the scene before showing it.
+A deliverable needs a real scene from the user. A calibration sample may use an
+illustrative scene, marked as invented.
+
+### خطابه
+Fit first: a speaker with standing, a «ما» audience, an occasion (a launch, a loss, a decision). Without an occasion, choose another style.
+1. The shared situation in one image.
+2. What «ما» have been through.
+3. What is at stake now.
+4. Commitments, with anaphora three times at most.
+5. One exact, verified quotation or verse.
+6. The call, addressed to «ما».
+
+### توضیح و آموزش
+1. The reader's problem, in the reader's terms (a situation, not a disclaimer).
+2. The tool, named and defined.
+3. Steps or questions the reader applies.
+4. One worked example on a real case.
+5. The tool's limits, at the end.
+
+### تأمل شخصی
+1. The question that will not leave the writer.
+2. Two errors to avoid.
+3. The narrow path between them, hedged honestly.
+4. An open ending.
+
+### سوگ‌نامه
+1. The person and the shared history, in order.
+2. Two or three specific memories.
+3. The work, named exactly.
+4. Condolence.
+
+### گزارش داده‌محور برند
+1. **What happened** in the period, in one line: the change, not the plan.
+2. Sections, each: a headline, a figure, its meaning, its cause.
+3. A real customer or employee story, if the material has one.
+4. Caveats: what is not measured yet, how terms are defined.
+5. **What comes next**: targets and plans, at the end. Never in the opening.
+
+### گزارش نهادی
+1. Scope and standard of the report.
+2. Per topic: the commitment, the process with its actor, the figure, the standard.
+3. Gaps and next year's targets at the end.
+
+### خبر کوتاه
+1. Who did what, when (the lead).
+2. Supporting facts, one per sentence, most important first.
+3. Context in one sentence.
+4. The next step or the source.
+
+
+
+---
+
+# PART 5 — Signature moves per style
 
 # Signature moves per recipe
 
@@ -1224,7 +1416,7 @@ particular recipe:
 - **End with an assessment and a risk**: which scenario is likeliest and which is most dangerous, and why they differ.
 
 ## استدلال روزنامه‌ای
-- **Announce the point in first person**: «در این یادداشت می‌خواهم به یک نکته بپردازم.»
+- **State the claim in first person**, inside the argument rather than as an announcement: «به نظر من…». The corpus columnists sometimes open with «در این یادداشت می‌خواهم…»; use it once at most, never as a pattern.
 - **From observation to generalisation**: a concrete case, then «این رفتار در … بیشتر دیده می‌شود».
 - **Concede and turn**: «البته … ولی …».
 - **A folk analogy or proverb at the close**, one only: «تا تنور داغ است…».
@@ -1256,14 +1448,14 @@ Requires an experience the user supplied. Do not invent one.
 - **A call to action addressed to «ما»**. Stay non-partisan unless the user sets the side.
 
 ## توضیح و آموزش
-- **«پیش‌نوشت:»** to set the frame and limits («این نوشته تحلیل سیاسی نیست…»).
+- **Open on the reader's problem**, as a situation in the reader's terms. Do not open with a disclaimer («این نوشته … نیست»); the limits of the tool go at the end.
 - **Name the tool or framework** and define it.
 - **Numbered steps or questions** the reader can apply.
 - **One worked example** using the reader's real case.
 - **A hedged conclusion**: what the tool can and cannot decide.
 
 ## تأمل شخصی
-- **«پیش‌نوشت:»** stating it is a personal report, not advice.
+- **One honest hedge where it matters**, not a disclaimer at the top.
 - **Hedges that are honest, not decorative**: «به گمانم»، «دست‌کم برای خودم».
 - **Two errors to avoid**, and the narrow path between them.
 - **An open ending**: a question or a provisional conclusion.
@@ -1275,10 +1467,10 @@ Requires an experience the user supplied. Do not invent one.
 - **Condolence at the end**, one paragraph.
 
 ## گزارش داده‌محور برند
-- **A headline and a one-sentence lead per section**: «سرویس‌هاب؛ همه‌ی ابزارها زیر یک سقف».
+- **A plain headline and a one-sentence lead per section**: «ابزارهای فروشندگان در یک سامانه», then the lead. No slogan, no colon in the headline.
 - **Figure → meaning → cause**: «فروش کنسرو در ده روز اول اسفند دو برابر شد؛ یعنی خانوارها پیش از آغاز جنگ ذخیره کردند.»
 - **The record sentence**, used sparingly: «رکورد سفارش روزانه در ۱۷ اسفند ثبت شد».
-- **Category framing**: «طرح‌های ما در سه دسته جای می‌گیرند: …».
+- **Category framing** in prose: «طرح‌های ما در سه دسته جای می‌گیرند که …», or a list after the sentence.
 - **Definitional caveats** that build trust: «هر حساب کاربری الزاماً یک نفر نیست.»
 - **A real customer or employee vignette** from the source material, never invented.
 
@@ -1297,8 +1489,9 @@ Requires an experience the user supplied. Do not invent one.
 
 ## سند راهبردی
 Provisional (style-framework.md §2). Built from one rewritten roadmap; the section map is in style-framework.md §5.3.
-- **The decision in the first paragraph**: what the reader is asked to approve, and the horizon («نقشه‌ی راه پنج‌ساله‌ی این سند، از … تا …»).
+- **Open on the diagnosis, not the proposal.** The situation and its tension come first; the decision asked of the reader comes after it has been earned. A first sentence of the form «پیشنهاد … این است که…» was judged the weakest opening in the calibration test (style-skeletons.md).
 - **Name the concept the case rests on** and return to it in later sections: «مهاجرت به هوش مصنوعی دو بال دارد: سامانه و آمادگی پذیرش».
+- **Name the crux and the trade-off**: the one obstacle the strategy removes, and what the organization will stop doing to remove it. A plan without something given up is a list of goals.
 - **Lessons before plans**: what the organization learned, stated as findings; the plan follows as their consequence.
 - **The ceiling argument**: today's model works but has a concrete limit; the proposed change removes it.
 - **Problem before solution**: the «why now» section comes before the model.
@@ -1312,7 +1505,7 @@ Provisional (style-framework.md §2). Built from one rewritten roadmap; the sect
 
 ---
 
-# PART 5 — Orthography (نگارش و رسم‌الخط)
+# PART 6 — Orthography (نگارش و رسم‌الخط)
 
 # Persian orthography: the mechanical layer
 
@@ -1587,7 +1780,7 @@ needs RLM.
 
 ---
 
-# PART 6 — Content craft: POV, structure, honesty
+# PART 7 — Content craft: POV, structure, honesty
 
 # Persian content craft: point of view, structure, and honesty
 
@@ -1845,7 +2038,7 @@ engineering, design, cooking — not just technology.
 
 ---
 
-# PART 7 — Academic writing (نگارش علمی)
+# PART 8 — Academic writing (نگارش علمی)
 
 # Persian academic writing (نگارش علمی فارسی)
 
@@ -2193,7 +2386,7 @@ evidence of having done the work — rather than trying to satisfy the tool.
 
 ---
 
-# PART 8 — Social channels: Telegram & Instagram
+# PART 9 — Social channels: Telegram & Instagram
 
 # Persian social channels: Telegram, Instagram, and repurposing
 
@@ -2459,7 +2652,7 @@ the fa_lint script (full package; chat-only AIs apply the equivalent rules manua
 
 ---
 
-# PART 9 — SEO writing & copywriting
+# PART 10 — SEO writing & copywriting
 
 # Persian SEO writing & copywriting
 
@@ -2673,7 +2866,7 @@ carry genuinely unique content (no doorway clones)?
 
 ---
 
-# PART 10 — Fonts
+# PART 11 — Fonts
 
 # Persian fonts: catalog, pairing, embedding
 
@@ -2780,7 +2973,7 @@ after the fact, but checking first is cheaper.
 
 ---
 
-# PART 11 — Word/DOCX + PDF
+# PART 12 — Word/DOCX + PDF
 
 # Persian DOCX + PDF: RTL and pagination recipes
 
@@ -3449,7 +3642,7 @@ the verify_pdf script (full package; chat-only AIs apply the equivalent rules ma
 
 ---
 
-# PART 12 — PowerPoint
+# PART 13 — PowerPoint
 
 # Persian PowerPoint: RTL slides with python-pptx
 
@@ -3561,7 +3754,7 @@ bidi bugs in HTML pipelines show up as scrambled punctuation at line edges.
 
 ---
 
-# PART 13 — HTML / CSS / email
+# PART 14 — HTML / CSS / email
 
 # Persian HTML/CSS: RTL web pages, emails, and HTML→PDF
 
@@ -3703,7 +3896,7 @@ p { orphans: 2; widows: 2; }                   /* no lonely lines */
 
 ---
 
-# PART 14 — Images, reportlab PDFs, Excel
+# PART 15 — Images, reportlab PDFs, Excel
 
 # Persian patches for format-skill toolchains
 

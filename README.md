@@ -139,6 +139,17 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.2.0** — think in the style before writing in it. New
+  references/style-skeletons.md: the thinking skeleton of every recipe (slots
+  to fill with real content, where the payoff goes, a fit test), with a strategy
+  skeleton built on diagnosis, crux, guiding policy with its trade-off, and
+  coherent actions. The workflow gains stage 2b (build the skeleton before
+  drafting) and a calibration procedure: one short sample per suitable style
+  with its essence and skeleton, judged «درآمده / نیمه / درنیامده». New writing
+  rules from that test: think in Persian collocations, colons only before a list
+  or quotation, plain headings, no announcing paragraph openers.
+  fa_lint now flags colons in headings, question headings, mid-sentence colons
+  and announcing openers.
 - **2.1.0** — moving between styles in long texts, and the rewrite path.
   Long documents now get a section map: each section takes its own style,
   moves to a near style at each boundary (neighbouring rhythm profiles, at

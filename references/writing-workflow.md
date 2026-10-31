@@ -101,6 +101,37 @@ Ask the user to choose with one question (AskUserQuestion where available;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
+## Stage 2b: build the skeleton (اسکلت)
+
+A style is a way of thinking before it is a way of writing. Before any prose,
+fill the chosen recipe's skeleton (style-skeletons.md) with real content: one
+note per slot. Check it:
+- **Every slot filled with real content.** An empty slot means the style does not fit or material is missing. Change the style or ask; do not write around the gap.
+- **The payoff is where the style puts it.** Reports end on targets; strategy opens on the diagnosis and ends on the ask; narratives give the meaning after the scene.
+- **The thinking slots are filled boldly**: diagnosis, crux, trade-off, drivers, indicators. These are the writer's reasoning and are expected; facts stay as the material gives them.
+
+For long or high-stakes texts, show the skeleton before drafting.
+
+## Calibrating styles on a topic
+
+When the user wants to know which styles suit a topic, or doubts whether a
+style «came through», write one short sample (150–250 words) per suitable style
+on the same material. For each sample show:
+- the style's essence in one line (what must be present for the style to be recognisable);
+- its filled skeleton;
+- the text.
+
+Let the user judge each sample «درآمده / نیمه / درنیامده» with a note, and
+revise only the ones that did not come through, skeleton first. Styles whose
+skeleton cannot be filled from the material are listed as unsuitable, not
+written. An illustrative scene for روایت شاهد may be invented in a calibration
+sample when the user asks, marked as invented; never in a deliverable.
+
+What the first calibration on a real strategy topic taught:
+- Tone and rhythm were right in most samples; the failures were thinking failures (no crux or trade-off in the strategy, targets given away in a report's opening, a disclaimer as an explainer's first line, scenarios not derived from drivers).
+- A rewrite is not a copy edit. Rebuilding the skeleton changes the text; polishing the original's sentences does not.
+- Shortening paragraphs to fit a rhythm band made the text choppier, not better. Bands are a check, not a target.
+
 ## Stage 3: sample text (متن نمونه), when it helps
 
 Write samples when the user cannot choose from the cards, when the text is
@@ -118,7 +149,7 @@ Then ask once: which sample, or which mix («آغاز ۲ با ساخت ۱»).
 ## Stage 4: write and finalize (نگارش نهایی)
 
 1. **Section map** (texts over ~600 words or with headings): one line per section with its job, its axis values if they change, and its rhythm profile (style-framework.md §5.3). Move to a near style at each boundary. Mark each section with `<!-- سبک: … -->` under its heading so the check below can measure it. Show the map only if the user asked to see the structure.
-2. **Draft** to the chosen card. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
+2. **Draft from the skeleton** (stage 2b), slot by slot. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
 3. **Checks**, in this order:
    - Facts: every name, figure, date and quotation traces to the user, a document or a source you found. Mark anything unverified.
    - Rhythm: `python3 scripts/style_check.py draft.md --recipe "<recipe>"` (or `--profile`); for a sectioned text, `--sections`, which measures each section against its declared profile and flags jumps between non-neighbouring profiles. Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).

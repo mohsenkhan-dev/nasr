@@ -314,6 +314,12 @@ def _neighbours(line, idx, length=1):
     right = line[idx + length:].split()
     return (left[-1] if left else ''), (right[0] if right else '')
 
+OPENER = re.compile(
+    r'^(?:[-*]\s+)?(?:(?:معیار|مسیر|گام|نکته|دلیل|بخش)\s+(?:نخست|اول|دوم|سوم|چهارم)\s+(?:این|آن)\s+است\s+که'
+    r'|این\s+(?:سند|یادداشت|نوشته|گزارش)\s+(?:پیشنهاد\s+می‌کند|از\s+مخاطب|می‌خواهد)'
+    r'|در\s+این\s+(?:بخش|یادداشت|نوشته)\s+(?:به\s+بررسی|می‌خواهم|سعی))')
+
+
 def check_remaining(text):
     ignored = _lint_ignored_lines(text)
     # bidi-start only matters in a Persian document. In an English guide that
@@ -334,6 +340,32 @@ def check_remaining(text):
                    'Persian line starts with a Latin word → renders LTR in chat/GitHub/'
                    'Telegram. Start with a Persian word («کتابخانه‌ی React…»), or '
                    'run persian_cleanup.py --bidi for plain-text output')
+        # Headings and colons (writing-style.md T13b). Persian prose uses «:» only
+        # before a list or a quotation; headings stay plain and declarative.
+        if fa_document and _is_fa_dominant(line):
+            body = line.lstrip()
+            if body.startswith('#'):
+                if ':' in body:
+                    record('heading-colon', i, line,
+                           'colon in a Persian heading → a plain heading without «عنوان: زیرعنوان»')
+                if body.rstrip().endswith(('؟', '?')):
+                    record('heading-question', i, line, 'question heading → a plain declarative heading')
+            elif '|' not in body:
+                for m in re.finditer(':', body):
+                    rest = body[m.end():].strip()
+                    head = body[:m.start()]
+                    clause = re.split(r'[.؟!]', rest, maxsplit=1)[0]
+                    # a list run into the sentence («سه چیز: الف، ب و ج») is fine
+                    enumeration = clause.count('،') >= 1 and len(clause.split()) <= 16
+                    if (rest and len(head.split()) > 3 and not enumeration
+                            and not rest.startswith(('«', '"'))):
+                        record('colon', i, line,
+                               'colon mid-sentence is rare in Persian → «،»، «یعنی» or a new sentence')
+                        break
+                if OPENER.match(body):
+                    record('announcing-opener', i, line,
+                           'paragraph opens by announcing («معیار نخست…»، «این سند پیشنهاد می‌کند…») → '
+                           'say the thing itself (style-skeletons.md)')
         # Dashes are flagged only INSIDE Persian prose. In a bilingual document
         # an em dash usually joins a term to its gloss («ZWNJ — نیم‌فاصله») or
         # sits in an English sentence that happens to quote one Persian word;
