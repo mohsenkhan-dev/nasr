@@ -351,9 +351,11 @@ def check_remaining(text):
                 if body.rstrip().endswith(('؟', '?')):
                     record('heading-question', i, line, 'question heading → a plain declarative heading')
             elif '|' not in body:
-                for m in re.finditer(':', body):
-                    rest = body[m.end():].strip()
-                    head = body[:m.start()]
+                # editorial notes in [brackets] are not prose
+                prose = re.sub(r'\[[^\]]*\]', '', body)
+                for m in re.finditer(':', prose):
+                    rest = prose[m.end():].strip()
+                    head = prose[:m.start()]
                     clause = re.split(r'[.؟!]', rest, maxsplit=1)[0]
                     # a list run into the sentence («سه چیز: الف، ب و ج») is fine
                     enumeration = clause.count('،') >= 1 and len(clause.split()) <= 16

@@ -101,16 +101,26 @@ Ask the user to choose with one question (AskUserQuestion where available;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
-## Stage 2b: build the skeleton (اسکلت)
+## Stage 2b: the storyline (خلاصه‌ی روایت)
 
-A style is a way of thinking before it is a way of writing. Before any prose,
-fill the chosen recipe's skeleton (style-skeletons.md) with real content: one
-note per slot. Check it:
-- **Every slot filled with real content.** An empty slot means the style does not fit or material is missing. Change the style or ask; do not write around the gap.
-- **The payoff is where the style puts it.** Reports end on targets; strategy opens on the diagnosis and ends on the ask; narratives give the meaning after the scene.
-- **The thinking slots are filled boldly**: diagnosis, crux, trade-off, drivers, indicators. These are the writer's reasoning and are expected; facts stay as the material gives them.
+Prose is written from a storyline, never from slots. Follow storyline.md:
 
-For long or high-stakes texts, show the skeleton before drafting.
+1. **Level 1.** The high-level storyline: 6–10 claim sentences, each answering
+   the question the previous one raises, opening situation → complication →
+   question → answer. Use the recipe's arc (style-skeletons.md) to know which
+   claims are needed and where the payoff goes. Group the sentences under 3–7
+   plain main headings.
+2. **Show level 1 to the user** for any long or high-stakes text, and wait.
+3. **Level 2.** Under each heading, the section's own chain of 3–6 claim
+   sentences, each marked [سند]، [شاهد بیرونی]، [استدلال] or [کمبود]. Show it,
+   at least for sections with weak support.
+4. **Level 3.** Each storyline sentence becomes a paragraph's first sentence;
+   the paragraph adds two or three sentences of support.
+5. **Check** with `scripts/storyline.py`: the printed lead sentences must read
+   as the storyline.
+
+Short texts (under about 400 words) need only level 1, kept in mind or shown
+in one line.
 
 ## Calibrating styles on a topic
 
@@ -149,7 +159,7 @@ Then ask once: which sample, or which mix («آغاز ۲ با ساخت ۱»).
 ## Stage 4: write and finalize (نگارش نهایی)
 
 1. **Section map** (texts over ~600 words or with headings): one line per section with its job, its axis values if they change, and its rhythm profile (style-framework.md §5.3). Move to a near style at each boundary. Mark each section with `<!-- سبک: … -->` under its heading so the check below can measure it. Show the map only if the user asked to see the structure.
-2. **Draft from the skeleton** (stage 2b), slot by slot. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
+2. **Draft from the storyline** (stage 2b): each storyline sentence opens a paragraph. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
 3. **Checks**, in this order:
    - Facts: every name, figure, date and quotation traces to the user, a document or a source you found. Mark anything unverified.
    - Rhythm: `python3 scripts/style_check.py draft.md --recipe "<recipe>"` (or `--profile`); for a sectioned text, `--sections`, which measures each section against its declared profile and flags jumps between non-neighbouring profiles. Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).

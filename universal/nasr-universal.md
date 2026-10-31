@@ -48,7 +48,7 @@ read the reference file for your output format before generating anything.
 |---|---|
 | Any Persian prose (always) | the «Writing style: registers & de-AI-ing» part below |
 | Mechanical correctness (always) | the «Orthography (نگارش و رسم‌الخط)» part below |
-| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | the «Writing workflow: concept to final text» part below, then the «Prose styles: axes, recipes, rhythm» part, the «Style skeletons: think before writing» part + the «Signature moves per style» part |
+| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | the «Writing workflow: concept to final text» part below, then the «Prose styles: axes, recipes, rhythm» part, the «Storyline first» part, the «Style arcs: think before writing» part + the «Signature moves per style» part |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | the «Academic writing (نگارش علمی)» part below |
 | Educational/technical content, docs, product pages, how-to | the «Content craft: POV, structure, honesty» part below |
 | Telegram, Instagram, captions, carousels, reels, stories | the «Social channels: Telegram & Instagram» part below |
@@ -91,11 +91,15 @@ statements, explainers, long posts), follow the «Writing workflow: concept to f
    searching, never by inventing.
 2. **Propose styles.** Two to four style cards that differ on an axis
    (style-framework.md), the recommended one first; combinations are allowed.
-2b. **Build the skeleton before writing.** A style is a way of thinking:
-   fill every slot of the recipe's skeleton (the «Style skeletons: think before writing» part below)
-   with real content, and let the skeleton decide where the payoff goes.
-   An empty slot means the style does not fit or material is missing. Never
-   shout the style in the first line.
+2b. **Storyline before prose** (the «Storyline first» part below). For long texts,
+   first the high-level storyline (6–10 claim sentences, each answering the
+   question the previous one raises, opening situation → complication →
+   question → answer) and the main headings; show it and wait. Then the
+   storyline of each section, with each claim marked [سند]، [شاهد بیرونی]،
+   [استدلال] or [کمبود]. Then prose: every storyline sentence opens a
+   paragraph. The recipe's arc (the «Style arcs: think before writing» part) says which claims are
+   needed and where the payoff goes. Check with `scripts/storyline.py`.
+   Never open with an announcement or a teaser.
 3. **Sample text, when it helps.** One opening paragraph per card on the same
    real facts, so the user compares style alone.
 4. **Write and finalize.** Draft to the chosen card, check facts, run
@@ -829,16 +833,26 @@ Ask the user to choose with one question (AskUserQuestion where available;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
-## Stage 2b: build the skeleton (اسکلت)
+## Stage 2b: the storyline (خلاصه‌ی روایت)
 
-A style is a way of thinking before it is a way of writing. Before any prose,
-fill the chosen recipe's skeleton (style-skeletons.md) with real content: one
-note per slot. Check it:
-- **Every slot filled with real content.** An empty slot means the style does not fit or material is missing. Change the style or ask; do not write around the gap.
-- **The payoff is where the style puts it.** Reports end on targets; strategy opens on the diagnosis and ends on the ask; narratives give the meaning after the scene.
-- **The thinking slots are filled boldly**: diagnosis, crux, trade-off, drivers, indicators. These are the writer's reasoning and are expected; facts stay as the material gives them.
+Prose is written from a storyline, never from slots. Follow storyline.md:
 
-For long or high-stakes texts, show the skeleton before drafting.
+1. **Level 1.** The high-level storyline: 6–10 claim sentences, each answering
+   the question the previous one raises, opening situation → complication →
+   question → answer. Use the recipe's arc (style-skeletons.md) to know which
+   claims are needed and where the payoff goes. Group the sentences under 3–7
+   plain main headings.
+2. **Show level 1 to the user** for any long or high-stakes text, and wait.
+3. **Level 2.** Under each heading, the section's own chain of 3–6 claim
+   sentences, each marked [سند]، [شاهد بیرونی]، [استدلال] or [کمبود]. Show it,
+   at least for sections with weak support.
+4. **Level 3.** Each storyline sentence becomes a paragraph's first sentence;
+   the paragraph adds two or three sentences of support.
+5. **Check** with `scripts/storyline.py`: the printed lead sentences must read
+   as the storyline.
+
+Short texts (under about 400 words) need only level 1, kept in mind or shown
+in one line.
 
 ## Calibrating styles on a topic
 
@@ -877,7 +891,7 @@ Then ask once: which sample, or which mix («آغاز ۲ با ساخت ۱»).
 ## Stage 4: write and finalize (نگارش نهایی)
 
 1. **Section map** (texts over ~600 words or with headings): one line per section with its job, its axis values if they change, and its rhythm profile (style-framework.md §5.3). Move to a near style at each boundary. Mark each section with `<!-- سبک: … -->` under its heading so the check below can measure it. Show the map only if the user asked to see the structure.
-2. **Draft from the skeleton** (stage 2b), slot by slot. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
+2. **Draft from the storyline** (stage 2b): each storyline sentence opens a paragraph. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
 3. **Checks**, in this order:
    - Facts: every name, figure, date and quotation traces to the user, a document or a source you found. Mark anything unverified.
    - Rhythm: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --recipe "<recipe>"` (or `--profile`); for a sectioned text, `--sections`, which measures each section against its declared profile and flags jumps between non-neighbouring profiles. Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).
@@ -1234,9 +1248,103 @@ Write the card before drafting a long text, and show it when options are offered
 
 ---
 
-# PART 4 — Style skeletons: think before writing
+# PART 4 — Storyline first
 
-# Style skeletons: think in the style before writing in it
+# Storyline first (خلاصه‌ی روایت)
+
+A text is a chain of claims before it is a set of paragraphs. Write the chain
+first, get it right, and only then write prose around it.
+
+This is how consulting and strategy writing is built, and it is what the
+user's tests asked for. Three Deloitte Insights articles were read for their
+structure: two research pieces on agentic AI, and one scenario piece on
+generative AI. In all three:
+- the opening runs situation → complication → question → answer;
+- about nine paragraphs in ten open with the claim itself, and the evidence (a figure, a case, a quotation) follows;
+- reading only the first sentence of each paragraph gives the whole argument;
+- body paragraphs run three or four sentences;
+- headings are short topics or short claims.
+
+In the user's tests, the samples that failed had acceptable tone and rhythm
+but no storyline. Their first sentences were connectors, announcements or
+descriptions, so the paragraphs sat side by side instead of following from
+one another. Style-skeleton slots alone («diagnosis», «crux») did not fix
+this, because a slot names a role, not a claim.
+
+## Level 1: the high-level storyline and the main headings
+
+Write 6–10 sentences. Each sentence must:
+- be a complete claim with content, never a label («تشخیص وضعیت») or an announcement («در ادامه می‌بینیم…»);
+- answer the question the previous sentence raises in the reader's mind: «خب؟»، «چرا؟»، «پس برنده کیست؟»، «پس چه باید کرد؟»، «بهایش چیست؟»، «چطور؟»، «از ما چه می‌خواهید؟».
+
+Write the reader's question in brackets after each sentence while drafting,
+so the chain is visible. A sentence whose bracket is empty, or whose question
+is not the one the next sentence answers, is in the wrong place.
+
+The opening sentences follow situation → complication → question → answer:
+- **Situation**: what the reader already accepts. No news in it.
+- **Complication**: what changed, or what goes wrong. This is where the text earns attention.
+- **Question**: the one the complication raises; usually left implicit.
+- **Answer**: the text's main claim. In a report or research piece it may come later, but the reader must feel the question early.
+
+Then group the sentences under the **main headings**: three to seven, each
+covering one or more storyline sentences. Headings are plain: a short topic
+or a short claim, no colon, no question mark, no slogan.
+
+The recipe's arc (style-skeletons.md) tells you what kind of claims the
+storyline needs and where the payoff goes: a strategy needs a diagnosis, a
+crux and a trade-off; a report puts targets at the end. The arc is the plan;
+the storyline is the plan filled with claims.
+
+**Show the level-1 storyline and headings to the user before going on** for
+any long or high-stakes text. It is ten lines; correcting it costs nothing
+compared with correcting prose.
+
+## Level 2: the storyline of each section
+
+Under each heading, write the section's own chain: 3–6 claim sentences,
+which will become the first sentences of its paragraphs. Next to each one,
+note its support:
+- **[سند]**: a fact in the user's material;
+- **[شاهد بیرونی]**: an external source, with its name and year, to be verified before use;
+- **[استدلال]**: the writer's reasoning, which needs no source but must follow;
+- **[کمبود]**: a claim the section needs but the material cannot support yet. Ask, search, or cut the claim; never fill it with invented facts.
+
+The section's chain must also pass the bracket test, and its last sentence
+should lead to the next heading's first sentence.
+
+For long texts, show level 2 as well before writing, or at least the
+sections whose support is weak.
+
+## Level 3: prose
+
+Each storyline sentence becomes the first sentence of a paragraph, reworded
+into natural Persian if needed but carrying the same claim. The rest of the
+paragraph, two or three sentences, gives the support: the figure and what it
+means, the case, the reasoning step. A paragraph that needs a second claim
+is two paragraphs.
+
+## Checks
+
+- **The lead-sentence test.** `python3 scripts/storyline.py draft.md` prints every heading and the first sentence of each paragraph under it. Read the printout alone. It must read as the storyline. If a first sentence is a connector, an announcement or a description, rewrite it as the claim.
+- **No teasers.** «چه چیزی آن را تعریف خواهد کرد» withholds the claim to create suspense; in this genre it is an announcement in disguise. State the claim.
+- **No wordplay in place of insight.** A quoted word turned into a concept («گره کار در همان «زودتر» است») signals that the reasoning is missing. Write the reasoning.
+- **Support before polish.** If level 2 has many [کمبود] marks, the text will read thin in any style. Say so to the user before writing.
+
+
+
+---
+
+# PART 5 — Style arcs: think before writing
+
+# Style arcs: think in the style before writing in it
+
+Read storyline.md first. A skeleton below is the **arc** of a recipe: which
+kinds of claims the text needs and where its payoff goes. It is a plan, not a
+text. Writing from the slots directly produced paragraphs that sat side by
+side, because a slot names a role («diagnosis»), not a claim. The arc is used
+to write the level-1 storyline, whose sentences are claims; the prose is
+written from the storyline.
 
 A style is a way of thinking, not a vocabulary. In the calibration test on a
 real strategy topic, the samples that failed had the right tone and rhythm but
@@ -1245,15 +1353,17 @@ brand report that gave away its targets in the first paragraph, an explainer
 that opened by announcing what it was not, scenarios that were not derived from
 anything. The words were arranged in the style; the content was not built in it.
 
-So every text is built in two steps:
+So every text is built in three steps (storyline.md gives the detail):
 
 1. **Build the skeleton.** Take the recipe's skeleton below and fill every slot
    with real content from the material: a sentence or a note per slot, not prose.
    If a slot cannot be filled, the style does not fit this content (or the
    material is missing): change the style or ask. Do not write around an empty slot.
-2. **Write from the skeleton.** Each slot becomes a paragraph or part of one.
-   The skeleton decides where the payoff goes; the prose never moves it forward
-   to announce it.
+2. **Turn the filled arc into a storyline**: claim sentences in order, each
+   answering the question the previous one raises, under plain headings.
+3. **Write from the storyline.** Each storyline sentence opens a paragraph. The
+   arc decides where the payoff goes; the prose never moves it forward to
+   announce it.
 
 For long or high-stakes texts, show the skeleton to the user before drafting.
 It is shorter than a draft and cheaper to correct.
@@ -1378,7 +1488,7 @@ Fit first: a speaker with standing, a «ما» audience, an occasion (a launch, 
 
 ---
 
-# PART 5 — Signature moves per style
+# PART 6 — Signature moves per style
 
 # Signature moves per recipe
 
@@ -1505,7 +1615,7 @@ Provisional (style-framework.md §2). Built from one rewritten roadmap; the sect
 
 ---
 
-# PART 6 — Orthography (نگارش و رسم‌الخط)
+# PART 7 — Orthography (نگارش و رسم‌الخط)
 
 # Persian orthography: the mechanical layer
 
@@ -1780,7 +1890,7 @@ needs RLM.
 
 ---
 
-# PART 7 — Content craft: POV, structure, honesty
+# PART 8 — Content craft: POV, structure, honesty
 
 # Persian content craft: point of view, structure, and honesty
 
@@ -2038,7 +2148,7 @@ engineering, design, cooking — not just technology.
 
 ---
 
-# PART 8 — Academic writing (نگارش علمی)
+# PART 9 — Academic writing (نگارش علمی)
 
 # Persian academic writing (نگارش علمی فارسی)
 
@@ -2386,7 +2496,7 @@ evidence of having done the work — rather than trying to satisfy the tool.
 
 ---
 
-# PART 9 — Social channels: Telegram & Instagram
+# PART 10 — Social channels: Telegram & Instagram
 
 # Persian social channels: Telegram, Instagram, and repurposing
 
@@ -2652,7 +2762,7 @@ the fa_lint script (full package; chat-only AIs apply the equivalent rules manua
 
 ---
 
-# PART 10 — SEO writing & copywriting
+# PART 11 — SEO writing & copywriting
 
 # Persian SEO writing & copywriting
 
@@ -2866,7 +2976,7 @@ carry genuinely unique content (no doorway clones)?
 
 ---
 
-# PART 11 — Fonts
+# PART 12 — Fonts
 
 # Persian fonts: catalog, pairing, embedding
 
@@ -2973,7 +3083,7 @@ after the fact, but checking first is cheaper.
 
 ---
 
-# PART 12 — Word/DOCX + PDF
+# PART 13 — Word/DOCX + PDF
 
 # Persian DOCX + PDF: RTL and pagination recipes
 
@@ -3642,7 +3752,7 @@ the verify_pdf script (full package; chat-only AIs apply the equivalent rules ma
 
 ---
 
-# PART 13 — PowerPoint
+# PART 14 — PowerPoint
 
 # Persian PowerPoint: RTL slides with python-pptx
 
@@ -3754,7 +3864,7 @@ bidi bugs in HTML pipelines show up as scrambled punctuation at line edges.
 
 ---
 
-# PART 14 — HTML / CSS / email
+# PART 15 — HTML / CSS / email
 
 # Persian HTML/CSS: RTL web pages, emails, and HTML→PDF
 
@@ -3896,7 +4006,7 @@ p { orphans: 2; widows: 2; }                   /* no lonely lines */
 
 ---
 
-# PART 15 — Images, reportlab PDFs, Excel
+# PART 16 — Images, reportlab PDFs, Excel
 
 # Persian patches for format-skill toolchains
 

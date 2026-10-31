@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.2.0
+  version: 2.3.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
@@ -44,7 +44,7 @@ read the reference file for your output format before generating anything.
 |---|---|
 | Any Persian prose (always) | `references/writing-style.md` |
 | Mechanical correctness (always) | `references/orthography.md` |
-| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | `references/writing-workflow.md`, then `style-framework.md`, `style-skeletons.md` + `style-moves.md` |
+| Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | `references/writing-workflow.md`, then `style-framework.md`, `storyline.md`, `style-skeletons.md` + `style-moves.md` |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | `references/academic.md` |
 | Educational/technical content, docs, product pages, how-to | `references/content-structures.md` |
 | Telegram, Instagram, captions, carousels, reels, stories | `references/social-channels.md` |
@@ -87,11 +87,15 @@ statements, explainers, long posts), follow `references/writing-workflow.md`:
    searching, never by inventing.
 2. **Propose styles.** Two to four style cards that differ on an axis
    (style-framework.md), the recommended one first; combinations are allowed.
-2b. **Build the skeleton before writing.** A style is a way of thinking:
-   fill every slot of the recipe's skeleton (`references/style-skeletons.md`)
-   with real content, and let the skeleton decide where the payoff goes.
-   An empty slot means the style does not fit or material is missing. Never
-   shout the style in the first line.
+2b. **Storyline before prose** (`references/storyline.md`). For long texts,
+   first the high-level storyline (6–10 claim sentences, each answering the
+   question the previous one raises, opening situation → complication →
+   question → answer) and the main headings; show it and wait. Then the
+   storyline of each section, with each claim marked [سند]، [شاهد بیرونی]،
+   [استدلال] or [کمبود]. Then prose: every storyline sentence opens a
+   paragraph. The recipe's arc (`style-skeletons.md`) says which claims are
+   needed and where the payoff goes. Check with `scripts/storyline.py`.
+   Never open with an announcement or a teaser.
 3. **Sample text, when it helps.** One opening paragraph per card on the same
    real facts, so the user compares style alone.
 4. **Write and finalize.** Draft to the chosen card, check facts, run
@@ -326,6 +330,7 @@ nasr/
 │   ├── writing-style.md        ← registers, Persian AI tells, colloquial patterns
 │   ├── writing-workflow.md     ← concept → style cards → samples → final text
 │   ├── style-framework.md      ← four style axes, recipes, rhythm profiles, choosing and combining
+│   ├── storyline.md            ← storyline first: level 1 and headings, level 2 per section, lead-sentence test
 │   ├── style-skeletons.md      ← the thinking skeleton of each style: slots, payoff, fit test
 │   ├── style-moves.md          ← signature moves per recipe (invented examples)
 │   ├── style-evidence.md       ← the reference corpus behind the styles, and its limits
@@ -343,6 +348,7 @@ nasr/
 ├── scripts/
 │   ├── persian_cleanup.py      ← FIX: edit/clean/normalize/spell-check (paknevis+davat)
 │   ├── fa_lint.py              ← LINT: report issues needing contextual judgment
+│   ├── storyline.py            ← print headings and paragraph lead sentences; flag announcements
 │   ├── style_check.py          ← measure a draft against a rhythm profile
 │   ├── verify_docx.py          ← DOCX RTL checks (+ --fix for section bidi)
 │   ├── verify_pdf.py           ← post-generation PDF checks

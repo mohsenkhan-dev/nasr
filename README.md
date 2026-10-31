@@ -139,6 +139,16 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.3.0** — storyline first. New references/storyline.md: long texts are
+  built in three levels, the high-level storyline (6–10 claim sentences, each
+  answering the question the previous one raises, opening situation →
+  complication → question → answer) with the main headings, then the
+  storyline of each section with every claim marked by its support, then
+  prose in which each storyline sentence opens a paragraph. New
+  scripts/storyline.py prints headings and lead sentences and flags
+  announcements, connectors and teasers. The style skeletons become arcs that
+  feed the storyline. Based on the structure of three Deloitte Insights
+  articles and the user's calibration tests.
 - **2.2.0** — think in the style before writing in it. New
   references/style-skeletons.md: the thinking skeleton of every recipe (slots
   to fill with real content, where the payoff goes, a fit test), with a strategy

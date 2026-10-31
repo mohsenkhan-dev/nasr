@@ -1,4 +1,11 @@
-# Style skeletons: think in the style before writing in it
+# Style arcs: think in the style before writing in it
+
+Read storyline.md first. A skeleton below is the **arc** of a recipe: which
+kinds of claims the text needs and where its payoff goes. It is a plan, not a
+text. Writing from the slots directly produced paragraphs that sat side by
+side, because a slot names a role («diagnosis»), not a claim. The arc is used
+to write the level-1 storyline, whose sentences are claims; the prose is
+written from the storyline.
 
 A style is a way of thinking, not a vocabulary. In the calibration test on a
 real strategy topic, the samples that failed had the right tone and rhythm but
@@ -7,15 +14,17 @@ brand report that gave away its targets in the first paragraph, an explainer
 that opened by announcing what it was not, scenarios that were not derived from
 anything. The words were arranged in the style; the content was not built in it.
 
-So every text is built in two steps:
+So every text is built in three steps (storyline.md gives the detail):
 
 1. **Build the skeleton.** Take the recipe's skeleton below and fill every slot
    with real content from the material: a sentence or a note per slot, not prose.
    If a slot cannot be filled, the style does not fit this content (or the
    material is missing): change the style or ask. Do not write around an empty slot.
-2. **Write from the skeleton.** Each slot becomes a paragraph or part of one.
-   The skeleton decides where the payoff goes; the prose never moves it forward
-   to announce it.
+2. **Turn the filled arc into a storyline**: claim sentences in order, each
+   answering the question the previous one raises, under plain headings.
+3. **Write from the storyline.** Each storyline sentence opens a paragraph. The
+   arc decides where the payoff goes; the prose never moves it forward to
+   announce it.
 
 For long or high-stakes texts, show the skeleton to the user before drafting.
 It is shorter than a draft and cheaper to correct.

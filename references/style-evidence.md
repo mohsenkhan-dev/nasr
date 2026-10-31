@@ -39,6 +39,9 @@ reposts and texts signed by someone else were removed.
 - **style_check.py `--compare`** puts a real text in its own rhythm profile 51% of the time (top two: 70%; chance 14%). Profiles overlap because one writer's texts vary. Use it as a band check, not as a judge of quality or authorship.
 - **Worked test**: a 250-word argument drafted for استدلال روزنامه‌ای needed three revisions to sit inside the band. The first was choppy (no long sentences, too many connectives). The second overcorrected (long paragraphs, too many «که»). The fourth passed every core feature, and `--compare` then ranked its intended profile first.
 
+- **Storyline in consulting writing**: three Deloitte Insights articles (two research pieces on agentic AI, one scenario piece on generative AI) were read for structure only. All open situation → complication → question → answer; about nine body paragraphs in ten open with the claim; reading only the first sentences gives the argument; body paragraphs run three or four sentences. The scenario piece builds four scenarios on two uncertain, high-impact axes, gives each a name and story, impacts, present-day signals and strategies, and ends by asking which strategies hold in every scenario. McKinsey's site refused automated reading, so no McKinsey text was analysed.
+- **Calibration tests with the user** (a strategy document for an AI company): conceptual analysis, journalistic argument, short news, explainer and witness narrative came through once rebuilt; the strategy samples failed until the storyline method, because their first sentences announced or teased instead of claiming.
+
 ## Known limits
 - **One labeller** (the model) for axis labels, plus 8 texts labelled by the user. No full inter-annotator agreement.
 - **Unreliable blinding**: topics and outlets gave authors away when labelling «blind».
