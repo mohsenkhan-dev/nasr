@@ -98,6 +98,14 @@ statements, explainers, long posts), follow the «Writing workflow: concept to f
    it as a native reader, then deliver in the requested format (DOCX, PDF,
    HTML, slides) with the verifiers below.
 
+**Long texts move between styles section by section.** Write a section map
+(style-framework.md §5.3), move to a near style at each boundary, mark each
+section with `<!-- سبک: … -->` and check with `style_check.py --sections`.
+**Rewriting an existing document** follows the rewrite path in
+writing-workflow.md: extract, measure the original, list inconsistencies for
+the user instead of fixing facts silently, rewrite under the same facts, and
+deliver a side-by-side comparison.
+
 Depth scales with the job: short transactional texts skip the workflow; a
 300–600-word text with a clear purpose gets a one-line restatement and a
 stated style; long, public or high-stakes texts get all four stages. If the
@@ -723,7 +731,8 @@ can see and redirect cheaply, so a wrong turn costs one message, not a rewrite.
 | 300–600 words, purpose clear | Stage 1 as a short restatement, stage 2 as one stated choice, then stage 4 |
 | Under 300 words, transactional (email, caption, UI copy, notice) | Skip to writing; register rules in writing-style.md are enough |
 | The user named the style or said «فقط بنویس» | State the style in one line and go to stage 4 |
-| Editing the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
+| Light edit of the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
+| Rewriting an existing document («بازنویسی کن»، «با نثر بنویس») | The rewrite path below: measure, diagnose, then the four stages on the document's own material |
 
 When in doubt, run stages 1 and 2 in one message: a restatement plus style cards.
 That is one exchange and it prevents most rewrites.
@@ -782,6 +791,12 @@ A good default set:
 3. **One combination** (style-framework.md §5): for example a scene that opens into analysis, or figures, then their meaning, then what should follow.
 4. Optional: **a deliberately plainer card** (فشرده or گزارشی) when the material is fact-dense and the reader is busy.
 
+For documents with sections, a card is a section map (style-framework.md §5.3),
+not one recipe. Default cards by genre:
+- **Strategy document, roadmap, proposal to a board**: the سند راهبردی recipe and its section map (recommended), plus a variant that changes one thing, for example «ما» instead of the organization's name when the document is signed by its management.
+- **Annual or sustainability report**: the brand or institutional report map; offer the other as the alternative card.
+- **Long analytical column**: one recipe, with at most a different opening section.
+
 Each card, in Persian:
 
 ```
@@ -813,16 +828,73 @@ Then ask once: which sample, or which mix («آغاز ۲ با ساخت ۱»).
 
 ## Stage 4: write and finalize (نگارش نهایی)
 
-1. **Section plan** (texts over ~600 words): one line per section with its job and its axis values if they change. Show it only if the user asked to see the structure.
+1. **Section map** (texts over ~600 words or with headings): one line per section with its job, its axis values if they change, and its rhythm profile (style-framework.md §5.3). Move to a near style at each boundary. Mark each section with `<!-- سبک: … -->` under its heading so the check below can measure it. Show the map only if the user asked to see the structure.
 2. **Draft** to the chosen card. Use two to four moves from style-moves.md, not all of them. Keep the concept from stage 1 visible: in the opening, and again where the argument turns or closes.
 3. **Checks**, in this order:
    - Facts: every name, figure, date and quotation traces to the user, a document or a source you found. Mark anything unverified.
-   - Rhythm: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --recipe "<recipe>"` (or `--profile`). Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).
+   - Rhythm: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --recipe "<recipe>"` (or `--profile`); for a sectioned text, `--sections`, which measures each section against its declared profile and flags jumps between non-neighbouring profiles. Revise features outside the band. Under ~400 words, fix only clear deviations: chasing every band swings the draft (style-evidence.md, worked test).
    - Orthography: `python3 the persian_cleanup script (full package; chat-only AIs apply the equivalent rules manually) --edit`, then `python3 the fa_lint script (full package; chat-only AIs apply the equivalent rules manually) --check`.
    - Reading pass: the native test in writing-style.md. At most one single-sentence paragraph. No run of short punchlines. No AI tells.
 4. **Revise** at most two rounds for rhythm. If the draft still fails, the card was wrong for the material: say so and offer the nearer card rather than forcing it.
 5. **Deliver** in the format asked for. For Word or PDF, follow docx-pdf.md and run verify_docx.py / verify_pdf.py. For HTML, html-css.md. For slides, pptx.md.
 6. **Closing note**, short: the style line («سبک: … · آهنگ: …»), what was not verified, and one offer if relevant (a shorter version, a headline set, the same text for another channel).
+
+## The rewrite path: an existing document
+
+When the user hands over a document (DOCX, PDF, Markdown, pasted text) and asks
+for it to be rewritten, the material already exists. The job is to keep every
+fact and change how the text works. Run the four stages, with these
+differences.
+
+**R1. Extract the text faithfully.**
+- Text only, in reading order, with headings kept as headings.
+- Tables are read cell by cell from the source (merged cells repeat their value; do not deduplicate them away).
+- Figures and images become caption markers («تصویر ۲: …») in their place, so the rewrite keeps their position.
+- For DOCX use python-docx over the body elements in order; for PDF see docx-pdf.md.
+
+**R2. Measure the original before touching it.**
+`style_check.py original.md --sections` (or `--compare` when it has no
+headings) gives the rhythm it actually has, section by section. This is the
+baseline the user will compare against, and it often names the problem: in the
+first real test, a roadmap's argument sections had 3.4 connectives per 1000
+words against a band of 12–22, which is why it read as a list of assertions.
+
+**R3. Diagnose, and list what only the user can decide.** Read the document
+for:
+- **Order:** does the problem come before the solution, the why before the what?
+- **Repetition:** the same sentence or argument in two sections.
+- **Position slips:** «ما» or «داشته باشیم» in a text that otherwise names the organization.
+- **Fragments and typos.**
+- **Numbers that disagree:** a criterion in the text against the table, a label that does not match its values («نسبت به امروز» over absolute figures), undefined units.
+- **Placeholders:** «…», «[کشورهای هدف]».
+- **Missing material the reader will ask for**: for a board, resources and risks.
+
+Never resolve a factual inconsistency silently and never fill a gap with an
+invented figure. They go on a separate list for the user, and the rewrite keeps
+the original's numbers.
+
+**R4. Stages 1–2 on the document.** The «برداشت من» is drawn from the document
+itself; questions go to the user only for what the document cannot answer.
+The style card is a section map. If the user asked for a finished rewrite, state
+the chosen card and go on; otherwise show the cards first.
+
+**R5. Rewrite under constraints.**
+- Same facts, figures, names, terms and claims. Do not add claims, even plausible ones.
+- Same length, within about 10%, unless the user asked for shorter.
+- Keep the document's conventions: its ezafe style (‌ی or ٔ; drop `fix_ezafe` from `persian_cleanup.py --steps` when it uses ‌ی), its terminology, its digit style in tables.
+- Reordering sections and merging repeated passages are allowed, but each one goes on the change list with its reason.
+
+**R6. Deliver a comparison, not only the new text.** Unless the user asked for
+the new text alone, deliver:
+- the original and the rewrite side by side, section by section, with moved sections marked;
+- the measurements before and after;
+- the change list;
+- the list of decisions for the user from R3.
+
+An HTML page (html-css.md) works well for review. When the user wants a file to
+work in, also deliver the rewrite alone in the original's format (DOCX: docx-pdf.md,
+then verify_docx.py).
+
 
 ## Feedback after delivery
 
@@ -941,6 +1013,12 @@ classified by its axis values; the recipe name only says which combination it is
 | گزارش داده‌محور برند | گزارش | واقعیت جاری | ما / بیرونی | فهرستی | گزارشی برند | annual or yearly reports of consumer companies |
 | گزارش نهادی | گزارش | واقعیت جاری | بیرونی | فهرستی | گزارشی نهادی | sustainability, board and institutional reports |
 | خبر کوتاه | گزارش | واقعیت جاری | بیرونی | فهرستی | فشرده | announcements, news briefs, release notes |
+| سند راهبردی | اقناع | واقعیت جاری + مفهوم | بیرونی (the organization by name) | زنجیره‌ای, then زمانی/فهرستی | تحلیلی میانه → گزارشی برند (section map, §5.3) | strategy documents, roadmaps and proposals to a board or headquarters |
+
+**سند راهبردی is provisional.** No strategy documents were in the corpus; the
+recipe is the best current combination of tested parts, built from one real
+roadmap (a five-year plan for an AI company) rewritten and measured section by
+section. Use it, and treat its section map as a default to adjust.
 
 The same writer uses several recipes: one columnist wrote a witness narrative,
 a numbered argument and a rebuttal within one month. Choose the recipe from the
@@ -987,16 +1065,97 @@ What the numbers mean in practice:
 - **Long or high-stakes text, or the user asked for options**: show two or three style cards (§6) with one line each on what the reader will feel, then write the one chosen. A good default set: the recipe the request implies, one that changes the purpose or the evidence, and one combination.
 - **Otherwise**: choose, and state the choice in one line before the text (for example «سبک: استدلال روزنامه‌ای، آهنگ استدلالی پیوسته»). The user can redirect cheaply.
 
-## 5. Combining styles in one text
+## 5. Moving between styles in one text
 
-Long texts are usually combinations. The rules:
-- **The whole text has one purpose**, the one the final section serves. A witness opening that leads to a call to action is a فراخوان text with a روایت شاهد opening.
-- **Each section may change evidence and structure.** Typical sequences:
-  - روایت شاهد → تحلیل مفهومی → استدلال: a scene, the concept it reveals, the argument.
-  - گزارش (figures) → تبیین (what they mean) → اقناع (what should follow): the strong pattern of data-driven reports.
-  - عبرت تاریخی → توجیه راهبردی: history, then today's scenarios.
-- **Position changes only at a section boundary** and with a reason (content-structures.md §1).
-- **Rhythm follows the dominant recipe**; a short narrative section may run shorter.
+Long texts are combinations, and in a long report the style should move from
+section to section: a summary, an argument, a list of results, a roadmap and a
+closing picture do different jobs. Moving well means moving to a NEAR style at
+each boundary, so the reader feels the text change gear, not change author.
+
+### 5.1 What stays fixed for the whole text
+- **One purpose**, the one the final section serves. A witness opening that leads to a call to action is a فراخوان text with a روایت شاهد opening.
+- **One position.** Change it only at a section boundary and with a reason (content-structures.md §1). A strategy document that names the organization in the third person for 2,000 words must not slip into «داشته باشیم».
+- **One register** and one orthographic convention (ezafe style, digits).
+
+### 5.2 What may move, and how far
+Two styles are **near** when they differ on one axis value, or when their rhythm
+profiles are neighbours. Neighbours were computed from the profile medians
+(`style_check.py --list`):
+
+| Profile | Nearest neighbours |
+|---|---|
+| تحلیلی میانه | استدلالی پیوسته، خطابی |
+| استدلالی پیوسته | تحلیلی میانه، خطابی |
+| گفت‌وگویی شخصی | خطابی، تحلیلی میانه |
+| گزارشی برند | گزارشی نهادی، خطابی |
+| گزارشی نهادی | گزارشی برند، تحلیلی میانه |
+| فشرده | خطابی، گفت‌وگویی شخصی |
+
+خطابی appears as a neighbour of almost everything because its bands are wide
+(one writer, 22 texts). Do not read it as a natural bridge.
+
+Rules for each boundary:
+- **Change one or two axes, not all four.** From an argument (اقناع، زنجیره‌ای) to a results list (گزارش، فهرستی) is two axes: fine. From a personal scene (تجربه، من، زمانی، گفت‌وگویی) to an institutional table (واقعیت جاری، بیرونی، فهرستی، نهادی) is four: put a section between them or open with a bridge paragraph.
+- **Move rhythm to a neighbour.** تحلیلی میانه → گزارشی برند is a jump: the first paragraph of the new section should still connect (one «یعنی» or «بنابراین»), and sentences lengthen over the section, not in its first line.
+- **Announce the change in the first sentence of the section**, in content, not as meta-talk: «این تصویر کلی است؛ عددهای سال این‌طورند:» rather than «در این بخش به بررسی … می‌پردازیم».
+- **Keep the concept visible across the move.** The named concept of the opening (writing-workflow.md, stage 1) should reappear in the report sections as the reason the figures matter.
+
+### 5.3 The section map
+For any text with sections, write a section map before drafting: one line per
+section with its job, the axis values that change, and its rhythm profile. Then
+mark each section in the draft with a comment under its heading.
+`style_check.py --sections` reads these, measures each section against its own
+profile, and warns when two consecutive sections are not neighbours:
+
+```
+## ۴. سبد فعالیت امروز
+<!-- سبک: گزارشی برند -->
+```
+
+Remove the comments in the delivered file if the format would show them (DOCX
+built from Markdown, plain text); HTML and rendered Markdown hide them.
+
+Default section maps follow. Adjust them to the document. The report maps
+follow the order of sections in the corpus reports, but were not measured
+section by section.
+
+**سند راهبردی** (strategy document, roadmap, proposal to a board):
+
+| Section | Job | Axes that change | Rhythm |
+|---|---|---|---|
+| خلاصه | the decision asked for, the target, the phases | گزارش + اقناع | تحلیلی میانه, figures allowed |
+| مسئله و آموخته‌ها | what experience taught; name the concept | تبیین، مفهوم | تحلیلی میانه |
+| ضرورت | the ceiling of today's model, the change proposed | اقناع، زنجیره‌ای | تحلیلی میانه or استدلالی پیوسته |
+| مدل یا ایده | the parts and how they feed each other | تبیین، فهرستی | تحلیلی میانه |
+| وضع موجود | what exists today | گزارش، فهرستی | گزارشی برند |
+| نقشه‌ی راه | phases: goal, work, indicators, exit criteria with numbers | گزارش، زمانی | گزارشی برند; shorter paragraphs are normal here (label lines «هدف فاز:»، «پایان فاز:») |
+| شاخص‌ها | the table, with definitions | گزارش | table, not prose |
+| منابع و ریسک‌ها | what it costs, what can go wrong, what the board decides | تبیین، شاخه‌ای (توجیه راهبردی) | تحلیلی میانه |
+| تصویر پایان دوره | one concrete, dated scene of success | تبیین، زمانی | تحلیلی میانه |
+
+Measured on the rewritten roadmap: the analytic sections sat in تحلیلی میانه
+once connectives were made explicit (the original had 3.4 per 1000 words,
+against a band of 12–22). The roadmap sections ran at 0–5 connectives with
+short paragraphs; that is the label-line structure, not a fault.
+
+**گزارش سالانه‌ی برند:** پیام مدیرعامل (فراخوان or تأمل، ما، گفت‌وگویی شخصی) →
+سال در یک نگاه (گزارش، فهرستی، گزارشی برند) → بخش‌های عملکرد (figure → meaning →
+cause، گزارشی برند) → روایت مشتری یا کارکنان (real stories only، زمانی، گفت‌وگویی
+شخصی) → مسئولیت اجتماعی (گزارشی برند) → چشم‌انداز (اقناع، شاخه‌ای، تحلیلی میانه).
+
+**گزارش پایداری یا نهادی:** پیام مدیرعامل → معرفی و حاکمیت (گزارشی نهادی) →
+موضوعات بااهمیت (تبیین، فهرستی، گزارشی نهادی) → عملکرد به تفکیک موضوع (figure،
+standard and actor، گزارشی نهادی) → اهداف سال بعد (اقناع، فهرستی، گزارشی برند to
+lighten the close).
+
+**یادداشت تحلیلی بلند:** روایت شاهد (opening scene) → تحلیل مفهومی → استدلال →
+توجیه راهبردی (scenarios) → توصیه. Rhythm stays in the columnist profiles
+throughout; only the opening may run shorter.
+
+### 5.4 Common sequences inside one section
+- روایت شاهد → تحلیل مفهومی → استدلال: a scene, the concept it reveals, the argument.
+- گزارش (figures) → تبیین (what they mean) → اقناع (what should follow): the strong pattern of data-driven reports.
+- عبرت تاریخی → توجیه راهبردی: history, then today's scenarios.
 
 ## 6. The style card
 
@@ -1021,7 +1180,7 @@ Write the card before drafting a long text, and show it when options are offered
 4. **Recipes are not writers.** Writers are calibration anchors, not voices to impersonate. When the user asks for «به سبک X», use the closest recipe and rhythm, do not copy X's idioms, and never present the text as X's.
 <!-- fa-lint-ignore-next-line -->
 5. **Corporate reports: formal-but-human, not bureaucratic.** The institutional reports in the corpus carry 4–6 bureaucratic forms (می‌باشد، گردید، نموده، در راستای) per 1000 words; the brand reports almost none, and read better. Use است، شد، کرد; name the actor instead of an agentless passive; keep figures, and give each important figure its meaning («۲۱ میلیون کاربر، یعنی…»).
-6. **Check the draft**: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --profile "استدلالی پیوسته"` (or `--recipe`). Revise features outside the band, then run fa_lint as usual.
+6. **Check the draft**: `python3 the style_check script (full package; chat-only AIs apply the equivalent rules manually) draft.md --profile "استدلالی پیوسته"` (or `--recipe`). For a text with sections, mark each section's style and run `--sections` (§5.3). Revise features outside the band, then run fa_lint as usual.
 
 
 
@@ -1135,6 +1294,19 @@ Requires an experience the user supplied. Do not invent one.
 - **One fact per sentence**, figures exact.
 - **No adjectives that the facts do not earn.**
 - **The next step or source at the end.**
+
+## سند راهبردی
+Provisional (style-framework.md §2). Built from one rewritten roadmap; the section map is in style-framework.md §5.3.
+- **The decision in the first paragraph**: what the reader is asked to approve, and the horizon («نقشه‌ی راه پنج‌ساله‌ی این سند، از … تا …»).
+- **Name the concept the case rests on** and return to it in later sections: «مهاجرت به هوش مصنوعی دو بال دارد: سامانه و آمادگی پذیرش».
+- **Lessons before plans**: what the organization learned, stated as findings; the plan follows as their consequence.
+- **The ceiling argument**: today's model works but has a concrete limit; the proposed change removes it.
+- **Problem before solution**: the «why now» section comes before the model.
+- **Every phase in the same four parts**: هدف فاز، کار، شاخص‌ها، پایان فاز, with measurable exit criteria whose numbers match the table.
+- **Check every number against the table** before delivery. A phase criterion that disagrees with the KPI table is the most common flaw.
+- **Resources and risks get a section**, even a short one; a board asks first what it costs and what can fail. If the material is missing, say so; do not invent figures.
+- **One concrete, dated scene at the end**, in the same position as the rest of the text (the organization by name, not «ما»).
+- **Tone**: formal-but-human, no bureaucratic forms, Persian terms first with the English term in parentheses once.
 
 
 

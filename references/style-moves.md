@@ -104,3 +104,16 @@ Requires an experience the user supplied. Do not invent one.
 - **One fact per sentence**, figures exact.
 - **No adjectives that the facts do not earn.**
 - **The next step or source at the end.**
+
+## سند راهبردی
+Provisional (style-framework.md §2). Built from one rewritten roadmap; the section map is in style-framework.md §5.3.
+- **The decision in the first paragraph**: what the reader is asked to approve, and the horizon («نقشه‌ی راه پنج‌ساله‌ی این سند، از … تا …»).
+- **Name the concept the case rests on** and return to it in later sections: «مهاجرت به هوش مصنوعی دو بال دارد: سامانه و آمادگی پذیرش».
+- **Lessons before plans**: what the organization learned, stated as findings; the plan follows as their consequence.
+- **The ceiling argument**: today's model works but has a concrete limit; the proposed change removes it.
+- **Problem before solution**: the «why now» section comes before the model.
+- **Every phase in the same four parts**: هدف فاز، کار، شاخص‌ها، پایان فاز, with measurable exit criteria whose numbers match the table.
+- **Check every number against the table** before delivery. A phase criterion that disagrees with the KPI table is the most common flaw.
+- **Resources and risks get a section**, even a short one; a board asks first what it costs and what can fail. If the material is missing, say so; do not invent figures.
+- **One concrete, dated scene at the end**, in the same position as the rest of the text (the organization by name, not «ما»).
+- **Tone**: formal-but-human, no bureaucratic forms, Persian terms first with the English term in parentheses once.

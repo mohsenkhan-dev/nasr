@@ -45,6 +45,9 @@
 [`references/style-evidence.md`](references/style-evidence.md) آمده است. هیچ متنی
 از منابع در این مخزن بازتولید نشده؛ فقط سنجه‌ها و مثال‌های ساختگی.
 
+همه‌ی مقسم‌ها و دسته‌بندی‌ها، مرزهایشان و دلیل همپوشانی نداشتنشان در
+**[راهنمای دسته‌بندی‌های نثر](GUIDE.fa.md)** آمده است.
+
 </div>
 
 ## Built on persian-writing
@@ -136,6 +139,18 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.1.0** — moving between styles in long texts, and the rewrite path.
+  Long documents now get a section map: each section takes its own style,
+  moves to a near style at each boundary (neighbouring rhythm profiles, at
+  most one or two axes changed) and declares it with `<!-- سبک: … -->`;
+  `style_check.py --sections` measures every section against its own profile
+  and flags jumps between non-neighbours. Default section maps for strategy
+  documents, brand and sustainability reports and long columns. New
+  provisional recipe سند راهبردی. Rewriting an existing document has its own
+  path: faithful extraction, measuring the original, a list of
+  inconsistencies for the user, a rewrite under the same facts, and a
+  side-by-side comparison. style_check skips captions, table rows and HTML
+  comments. New Persian guide to every axis and category: GUIDE.fa.md.
 - **2.0.0** — nasr. Renamed and published as its own repository. New writing
   workflow (references/writing-workflow.md): understand the concept and show a
   short restatement, propose two to four style cards that differ on an axis,

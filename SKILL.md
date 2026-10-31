@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
@@ -93,6 +93,14 @@ statements, explainers, long posts), follow `references/writing-workflow.md`:
    `style_check.py`, `persian_cleanup.py --edit` and `fa_lint.py --check`, read
    it as a native reader, then deliver in the requested format (DOCX, PDF,
    HTML, slides) with the verifiers below.
+
+**Long texts move between styles section by section.** Write a section map
+(style-framework.md §5.3), move to a near style at each boundary, mark each
+section with `<!-- سبک: … -->` and check with `style_check.py --sections`.
+**Rewriting an existing document** follows the rewrite path in
+writing-workflow.md: extract, measure the original, list inconsistencies for
+the user instead of fixing facts silently, rewrite under the same facts, and
+deliver a side-by-side comparison.
 
 Depth scales with the job: short transactional texts skip the workflow; a
 300–600-word text with a clear purpose gets a one-line restatement and a

@@ -11,7 +11,20 @@ Usage:
   python3 style_check.py draft.md --profile "استدلالی پیوسته"
   python3 style_check.py draft.md --recipe "گزارش داده‌محور برند"   # uses the recipe's default profile
   python3 style_check.py draft.md --compare                          # nearest profile for an existing text
+  python3 style_check.py report.md --sections                        # each section against its own style
   python3 style_check.py --list
+
+Long texts move between styles section by section (style-framework.md §5).
+With --sections the file is split at its Markdown headings (## by default,
+--level to change) and each section is measured on its own. A section declares
+its style with a comment right under its heading:
+  <!-- سبک: گزارشی برند -->        (a profile)
+  <!-- سبک: گزارش داده‌محور برند --> (or a recipe)
+Undeclared sections fall back to --profile/--recipe, or get their nearest
+profiles. Sections under 60 words are listed but not measured.
+
+Captions (a line in *italics*, or starting «تصویر ۲:»، «جدول ۱:»، «نمودار»،
+«شکل»), Markdown table rows and HTML comments are not prose and are skipped.
 
 Exit code: 0 = all core features inside the band, 1 = something to revise.
 Python 3.8+, standard library only.
@@ -29,6 +42,7 @@ RECIPE_PROFILE = {
     "روایت شاهد": "گفت‌وگویی شخصی", "توضیح و آموزش": "گفت‌وگویی شخصی", "تأمل شخصی": "گفت‌وگویی شخصی",
     "سوگ‌نامه": "گفت‌وگویی شخصی", "خطابه": "خطابی",
     "گزارش داده‌محور برند": "گزارشی برند", "گزارش نهادی": "گزارشی نهادی", "خبر کوتاه": "فشرده",
+    "سند راهبردی": "تحلیلی میانه",
 }
 FA_WORD = re.compile(r"[؀-ۿ]+(?:‌[؀-ۿ]+)*")
 CONNECTIVES = ["اما", "ولی", "با این حال", "با این همه", "در حالی که", "حال آنکه", "چون", "زیرا", "چرا که",
@@ -71,8 +85,14 @@ def sentences(t):
     return [p for p in (s.strip() for s in parts) if len(FA_WORD.findall(p)) >= 2]
 
 
+CAPTION = re.compile(r"^\s*(?:[*_][^*_\n].*[*_]|(?:تصویر|جدول|نمودار|شکل)\s*[0-9۰-۹]+\s*[:：].*)\s*$", re.M)
+
+
 def strip_markup(t):
     t = re.sub(r"```.*?```", " ", t, flags=re.S)
+    t = re.sub(r"<!--.*?-->", " ", t, flags=re.S)
+    t = re.sub(r"^\s*\|.*\|\s*$", "", t, flags=re.M)  # Markdown table rows
+    t = CAPTION.sub("", t)  # captions are labels, not paragraphs
     t = re.sub(r"^\s{0,3}#{1,6}\s+.*$", "", t, flags=re.M)  # headings are not paragraphs
     t = re.sub(r"^\s*([-*]|\d+[.)]|[۰-۹]+[.)-])\s+", "", t, flags=re.M)
     return re.sub(r"\n\s*\n", "\n", t)
@@ -82,7 +102,7 @@ def measure(txt):
     ss = sentences(txt)
     words = FA_WORD.findall(txt)
     if len(ss) < 3 or len(words) < 60:
-        sys.exit("متن برای سنجش کوتاه است: دست‌کم ۶۰ کلمه و ۳ جمله لازم است.")
+        raise ValueError("متن برای سنجش کوتاه است: دست‌کم ۶۰ کلمه و ۳ جمله لازم است.")
     L = [len(FA_WORD.findall(s)) for s in ss]
     k = 1000 / len(words)
     paras = [p for p in txt.split("\n") if len(FA_WORD.findall(p)) >= 8]
@@ -156,6 +176,76 @@ def nearest(m):
     return sorted(PROFILES, key=dist)
 
 
+def profile_distance(a, b):
+    """Distance between two profiles' medians, in band widths: used for neighbours."""
+    ra, rb = PROFILES[a]["ranges"], PROFILES[b]["ranges"]
+    fs = [f for f in CORE if f in ra and f in rb]
+    return sum(abs(ra[f][1] - rb[f][1]) / max(1e-6, (ra[f][2] - ra[f][0] + rb[f][2] - rb[f][0]) / 2) for f in fs) / len(fs)
+
+
+def neighbours(name, k=2):
+    return sorted((p for p in PROFILES if p != name), key=lambda p: profile_distance(name, p))[:k]
+
+
+DECL = re.compile(r"<!--\s*(?:سبک|style)\s*:\s*(.+?)\s*-->")
+
+
+def resolve(name):
+    name = (name or "").strip()
+    return name if name in PROFILES else RECIPE_PROFILE.get(name)
+
+
+def split_sections(txt, level):
+    head = re.compile(r"^#{1,%d}\s+(.+)$" % level, re.M)
+    marks = list(head.finditer(txt))
+    out = []
+    if marks and txt[:marks[0].start()].strip():
+        out.append(("(پیش از نخستین سرفصل)", txt[:marks[0].start()]))
+    for i, m in enumerate(marks):
+        end = marks[i + 1].start() if i + 1 < len(marks) else len(txt)
+        out.append((m.group(1).strip(), txt[m.end():end]))
+    return out or [("(کل متن)", txt)]
+
+
+def run_sections(txt, level, default):
+    rows, issues, prev = [], 0, None
+    for title, body in split_sections(txt, level):
+        d = DECL.search(body)
+        declared = resolve(d.group(1)) if d else None
+        if d and not declared:
+            print(f"⚠ «{d.group(1)}» نه آهنگ است نه نسخه؛ بخش «{title}» بی‌اعلام سنجیده می‌شود.")
+        try:
+            m = measure(strip_markup(body))
+        except ValueError:
+            rows.append((title, None, declared, None))
+            continue
+        name = declared or default
+        print("─" * 60)
+        print(f"بخش: {title}")
+        if name:
+            n = report(m, name)
+            issues += n
+        else:
+            order = nearest(m)
+            print("بی‌اعلام؛ نزدیک‌ترین آهنگ‌ها:", "، ".join(order[:2]))
+            print()
+            n = report(m, order[0])
+            name = order[0]
+        if prev and prev != name and name not in neighbours(prev, 3):
+            print()
+            print(f"  ↔ پرش از «{prev}» به «{name}»: این دو همسایه نیستند؛ با یک جمله‌ی پل یا یک بخش میانی گذار را نرم کن.")
+        rows.append((title, m["_words"], name, n))
+        prev = name
+    print("═" * 60)
+    print("نقشه‌ی سبک بخش‌ها:")
+    for title, w, name, n in rows:
+        if w is None:
+            print(f"  {title[:40]:40s}  کوتاه، سنجیده نشد")
+        else:
+            print(f"  {title[:40]:40s}  {fa(w):>6s} کلمه  {name:16s}  {'✓' if not n else fa(n) + ' ایراد'}")
+    return issues
+
+
 def main():
     ap = argparse.ArgumentParser(description="Measure a Persian draft against a rhythm profile.")
     ap.add_argument("file", nargs="?", help="draft file (Markdown or plain text); '-' for stdin")
@@ -164,17 +254,28 @@ def main():
     g.add_argument("--recipe", help="recipe name; its default profile is used")
     g.add_argument("--compare", action="store_true", help="rank profiles by closeness")
     ap.add_argument("--list", action="store_true", help="list profiles and recipes")
+    ap.add_argument("--sections", action="store_true", help="measure each section against its declared style")
+    ap.add_argument("--level", type=int, default=2, help="deepest heading level that starts a section (default 2)")
     a = ap.parse_args()
     if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
         sys.stdout.reconfigure(encoding="utf-8")
     if a.list:
         print("آهنگ‌ها:", "، ".join(PROFILES))
         print("نسخه‌ها:", "، ".join(f"{r} → {p}" for r, p in RECIPE_PROFILE.items()))
+        print("همسایه‌ها (نزدیک‌ترین آهنگ‌ها برای گذار بین بخش‌ها):")
+        for p in PROFILES:
+            print(f"  {p}: " + "، ".join(neighbours(p)))
         return 0
     if not a.file:
         ap.error("file is required")
     txt = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8")
-    m = measure(strip_markup(txt))
+    if a.sections:
+        default = a.profile or RECIPE_PROFILE.get(a.recipe or "")
+        return 1 if run_sections(txt, a.level, default) else 0
+    try:
+        m = measure(strip_markup(txt))
+    except ValueError as e:
+        sys.exit(str(e))
     if a.compare:
         order = nearest(m)
         print("نزدیک‌ترین آهنگ‌ها:", "، ".join(order[:3]), "\n")
