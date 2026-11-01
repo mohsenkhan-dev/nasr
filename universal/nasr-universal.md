@@ -51,7 +51,7 @@ read the reference file for your output format before generating anything.
 | Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | the «Writing workflow: concept to final text» part below, then the «Prose styles: axes, recipes, rhythm» part, the «Storyline first» part, the «Style arcs: think before writing» part + the «Signature moves per style» part |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | the «Academic writing (نگارش علمی)» part below |
 | Educational/technical content, docs, product pages, how-to | the «Content craft: POV, structure, honesty» part below |
-| Telegram, Instagram, captions, carousels, reels, stories | the «Social channels: Telegram & Instagram» part below |
+| Telegram, Instagram, captions, carousels, reels, stories | the «Social channels: Telegram & Instagram» part below; a post that is prose (an argument, analysis or story, not a caption) also follows the «Writing workflow: concept to final text» part below |
 | SEO content, blog for search, landing/ad copy, کپشن فروش | the «SEO writing & copywriting» part below |
 | Cleanup/normalize/spell-check existing text (ویرایش، پاکسازی) | the Orthography part (script docs ship with the full package) |
 | Choosing/embedding fonts | the «Fonts» part below |
@@ -80,6 +80,18 @@ orthography. This skill itself is brand-neutral: colors in the code examples are
 placeholders, and Vazirmatn is just the default font, not a requirement.
 
 ## Writing workflow: concept → styles → samples → final text
+
+**Checkpoint first.** When the user asks for a new prose text, the first reply
+is never the text. It is «برداشت من», at most three questions, three suggested
+styles (the advanced-settings page when you can write files, text cards
+otherwise) and the material plan; then end the turn and wait. Without a
+question tool, ask in the message and stop. Skip only when the user says
+«فقط بنویس» or similar, edits their own text, or asks for a short
+transactional text (writing-workflow.md, «The checkpoint rule» and the depth
+table, read top to bottom). «طبق اسکیل»، «کامل»، «با نثر» mean the full path
+with three stops. When the user asks for evidence («شواهد»، «منبع»), search and
+list verified sources at the checkpoint; with no web access say so, and never
+cite from memory.
 
 For any text that will be read as prose (columns, analyses, essays, reports,
 statements, explainers, long posts), follow the «Writing workflow: concept to final text» part below:
@@ -123,10 +135,10 @@ writing-workflow.md: extract, measure the original, list inconsistencies for
 the user instead of fixing facts silently, rewrite under the same facts, and
 deliver a side-by-side comparison.
 
-Depth scales with the job: short transactional texts skip the workflow; a
-300–600-word text with a clear purpose gets a one-line restatement and a
-stated style; long, public or high-stakes texts get all four stages. If the
-user names a style or says «فقط بنویس», state the style in one line and write.
+Depth follows the ordered table in writing-workflow.md: «فقط بنویس» → write;
+own-text edit → light; rewrite → rewrite path; short transactional → write;
+«طبق اسکیل», over ~600 words or high-stakes → full path with three stops;
+everything else, including any public or opinion post → the checkpoint.
 
 ## Writing: the five-second summary
 
@@ -752,19 +764,55 @@ can see and redirect cheaply, so a wrong turn costs one message, not a rewrite.
 ۴. نگارش نهایی   → پیش‌نویس، بررسی‌ها، بازنویسی، تحویل در قالب خواسته‌شده
 ```
 
+## The checkpoint rule (ایستگاه): ask and show before writing
+
+**Default: stop before the text.** When the user asks for a new text to be
+written (a post, column, report, statement, letter that argues, any prose),
+the first reply is the checkpoint, never the text:
+1. «برداشت من» in 4–6 lines (stage 1);
+2. at most three questions whose answers change the text;
+3. three suggested styles: the advanced-settings page (میز کار) when you can
+   write files, or three style cards as text when you cannot (stage 2);
+4. the material plan: what evidence you have, what you will search for, what is missing.
+
+Then **end the turn**. Do not write the text in the same reply. This does not
+depend on a question tool: where AskUserQuestion or a similar tool exists, use
+it; where it does not (Codex, plain chat, API), ask in the message and stop.
+An agent that writes the text in the same turn as the checkpoint has skipped it.
+
+**Phrases that set the path** (read the user's words, not your estimate of the job):
+
+| The user says | Path |
+|---|---|
+| «فقط بنویس»، «سریع»، «بدون سؤال»، «همین الان» | No checkpoint: state the style in one line and write |
+| «طبق اسکیل»، «کامل»، «کاملاً طبق اسکیل»، «با نثر»، «مرحله به مرحله» | Full path with three stops: after the checkpoint, after the level-1 storyline, after the level-2 storyline (or the samples) |
+| «تنظیمات پیشرفته»، «میز کار» | The advanced-settings page at the checkpoint |
+| nothing about the process | The checkpoint, then write after the user answers |
+
 ## Choosing the depth
 
-| Situation | Path |
-|---|---|
-| Long (over ~600 words), high-stakes, public, or the user asked for options | All four stages |
-| 300–600 words, purpose clear | Stage 1 as a short restatement, stage 2 as one stated choice, then stage 4 |
-| Under 300 words, transactional (email, caption, UI copy, notice) | Skip to writing; register rules in writing-style.md are enough |
-| The user named the style or said «فقط بنویس» | State the style in one line and go to stage 4 |
-| Light edit of the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
-| Rewriting an existing document («بازنویسی کن»، «با نثر بنویس») | The rewrite path below: measure, diagnose, then the four stages on the document's own material |
+Apply the **first** row that matches, top to bottom. The rows do not overlap
+because the order decides.
 
-When in doubt, run stages 1 and 2 in one message: a restatement plus style cards.
-That is one exchange and it prevents most rewrites.
+| Order | Situation | Path |
+|---|---|---|
+| 1 | The user said «فقط بنویس» or similar | State the style in one line and write |
+| 2 | Light edit of the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
+| 3 | Rewriting an existing document («بازنویسی کن») | The rewrite path below, with the checkpoint after the diagnosis |
+| 4 | Under ~150 words and transactional (email reply, caption, notice, UI copy) | Write; register rules in writing-style.md are enough |
+| 5 | The user said «طبق اسکیل» or similar, or the text is over ~600 words, or high-stakes | Full path with three stops |
+| 6 | Everything else, including any public or opinion text (a Telegram or Instagram post, a column) whatever its length | The checkpoint, then write after the answers |
+
+A public text is never «transactional»: a post that takes a position needs the
+checkpoint even at 300 words.
+
+## When the user asks for evidence (شواهد، منبع، پژوهش)
+
+«شواهد علمی بیار»، «با منبع»، «مستند» make research a stage of its own:
+- Search before writing, and list at the checkpoint the sources you found: author or institution, year, title, link, and the one finding you will use from each. Prefer peer-reviewed papers, official statistics and major research institutes.
+- Every figure or finding in the text must trace to a listed source you have actually opened. Quote nothing you have not read.
+- **No web access → say so at the checkpoint** and ask the user for sources, or offer to write the argument without citations. Never produce a reference from memory as if verified; a plausible but invented citation is the worst failure of this skill.
+- After the text, list the sources used, in the format the channel allows (a short list at the end of a Telegram post).
 
 ## Stage 1: understand the concept (فهم مفهوم)
 
@@ -837,15 +885,18 @@ Each card, in Persian:
 - ریسک یا کمبود: به دست‌کم یک منبع رسمی دیگر نیاز دارد
 ```
 
-Ask the user to choose with one question (AskUserQuestion where available;
+Ask the user to choose with one question (AskUserQuestion where available,
+otherwise in the message, and then end the turn;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
-## Advanced settings (تنظیمات پیشرفته)
+## Advanced settings (تنظیمات پیشرفته، میز کار)
 
-When the user asks for «تنظیمات پیشرفته», wants to fine-tune a style, or the
-text is long or high-stakes and the user likes to choose, build the settings
-page instead of (or after) the style cards:
+The settings page is the default form of the checkpoint's style suggestions
+whenever you can write a file (Claude Code, Codex, any agent with a file
+system): build it, give the user its path, and stop. In a chat-only setting,
+show the same three suggestions as text cards. Build it in any case when the
+user asks for «تنظیمات پیشرفته» or «میز کار»:
 
 ```bash
 python3 scripts/settings.py --brief "<what the user wants to write>" \
@@ -1373,8 +1424,9 @@ storyline needs and where the payoff goes: a strategy needs a diagnosis, a
 crux and a trade-off; a report puts targets at the end. The arc is the plan;
 the storyline is the plan filled with claims.
 
-**Show the level-1 storyline and headings to the user before going on** for
-any long or high-stakes text. It is ten lines; correcting it costs nothing
+**Show the level-1 storyline and headings to the user and end the turn**
+whenever the full path applies (writing-workflow.md, depth row 5) or the user
+asked to follow the skill fully. It is ten lines; correcting it costs nothing
 compared with correcting prose.
 
 ## Level 2: the storyline of each section
@@ -2899,6 +2951,9 @@ evidence of having done the work — rather than trying to satisfy the tool.
 # PART 11 — Social channels: Telegram & Instagram
 
 # Persian social channels: Telegram, Instagram, and repurposing
+
+> A post that is prose (an argument, analysis or story rather than a caption)
+> also follows writing-workflow.md, starting with its checkpoint.
 
 Channel craft, not channel decoration. Register comes from writing-style.md,
 structure and honesty from content-structures.md; this file adds what changes

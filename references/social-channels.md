@@ -1,5 +1,8 @@
 # Persian social channels: Telegram, Instagram, and repurposing
 
+> A post that is prose (an argument, analysis or story rather than a caption)
+> also follows writing-workflow.md, starting with its checkpoint.
+
 Channel craft, not channel decoration. Register comes from writing-style.md,
 structure and honesty from content-structures.md; this file adds what changes
 when the text is consumed on a phone, in a feed, in seconds.

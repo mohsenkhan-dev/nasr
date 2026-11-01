@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.5.1
+  version: 2.6.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
@@ -47,7 +47,7 @@ read the reference file for your output format before generating anything.
 | Prose over ~300 words that explains, argues, reports, mobilizes or commemorates: columns, analyses, essays, annual/sustainability reports, statements | `references/writing-workflow.md`, then `style-framework.md`, `storyline.md`, `style-skeletons.md` + `style-moves.md` |
 | Academic: paper, thesis, report, مقاله/پایان‌نامه | `references/academic.md` |
 | Educational/technical content, docs, product pages, how-to | `references/content-structures.md` |
-| Telegram, Instagram, captions, carousels, reels, stories | `references/social-channels.md` |
+| Telegram, Instagram, captions, carousels, reels, stories | `references/social-channels.md`; a post that is prose (an argument, analysis or story, not a caption) also follows `references/writing-workflow.md` |
 | SEO content, blog for search, landing/ad copy, کپشن فروش | `references/seo-copywriting.md` |
 | Cleanup/normalize/spell-check existing text (ویرایش، پاکسازی) | `references/cleanup/paknevis-rules.md` + `usage-patterns.md` |
 | Choosing/embedding fonts | `references/fonts.md` |
@@ -76,6 +76,18 @@ orthography. This skill itself is brand-neutral: colors in the code examples are
 placeholders, and Vazirmatn is just the default font, not a requirement.
 
 ## Writing workflow: concept → styles → samples → final text
+
+**Checkpoint first.** When the user asks for a new prose text, the first reply
+is never the text. It is «برداشت من», at most three questions, three suggested
+styles (the advanced-settings page when you can write files, text cards
+otherwise) and the material plan; then end the turn and wait. Without a
+question tool, ask in the message and stop. Skip only when the user says
+«فقط بنویس» or similar, edits their own text, or asks for a short
+transactional text (writing-workflow.md, «The checkpoint rule» and the depth
+table, read top to bottom). «طبق اسکیل»، «کامل»، «با نثر» mean the full path
+with three stops. When the user asks for evidence («شواهد»، «منبع»), search and
+list verified sources at the checkpoint; with no web access say so, and never
+cite from memory.
 
 For any text that will be read as prose (columns, analyses, essays, reports,
 statements, explainers, long posts), follow `references/writing-workflow.md`:
@@ -119,10 +131,10 @@ writing-workflow.md: extract, measure the original, list inconsistencies for
 the user instead of fixing facts silently, rewrite under the same facts, and
 deliver a side-by-side comparison.
 
-Depth scales with the job: short transactional texts skip the workflow; a
-300–600-word text with a clear purpose gets a one-line restatement and a
-stated style; long, public or high-stakes texts get all four stages. If the
-user names a style or says «فقط بنویس», state the style in one line and write.
+Depth follows the ordered table in writing-workflow.md: «فقط بنویس» → write;
+own-text edit → light; rewrite → rewrite path; short transactional → write;
+«طبق اسکیل», over ~600 words or high-stakes → full path with three stops;
+everything else, including any public or opinion post → the checkpoint.
 
 ## Writing: the five-second summary
 

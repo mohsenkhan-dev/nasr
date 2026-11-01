@@ -82,8 +82,9 @@ storyline needs and where the payoff goes: a strategy needs a diagnosis, a
 crux and a trade-off; a report puts targets at the end. The arc is the plan;
 the storyline is the plan filled with claims.
 
-**Show the level-1 storyline and headings to the user before going on** for
-any long or high-stakes text. It is ten lines; correcting it costs nothing
+**Show the level-1 storyline and headings to the user and end the turn**
+whenever the full path applies (writing-workflow.md, depth row 5) or the user
+asked to follow the skill fully. It is ten lines; correcting it costs nothing
 compared with correcting prose.
 
 ## Level 2: the storyline of each section

@@ -139,6 +139,16 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.6.0** — the checkpoint. Asked for a new prose text, the skill now
+  stops first: «برداشت من», up to three questions, three suggested styles
+  (the settings page when files can be written) and the material plan, then
+  it ends the turn, with or without a question tool. The depth table is
+  ordered so its rows cannot conflict; any public or opinion post gets the
+  checkpoint whatever its length; «طبق اسکیل»، «کامل»، «با نثر» mean the full
+  path with three stops; Telegram prose posts route to the writing workflow;
+  requests for evidence add a research step with verified sources and an
+  explicit no-web fallback. Prompted by a run in Codex that wrote a long
+  Telegram post with no question asked.
 - **2.5.1** — no jolts in long texts. In the settings page, tone and rhythm
   for a long text are set only per section (the whole-text fields are disabled
   with a note), and each recipe that is usually long brings its own default
