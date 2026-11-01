@@ -41,9 +41,10 @@ verification. Bundled Vazirmatn and Lalezar fonts (SIL OFL).
   final text), style-framework, style-moves, style-evidence, writing-style,
   orthography, academic,
   seo-copywriting, fonts, docx-pdf, pptx, html-css, format-skills-fa,
-  cleanup/ (paknevis+davat docs)
-- `scripts/` — persian_cleanup.py, fa_lint.py, style_check.py, verify_pdf.py,
-  install_fonts.sh, download_fonts.py, build_universal.py
+  document-design (simple / designed / on the user's template), cleanup/
+- `scripts/` — persian_cleanup.py, fa_lint.py, style_check.py, storyline.py,
+  settings.py (workbench), design_samples.py, render_html.py, verify_docx.py,
+  verify_pdf.py, install_fonts.sh, download_fonts.py, build_universal.py
 - `assets/` — fonts/ (TTFs), persian_words.txt (453K-word frequency
   dictionary for spell-check), style_profiles.json (rhythm bands)
 - `universal/` — generated single-file edition for chat-only AIs

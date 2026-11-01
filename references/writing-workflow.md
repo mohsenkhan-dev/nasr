@@ -18,10 +18,54 @@ can see and redirect cheaply, so a wrong turn costs one message, not a rewrite.
 written (a post, column, report, statement, letter that argues, any prose),
 the first reply is the checkpoint, never the text:
 1. «برداشت من» in 4–6 lines (stage 1);
-2. at most three questions whose answers change the text;
-3. three suggested styles: the advanced-settings page (میز کار) when you can
-   write files, or three style cards as text when you cannot (stage 2);
-4. the material plan: what evidence you have, what you will search for, what is missing.
+2. **for any text with sections, the outline of this text** (below,
+   «Structure before style»): every printed heading with what the section
+   says, as a table or on the workbench;
+3. at most three questions whose answers change the text, and the list of
+   conflicts between what the user asked and the existing text or data;
+4. the term list: official names, replacements, banned words (below);
+5. the style: for a sectioned document, pick it yourself and say it in one
+   line; otherwise three suggestions, each with a two-sentence sample on the
+   real material (stage 2);
+6. the material plan: what evidence you have, what you will search for, what is missing.
+
+Where you can write files, put the outline, questions, terms and style on the workbench page (میز کار, «The
+workbench» below) and send it; in chat, show them as plain tables.
+
+### Structure before style
+
+In the first real use (a board strategy document rewritten and extended), the
+user never argued about style. Every round trip was about structure: which
+sections, in which order, what each one says, and what its heading is. Style
+cards shown before the outline were noise. So, for documents with sections:
+- The outline comes first, and it is the outline of **this** document, with
+  its real headings. Generic section types («استدلال و ضرورت») are for you,
+  never for the user.
+- Show two things per section and keep them apart: **the heading** that will
+  be printed, and **what the section says** (one plain sentence, not printed).
+  A user reads a sentence in the heading column as a proposed heading.
+- Alternatives for one heading are labelled «تیتر جایگزین برای همین بخش»,
+  never «الف/ب» next to each other, which reads as heading + subheading.
+- Every proposed heading already passes the heading rules (storyline.md
+  «Headings»): no colon, no question, no sentence with a verb, content not label.
+- The user can add, drop, move and nest sections in one sentence or on the
+  workbench. Treat a section the user asked for as fixed: if it is missing
+  from your outline, the outline is wrong.
+- The style is your call for such documents. State it in one line («سبک: سند
+  راهبردی؛ بخش الزامات: توجیه راهبردی») and change it only if the user asks.
+
+### Lock the terms
+
+Users fix vocabulary mid-way: «موتور نگو، بگو پیشران» and «برای این محصول
+دستیار نگو» and «نام کاملش همیشه پلتفرم … است» and «فرق لفظ خوبی نیست». Collect
+these at the checkpoint and whenever they come up:
+- official names (the full name on first mention, the short name after);
+- replacements (X → Y) and banned words;
+- metaphors the document already uses for something else. In the test, the
+  original text used «دو بال» for system and adoption; calling the two
+  businesses «دو بال» too would have collided.
+Apply the list to the prose, tables, captions, figure text and file names,
+and before delivery search the final text for every banned word.
 
 Then **end the turn**. Do not write the text in the same reply. This does not
 depend on a question tool: where AskUserQuestion or a similar tool exists, use
@@ -46,7 +90,7 @@ because the order decides.
 |---|---|---|
 | 1 | The user said «فقط بنویس» or similar | State the style in one line and write |
 | 2 | Light edit of the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
-| 3 | Rewriting an existing document («بازنویسی کن») | The rewrite path below, with the checkpoint after the diagnosis |
+| 3 | Rewriting an existing document («بازنویسی کن»), or rewriting it in a new voice **and** adding to it («تغییرات اضافه می‌شوند و متن فعلی را کامل می‌کنند») | The rewrite path below, with the checkpoint after the diagnosis; for additions, «Rewrite and extend» |
 | 4 | Under ~150 words and transactional (email reply, caption, notice, UI copy) | Write; register rules in writing-style.md are enough |
 | 5 | The user said «طبق اسکیل» or similar, or the text is over ~600 words, or high-stakes | Full path with three stops |
 | 6 | Everything else, including any public or opinion text (a Telegram or Instagram post, a column) whatever its length | The checkpoint, then write after the answers |
@@ -118,7 +162,7 @@ A good default set:
 
 For documents with sections, a card is a section map (style-framework.md §5.3),
 not one recipe. Default cards by genre:
-- **Strategy document, roadmap, proposal to a board**: the سند راهبردی recipe and its section map (recommended), plus a variant that changes one thing, for example «ما» instead of the organization's name when the document is signed by its management.
+- **Strategy document, roadmap, proposal to a board**: the سند راهبردی recipe, chosen by you and stated in one line; argument sections (necessity, requirements) move to توجیه راهبردی. Spend the checkpoint on the outline, not on style cards («Structure before style»).
 - **Annual or sustainability report**: the brand or institutional report map; offer the other as the alternative card.
 - **Long analytical column**: one recipe, with at most a different opening section.
 
@@ -138,33 +182,47 @@ otherwise in the message, and then end the turn;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
-## Advanced settings (تنظیمات پیشرفته، میز کار)
+## The workbench (میز کار، تنظیمات پیشرفته)
 
-The settings page is the default form of the checkpoint's style suggestions
-whenever you can write a file (Claude Code, Codex, any agent with a file
-system): build it, give the user its path, and stop. In a chat-only setting,
-show the same three suggestions as text cards. Build it in any case when the
-user asks for «تنظیمات پیشرفته» or «میز کار»:
+The workbench is one page that carries the whole checkpoint, so the user
+decides in one place instead of over five messages. Build it whenever you can
+write a file and the text has sections, and always when the user asks for
+«تنظیمات پیشرفته» or «میز کار». Write the checkpoint as JSON, then:
 
 ```bash
-python3 scripts/settings.py --brief "<what the user wants to write>" \
-    --suggest "<recipe 1>|<one-line reason>" "<recipe 2>|<reason>" "<recipe 3>|<reason>" \
-    [--sections "<section type>" ...] --out <scratch>/nasr-settings.html
+python scripts/settings.py --config <scratch>/checkpoint.json --out <folder>/nasr-desk.html
 ```
 
-Send the page to the user. It lists all 14 recipes with your three suggestions
-in three colours, and for the chosen recipe a dropdown per parameter (purpose,
-evidence, position, structure, register, distance, certainty, warmth, rhythm).
-Options that make no sense for the recipe or the register are disabled; the
-recipe's default is marked «پیشنهادی», and values allowed only with a reason
-are marked «با احتیاط». For long texts the user also orders the sections and
-sets their tone; jumps of more than one step, or between non-neighbouring
-rhythms, are flagged. The page produces a «کارت تنظیمات» the user pastes back.
+`checkpoint.json` holds (the script's docstring shows the exact shape):
+- `outline`: every section with `title` (printed heading), `job` (what it
+  says, not printed), `source` (تازه / از متن قبلی / قبلی با افزوده), `level`
+  (1 or 2), optional `alts` (alternative headings) and `type` (a section type
+  from style_matrix.json, used only for tone defaults);
+- `questions` (with answer options) and `conflicts` (each with what disagrees
+  with what);
+- `terms` (from, rule, to);
+- `suggestions`: up to three recipes, each with `why` in plain words and a
+  `sample` of two or three sentences **on the real material**. A style the
+  user cannot see is a style they cannot choose; never send cards without samples.
 
-Treat the pasted card as the user's decision: its values override the
-defaults. If it chooses a «با احتیاط» value, follow it and keep the reason in
-mind (say it once if it matters). The page's data is assets/style_matrix.json,
-the same source as tone-matrix.md, so the two cannot disagree.
+The page, in order: the outline (edit headings in place, alternative headings
+one click away, add / delete / move / nest, live heading checks); questions
+and conflicts with answer buttons; the term table; three style cards with
+their samples; and, folded away, the full parameter panel and per-section
+tone for users who want them. Everything lands in a «کارت تنظیمات» the user
+pastes back.
+
+What the first real use taught about this page: an earlier version opened on
+abstract parameters (distance, certainty, rhythm) and generic section types,
+had no examples, no way to add a heading, and did not show the section the
+user had asked for. The user found it confusing and decided nothing on it.
+Keep the page about the user's document, in the user's words; parameters are
+the last and optional layer.
+
+Treat the pasted card as the user's decision: its headings, answers, terms and
+style override yours. If it chooses a «با احتیاط» value, follow it and keep the
+reason in mind (say it once if it matters). The page's data is
+assets/style_matrix.json, the same source as tone-matrix.md.
 
 ## Stage 2b: the storyline (خلاصه‌ی روایت)
 
@@ -248,7 +306,8 @@ differences.
 **R1. Extract the text faithfully.**
 - Text only, in reading order, with headings kept as headings.
 - Tables are read cell by cell from the source (merged cells repeat their value; do not deduplicate them away).
-- Figures and images become caption markers («تصویر ۲: …») in their place, so the rewrite keeps their position.
+- Figures and images become caption markers («تصویر ۲. …») in their place, so the rewrite keeps their position.
+- **Read the text inside the images too**: the cover, diagrams, timelines, number tiles. List every name, figure and claim they carry. In the first real use the cover still named the old mission and the closing figure still showed the old targets (۸۰ مشتری، ۳۰٪) after the text had changed; only a visual check of the PDF caught it. An image whose text no longer matches goes on the change list and is redrawn (document-design.md «Figures»).
 - For DOCX use python-docx over the body elements in order; for PDF see docx-pdf.md.
 
 **R2. Measure the original before touching it.**
@@ -282,6 +341,21 @@ the chosen card and go on; otherwise show the cards first.
 - Same length, within about 10%, unless the user asked for shorter.
 - Keep the document's conventions: its ezafe style (‌ی or ٔ; drop `fix_ezafe` from `persian_cleanup.py --steps` when it uses ‌ی), its terminology, its digit style in tables.
 - Reordering sections and merging repeated passages are allowed, but each one goes on the change list with its reason.
+
+**R5b. Rewrite and extend.** When the user wants the existing text kept in
+substance, rewritten in a new voice, and completed with new material (a new
+business line, new targets, a new section), R5's «same length, no new claims»
+does not hold. Instead:
+- The original's facts are locked: rewrite them, never change them silently.
+- Every addition is marked as new in the outline («تازه» / «قبلی با افزوده»).
+- Wherever an addition disagrees with the original or with the user's data
+  (a count, a date, a target, a name, a metaphor), list it as a conflict at
+  the checkpoint with both sides; the user decides.
+- New targets are derived from the user's data model (budget sheet, KPI
+  sheet), and the derivation is shown («از رشد ماهانه‌ی ۸٪ اکسل»). A target
+  proposed before reading the model will change later and cost a round trip.
+  When the user raises targets («تهاجمی‌تر»), show old and new side by side.
+- The deliverable keeps the original's design (docx-pdf.md §7.3).
 
 **R6. Deliver a comparison, not only the new text.** Unless the user asked for
 the new text alone, deliver:

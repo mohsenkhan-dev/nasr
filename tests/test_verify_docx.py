@@ -1,4 +1,5 @@
 import os
+import tempfile
 import sys
 import unittest
 
@@ -34,7 +35,7 @@ class TestVerifyDocx(unittest.TestCase):
         doc.sections[0]._sectPr.insert(0, OxmlElement("w:bidi"))
 
         doc.add_paragraph("متن تستی با ارثبری از استایل پیشفرض")
-        path = "/tmp/test_persianize_styles_unit.docx"
+        path = os.path.join(tempfile.gettempdir(), "test_persianize_styles_unit.docx")
         doc.save(path)
 
         errors, warnings, notes = check(path, expect_fonts=["Vazirmatn"])
@@ -48,7 +49,7 @@ class TestVerifyDocx(unittest.TestCase):
         """Documents lacking RTL and complex-script font at both run and style levels must report hard errors."""
         doc = docx.Document()
         doc.add_paragraph("متن خام بدون هیچ تنظیمی")
-        path = "/tmp/test_missing_rtl_unit.docx"
+        path = os.path.join(tempfile.gettempdir(), "test_missing_rtl_unit.docx")
         doc.save(path)
 
         errors, warnings, notes = check(path, expect_fonts=[])

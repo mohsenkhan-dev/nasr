@@ -58,18 +58,20 @@ read the reference file for your output format before generating anything.
 | Word/.docx or docx→PDF | the «Word/DOCX + PDF» part below |
 | PowerPoint/.pptx | the «PowerPoint» part below |
 | HTML, email templates, HTML→PDF | the «HTML / CSS / email» part below |
-| Images/posters (PIL), new PDFs (reportlab), Excel | the «Images, reportlab PDFs, Excel» part below |
+| Images/posters (PIL), new PDFs (reportlab), Excel, editing an existing workbook | the «Images, reportlab PDFs, Excel» part below |
+| A designed document (cover, colours, «زیبا»، «حرفه‌ای»), or building on the user's own designed file | `references/document-design.md`, then the format's reference |
 
-**Visual neutrality — read before copying any code example.** This skill styles
-NOTHING. It governs direction, spacing, fonts-for-shaping and text — never
-colors, accent bars, card backgrounds, or a house look. Every hex, border, and
-fill in the code examples is a stand-in written in plain grey/black; they exist
-to show WHERE a property goes, not what value to use. Default output is black
-text on default background, no accent color. Take colors and visual form ONLY
-from: the user's explicit request, an attached brand/theme skill, or an input
-template being matched. Absent those, do not invent a palette and do not carry
-one over from example to example — unstyled is the correct default, and a
-surprise purple heading is a bug.
+**Visual neutrality, and when to design.** The simple level is the default:
+this skill governs direction, spacing, fonts-for-shaping and text, and every
+hex, border and fill in the code examples is a grey/black stand-in that shows
+WHERE a property goes, not what value to use. Unstyled black text is the
+correct default, and a surprise purple heading is a bug. Design is allowed in
+two cases (document-design.md): the user asks for a designed document or it
+goes to a board, investors, clients or the public, and then you **offer three
+or four rendered directions** (`scripts/design_samples.py`) and build the one
+the user picks; or the user hands over a designed file, and then you build on
+its own elements (docx-pdf.md §7.3). Never invent one look silently, and never
+carry a palette from one user or example to the next.
 
 This skill composes with the general docx/pptx/pdf skills: those handle file
 mechanics; this one overrides and extends them for Persian. When both disagree
@@ -82,9 +84,14 @@ placeholders, and Vazirmatn is just the default font, not a requirement.
 ## Writing workflow: concept → styles → samples → final text
 
 **Checkpoint first.** When the user asks for a new prose text, the first reply
-is never the text. It is «برداشت من», at most three questions, three suggested
-styles (the advanced-settings page when you can write files, text cards
-otherwise) and the material plan; then end the turn and wait. Without a
+is never the text. It is «برداشت من»; for a text with sections, the outline of
+THIS text (printed heading + what the section says, kept apart); at most three
+questions and the list of conflicts; the term list; the style (your call in one
+line for sectioned documents, otherwise three suggestions with short samples
+on the real material); and the material plan. Where you can write files, all
+of it goes on the workbench page (`scripts/settings.py --config`); then end the
+turn and wait. Structure comes before style: in real use users argue about
+sections and headings, not about tone. Without a
 question tool, ask in the message and stop. Skip only when the user says
 «فقط بنویس» or similar, edits their own text, or asks for a short
 transactional text (writing-workflow.md, «The checkpoint rule» and the depth
@@ -101,12 +108,15 @@ statements, explainers, long posts), follow the «Writing workflow: concept to f
    quotations). Show a 4–6-line «برداشت من» and ask at most three questions
    whose answers change the text. Thin material is fixed here, by asking or
    searching, never by inventing.
-2. **Propose styles.** Two to four style cards that differ on an axis
-   (style-framework.md), the recommended one first; combinations are allowed.
-   For fine-tuning, build the advanced-settings page (`scripts/settings.py`,
-   writing-workflow.md «Advanced settings»): every recipe with your three
-   suggestions coloured, a dropdown per parameter with meaningless options
-   disabled, and a settings card the user pastes back.
+2. **Outline, terms, then style.** For sectioned texts, the outline with real
+   headings that pass the heading rules (storyline.md «Headings»), the term
+   list, and the style stated in one line. For single-piece texts, two to four
+   style cards that differ on an axis (style-framework.md), each with a short
+   sample on the real material. The workbench (`scripts/settings.py --config`,
+   writing-workflow.md «The workbench») carries all of it and returns one
+   settings card the user pastes back. When the user names a few items with
+   «و …», they are examples of a category: build the complete frame first
+   (storyline.md «Examples or a complete list»).
 2b. **Storyline before prose** (the «Storyline first» part below). For long texts,
    first the high-level storyline (6–10 claim sentences, each answering the
    question the previous one raises, opening situation → complication →
@@ -131,9 +141,12 @@ statements, explainers, long posts), follow the «Writing workflow: concept to f
 (style-framework.md §5.3), move to a near style at each boundary, mark each
 section with `<!-- سبک: … -->` and check with `style_check.py --sections`.
 **Rewriting an existing document** follows the rewrite path in
-writing-workflow.md: extract, measure the original, list inconsistencies for
-the user instead of fixing facts silently, rewrite under the same facts, and
-deliver a side-by-side comparison.
+writing-workflow.md: extract (the text inside images and the cover too),
+measure the original, list inconsistencies for the user instead of fixing
+facts silently, rewrite under the same facts, and deliver a side-by-side
+comparison. **Rewrite and extend** (new voice plus new material) locks the
+original's facts, marks every addition, lists every conflict, and derives new
+targets from the user's data model.
 
 Depth follows the ordered table in writing-workflow.md: «فقط بنویس» → write;
 own-text edit → light; rewrite → rewrite path; short transactional → write;
@@ -259,8 +272,12 @@ cleaning for NLP (`--preset persian`), single functions (`--fn convert_digits`),
 spell-check against the bundled 453K-word frequency dictionary
 (`--edit --spellcheck`), custom pipelines. Persian «ویرایش» requests → `--edit`
 (conservative, content preserved); «پاکسازی/نرمالایز» → `--preset persian`
-(strips links/mentions/emojis). Details: `references/cleanup/`. Note: `--edit`
-applies the خانهٔ ezafe style; drop `fix_ezafe` from `--steps` to keep خانه‌ی.
+(strips links/mentions/emojis). Details: `references/cleanup/`. Ezafe after
+silent heh: `--edit` keeps the text's own style by default (`--ezafe auto`; a
+document that already writes خانه‌ی stays خانه‌ی), `--ezafe hamza` writes خانهٔ.
+
+**On Windows** run the scripts with `python` or `py -3` (`python3` is often a
+Store alias); they set UTF-8 output themselves.
 
 ## Fonts
 
@@ -770,10 +787,54 @@ can see and redirect cheaply, so a wrong turn costs one message, not a rewrite.
 written (a post, column, report, statement, letter that argues, any prose),
 the first reply is the checkpoint, never the text:
 1. «برداشت من» in 4–6 lines (stage 1);
-2. at most three questions whose answers change the text;
-3. three suggested styles: the advanced-settings page (میز کار) when you can
-   write files, or three style cards as text when you cannot (stage 2);
-4. the material plan: what evidence you have, what you will search for, what is missing.
+2. **for any text with sections, the outline of this text** (below,
+   «Structure before style»): every printed heading with what the section
+   says, as a table or on the workbench;
+3. at most three questions whose answers change the text, and the list of
+   conflicts between what the user asked and the existing text or data;
+4. the term list: official names, replacements, banned words (below);
+5. the style: for a sectioned document, pick it yourself and say it in one
+   line; otherwise three suggestions, each with a two-sentence sample on the
+   real material (stage 2);
+6. the material plan: what evidence you have, what you will search for, what is missing.
+
+Where you can write files, put the outline, questions, terms and style on the workbench page (میز کار, «The
+workbench» below) and send it; in chat, show them as plain tables.
+
+### Structure before style
+
+In the first real use (a board strategy document rewritten and extended), the
+user never argued about style. Every round trip was about structure: which
+sections, in which order, what each one says, and what its heading is. Style
+cards shown before the outline were noise. So, for documents with sections:
+- The outline comes first, and it is the outline of **this** document, with
+  its real headings. Generic section types («استدلال و ضرورت») are for you,
+  never for the user.
+- Show two things per section and keep them apart: **the heading** that will
+  be printed, and **what the section says** (one plain sentence, not printed).
+  A user reads a sentence in the heading column as a proposed heading.
+- Alternatives for one heading are labelled «تیتر جایگزین برای همین بخش»,
+  never «الف/ب» next to each other, which reads as heading + subheading.
+- Every proposed heading already passes the heading rules (storyline.md
+  «Headings»): no colon, no question, no sentence with a verb, content not label.
+- The user can add, drop, move and nest sections in one sentence or on the
+  workbench. Treat a section the user asked for as fixed: if it is missing
+  from your outline, the outline is wrong.
+- The style is your call for such documents. State it in one line («سبک: سند
+  راهبردی؛ بخش الزامات: توجیه راهبردی») and change it only if the user asks.
+
+### Lock the terms
+
+Users fix vocabulary mid-way: «موتور نگو، بگو پیشران» and «برای این محصول
+دستیار نگو» and «نام کاملش همیشه پلتفرم … است» and «فرق لفظ خوبی نیست». Collect
+these at the checkpoint and whenever they come up:
+- official names (the full name on first mention, the short name after);
+- replacements (X → Y) and banned words;
+- metaphors the document already uses for something else. In the test, the
+  original text used «دو بال» for system and adoption; calling the two
+  businesses «دو بال» too would have collided.
+Apply the list to the prose, tables, captions, figure text and file names,
+and before delivery search the final text for every banned word.
 
 Then **end the turn**. Do not write the text in the same reply. This does not
 depend on a question tool: where AskUserQuestion or a similar tool exists, use
@@ -798,7 +859,7 @@ because the order decides.
 |---|---|---|
 | 1 | The user said «فقط بنویس» or similar | State the style in one line and write |
 | 2 | Light edit of the user's own text | Stage 1 only on what the text is for; keep their style unless asked |
-| 3 | Rewriting an existing document («بازنویسی کن») | The rewrite path below, with the checkpoint after the diagnosis |
+| 3 | Rewriting an existing document («بازنویسی کن»), or rewriting it in a new voice **and** adding to it («تغییرات اضافه می‌شوند و متن فعلی را کامل می‌کنند») | The rewrite path below, with the checkpoint after the diagnosis; for additions, «Rewrite and extend» |
 | 4 | Under ~150 words and transactional (email reply, caption, notice, UI copy) | Write; register rules in writing-style.md are enough |
 | 5 | The user said «طبق اسکیل» or similar, or the text is over ~600 words, or high-stakes | Full path with three stops |
 | 6 | Everything else, including any public or opinion text (a Telegram or Instagram post, a column) whatever its length | The checkpoint, then write after the answers |
@@ -870,7 +931,7 @@ A good default set:
 
 For documents with sections, a card is a section map (style-framework.md §5.3),
 not one recipe. Default cards by genre:
-- **Strategy document, roadmap, proposal to a board**: the سند راهبردی recipe and its section map (recommended), plus a variant that changes one thing, for example «ما» instead of the organization's name when the document is signed by its management.
+- **Strategy document, roadmap, proposal to a board**: the سند راهبردی recipe, chosen by you and stated in one line; argument sections (necessity, requirements) move to توجیه راهبردی. Spend the checkpoint on the outline, not on style cards («Structure before style»).
 - **Annual or sustainability report**: the brand or institutional report map; offer the other as the alternative card.
 - **Long analytical column**: one recipe, with at most a different opening section.
 
@@ -890,33 +951,47 @@ otherwise in the message, and then end the turn;
 options in the user's language, the recommended card first). Allow «ترکیب ۱ و
 ۳» as an answer: combining is normal (style-framework.md §5).
 
-## Advanced settings (تنظیمات پیشرفته، میز کار)
+## The workbench (میز کار، تنظیمات پیشرفته)
 
-The settings page is the default form of the checkpoint's style suggestions
-whenever you can write a file (Claude Code, Codex, any agent with a file
-system): build it, give the user its path, and stop. In a chat-only setting,
-show the same three suggestions as text cards. Build it in any case when the
-user asks for «تنظیمات پیشرفته» or «میز کار»:
+The workbench is one page that carries the whole checkpoint, so the user
+decides in one place instead of over five messages. Build it whenever you can
+write a file and the text has sections, and always when the user asks for
+«تنظیمات پیشرفته» or «میز کار». Write the checkpoint as JSON, then:
 
 ```bash
-python3 scripts/settings.py --brief "<what the user wants to write>" \
-    --suggest "<recipe 1>|<one-line reason>" "<recipe 2>|<reason>" "<recipe 3>|<reason>" \
-    [--sections "<section type>" ...] --out <scratch>/nasr-settings.html
+python scripts/settings.py --config <scratch>/checkpoint.json --out <folder>/nasr-desk.html
 ```
 
-Send the page to the user. It lists all 14 recipes with your three suggestions
-in three colours, and for the chosen recipe a dropdown per parameter (purpose,
-evidence, position, structure, register, distance, certainty, warmth, rhythm).
-Options that make no sense for the recipe or the register are disabled; the
-recipe's default is marked «پیشنهادی», and values allowed only with a reason
-are marked «با احتیاط». For long texts the user also orders the sections and
-sets their tone; jumps of more than one step, or between non-neighbouring
-rhythms, are flagged. The page produces a «کارت تنظیمات» the user pastes back.
+`checkpoint.json` holds (the script's docstring shows the exact shape):
+- `outline`: every section with `title` (printed heading), `job` (what it
+  says, not printed), `source` (تازه / از متن قبلی / قبلی با افزوده), `level`
+  (1 or 2), optional `alts` (alternative headings) and `type` (a section type
+  from style_matrix.json, used only for tone defaults);
+- `questions` (with answer options) and `conflicts` (each with what disagrees
+  with what);
+- `terms` (from, rule, to);
+- `suggestions`: up to three recipes, each with `why` in plain words and a
+  `sample` of two or three sentences **on the real material**. A style the
+  user cannot see is a style they cannot choose; never send cards without samples.
 
-Treat the pasted card as the user's decision: its values override the
-defaults. If it chooses a «با احتیاط» value, follow it and keep the reason in
-mind (say it once if it matters). The page's data is assets/style_matrix.json,
-the same source as tone-matrix.md, so the two cannot disagree.
+The page, in order: the outline (edit headings in place, alternative headings
+one click away, add / delete / move / nest, live heading checks); questions
+and conflicts with answer buttons; the term table; three style cards with
+their samples; and, folded away, the full parameter panel and per-section
+tone for users who want them. Everything lands in a «کارت تنظیمات» the user
+pastes back.
+
+What the first real use taught about this page: an earlier version opened on
+abstract parameters (distance, certainty, rhythm) and generic section types,
+had no examples, no way to add a heading, and did not show the section the
+user had asked for. The user found it confusing and decided nothing on it.
+Keep the page about the user's document, in the user's words; parameters are
+the last and optional layer.
+
+Treat the pasted card as the user's decision: its headings, answers, terms and
+style override yours. If it chooses a «با احتیاط» value, follow it and keep the
+reason in mind (say it once if it matters). The page's data is
+assets/style_matrix.json, the same source as tone-matrix.md.
 
 ## Stage 2b: the storyline (خلاصه‌ی روایت)
 
@@ -1000,7 +1075,8 @@ differences.
 **R1. Extract the text faithfully.**
 - Text only, in reading order, with headings kept as headings.
 - Tables are read cell by cell from the source (merged cells repeat their value; do not deduplicate them away).
-- Figures and images become caption markers («تصویر ۲: …») in their place, so the rewrite keeps their position.
+- Figures and images become caption markers («تصویر ۲. …») in their place, so the rewrite keeps their position.
+- **Read the text inside the images too**: the cover, diagrams, timelines, number tiles. List every name, figure and claim they carry. In the first real use the cover still named the old mission and the closing figure still showed the old targets (۸۰ مشتری، ۳۰٪) after the text had changed; only a visual check of the PDF caught it. An image whose text no longer matches goes on the change list and is redrawn (document-design.md «Figures»).
 - For DOCX use python-docx over the body elements in order; for PDF see docx-pdf.md.
 
 **R2. Measure the original before touching it.**
@@ -1034,6 +1110,21 @@ the chosen card and go on; otherwise show the cards first.
 - Same length, within about 10%, unless the user asked for shorter.
 - Keep the document's conventions: its ezafe style (‌ی or ٔ; drop `fix_ezafe` from `persian_cleanup.py --steps` when it uses ‌ی), its terminology, its digit style in tables.
 - Reordering sections and merging repeated passages are allowed, but each one goes on the change list with its reason.
+
+**R5b. Rewrite and extend.** When the user wants the existing text kept in
+substance, rewritten in a new voice, and completed with new material (a new
+business line, new targets, a new section), R5's «same length, no new claims»
+does not hold. Instead:
+- The original's facts are locked: rewrite them, never change them silently.
+- Every addition is marked as new in the outline («تازه» / «قبلی با افزوده»).
+- Wherever an addition disagrees with the original or with the user's data
+  (a count, a date, a target, a name, a metaphor), list it as a conflict at
+  the checkpoint with both sides; the user decides.
+- New targets are derived from the user's data model (budget sheet, KPI
+  sheet), and the derivation is shown («از رشد ماهانه‌ی ۸٪ اکسل»). A target
+  proposed before reading the model will change later and cost a round trip.
+  When the user raises targets («تهاجمی‌تر»), show old and new side by side.
+- The deliverable keeps the original's design (docx-pdf.md §7.3).
 
 **R6. Deliver a comparison, not only the new text.** Unless the user asked for
 the new text alone, deliver:
@@ -1409,8 +1500,43 @@ The opening sentences follow situation → complication → question → answer:
 - **Answer**: the text's main claim. In a report or research piece it may come later, but the reader must feel the question early.
 
 Then group the sentences under the **main headings**: three to seven, each
-covering one or more storyline sentences. Headings are plain: a short topic
-or a short claim, no colon, no question mark, no slogan.
+covering one or more storyline sentences. Headings follow the rules below.
+
+### Headings
+
+A heading is what the reader sees in the document. The first real use showed
+how easily headings go wrong; the user rejected four of five proposed
+headings, among them «چرا ونچر، و چرا وزنش روی کلمه است؟». Rules:
+- Two to eight words. A noun phrase or a short claim: «مسیر توسعه‌ی سریع»،
+  «اقتضائات رشد سریع»، «تصویر سال ۱۴۱۰».
+- No colon, no question, no «چرا / چگونه / آیا» opening, no full sentence
+  ending in a verb, no slogan, no wordplay.
+- Persian collocations, not translated ones: «ضرورت حرکت به سمت ساختار چابک
+  و مقیاس‌پذیر»، not «چرایی ونچر».
+- The heading names the section's content; the sentence that explains the
+  section's job is a separate thing and is never shown as a heading.
+- Use the user's names for things («پلتفرم هوش مصنوعی اُکیان») and the term
+  list (writing-workflow.md «Lock the terms»).
+- A heading the user wrote is final. Do not «improve» it.
+- When you offer alternatives, offer them for one heading at a time and
+  label them as alternatives.
+
+`fa_lint.py` flags colons and questions in Markdown headings; the workbench
+checks every heading live.
+
+### Examples or a complete list
+
+When the user names a few items and ends with «و …» or «مواردی مثل»
+(«بودجه‌ی کافی، GPU، فضای فیزیکی، جبران خدمات و …»), or gives one item «as
+an example» («نیروی انسانی را مثال زدم»), the items are **examples of a
+category**, not the outline of the section. Build the complete frame of the
+category first, with parts that do not overlap and together cover it, then
+place the user's items in it, and give every part comparable weight. In the
+first real use the agent made the user's example (human capital) the axis of
+the requirements section and summarised everything else; the user called it
+biased and illogical. The frame that worked was: the gap with competitors →
+its five dimensions (capital, compute, people, brand, decision speed) → one
+requirement per dimension → the smart ways to close the gap.
 
 Under each heading, add one line that sets the section's **job, tone and
 rhythm**: its distance, certainty and warmth, and its rhythm profile. Start
@@ -3558,8 +3684,9 @@ cantSplit) apply identically to both libraries.
 border, or a fill, it uses neutral grey/black purely to show the property's
 position. Do NOT reproduce these values as a look. Default to unstyled (black
 text, no accent). Pull real colors only from the user's request, an attached
-brand skill, or a template you're matching. The RTL/pagination structure is the
-reusable part; the styling is not.
+brand skill, a template you're matching, or a design direction the user chose
+(document-design.md, §7 below). The RTL/pagination structure is the reusable
+part; the styling is not.
 
 ## Table of contents
 
@@ -3569,6 +3696,7 @@ reusable part; the styling is not.
 4. Fonts and PDF conversion workflow
 5. Verification checklist (mandatory)
 6. python-docx equivalents
+7. Designed documents: applying tokens, reusing an existing template
 
 ---
 
@@ -4203,6 +4331,83 @@ your Persian font and nothing else. A `DejaVu` or `OpenSymbol` row means a
 glyph fell back — usually a list bullet or a symbol from §1.4.
 the verify_pdf script (full package; chat-only AIs apply the equivalent rules manually) flags this automatically.
 
+## 7. Designed documents
+
+Design levels and how a look is chosen: document-design.md. This section is
+the Word side.
+
+### 7.1 Applying a chosen direction's tokens (python-docx)
+
+`design_samples.py` writes the chosen direction's tokens (`head_font`,
+`accent`, `box_bg`, `table_head_bg`, …). Apply them to styles, not run by run,
+so every later paragraph inherits them:
+
+```python
+from docx.shared import RGBColor, Pt
+from docx.oxml.ns import qn
+
+def hexrgb(h): return RGBColor.from_string(h.lstrip("#").upper())
+
+def apply_tokens(doc, tk):
+    for name, size in (("Heading 1", 20), ("Heading 2", 15), ("Heading 3", 13)):
+        st = doc.styles[name]
+        st.font.name = tk["head_font"]; st.font.size = Pt(size)
+        st.font.color.rgb = hexrgb(tk["accent"])
+        rfonts = st.element.get_or_add_rPr().get_or_add_rFonts()
+        for attr in ("w:ascii", "w:hAnsi", "w:cs"):
+            rfonts.set(qn(attr), tk["head_font"])
+    body = doc.styles["Normal"]
+    body.font.color.rgb = hexrgb(tk["ink"])
+
+def shade(cell, hex_fill):
+    tcPr = cell._tc.get_or_add_tcPr()
+    shd = tcPr.makeelement(qn("w:shd"), {qn("w:val"): "clear", qn("w:color"): "auto",
+                                         qn("w:fill"): hex_fill.lstrip("#")})
+    tcPr.append(shd)
+```
+
+- A callout box is a one-cell table with `cantSplit`, shaded with `box_bg`
+  and a start-side border in `box_rule` (§3.2 for the unsplittable card).
+- The header row of a data table is shaded `table_head_bg`, its text
+  `table_head_ink`; mark it `tblHeader` so it repeats across pages (§3.5).
+- Covers and number tiles are images rendered from HTML
+  (document-design.md «Figures»); place them full-width.
+- Lalezar is a display font: headings and covers only, never body text.
+
+### 7.2 Checking a designed DOCX
+
+Run `verify_docx.py` as usual, then export to PDF (LibreOffice, or Word's
+`ExportAsFixedFormat` through COM on Windows) and look at every page as an
+image. Designed documents fail visually, not structurally: a stale figure, a
+cover with the old title, a heading alone at the bottom of a page.
+
+### 7.3 Building on an existing designed document
+
+When the user's own DOCX already has a design (title font, colours, boxes,
+tables, figures), keep it by **cloning its elements as templates** instead of
+recreating styles:
+
+1. Copy the source file and open the copy with python-docx.
+2. List the body elements in order and pick one template for each role: main
+   heading (often with `pageBreakBefore`), sub-heading, body paragraph,
+   bold-lead paragraph («**اجرا.** …»), bullet, caption, callout box (a table),
+   data table, each figure paragraph, the cover, the section breaks.
+3. Build the new body from `copy.deepcopy(template)` and replace only the text:
+   keep the first run of each role (its `rPr` carries the design), set its
+   `w:t`, drop the other runs. For a table with a different number of columns,
+   rebuild `w:tblGrid` and clone header and body cells from the template row.
+4. Keep the cover paragraph and the section-break paragraph first and the final
+   `sectPr` last; remove everything else from the body and append the new
+   elements in order.
+5. Replace stale images by swapping the image part's bytes
+   (`rel.target_part._blob = new_png`) at the same pixel size, so the frame
+   and its position stay.
+6. Add `<w:bidi/>` to every paragraph and `<w:rtl/>` to every run that holds
+   Persian; template files often rely on Word's defaults, and verify_docx
+   then reports a missing base direction.
+7. Convert Persian digits in the new text runs, then run verify_docx with
+   `--fix` and look at the PDF.
+
 
 
 ---
@@ -4482,6 +4687,13 @@ from PIL import features
 assert features.check('raqm')   # True in most modern Pillow builds
 ```
 
+**No raqm (common on Windows) → render HTML instead.** Do not ship reshaped-
+and-reversed tricks. Write the image as an HTML page with the bundled fonts
+(`@font-face` pointing at `assets/fonts/*.ttf` by file:// URL) and render it
+with a headless browser, which shapes Persian correctly:
+`python scripts/render_html.py poster.html poster.png --size 1080x1350`
+(document-design.md «Figures»).
+
 **With raqm (the normal case)** — pass direction and language, anchor right:
 
 ```python
@@ -4588,6 +4800,34 @@ for cell in row:
   which is where Persian readers expect the first column. Write data in
   logical order and let the view mirror it.
 
+### 3.1 Editing an existing workbook
+
+Writing a NEW workbook with openpyxl is safe. Re-saving an EXISTING one is
+not always: openpyxl rewrites the whole package, drops every cached formula
+value, and can lose parts it does not model. In the first real use, a budget
+workbook with links to two external files came back from a plain
+`load_workbook(...).save(...)` round trip as a file Excel refused to open.
+- Before editing a user's workbook, round-trip it once unchanged and open the
+  result in the real application (or LibreOffice) before trusting it.
+- Files with external links, pivot tables, macros, slicers, charts or data
+  validation: edit them with the application itself. On Windows with Excel
+  installed, drive Excel through COM from PowerShell
+  (`New-Object -ComObject Excel.Application`, `Workbooks.Open`, write
+  `Range(...).Formula` / `.Value2`, `CalculateFull()`, `Save()`). Excel keeps
+  every part and recalculates, so the new numbers can be read back and quoted.
+- PowerShell 5.1 traps met while doing this:
+  - a parameter declared `[string]$X` stays typed, and `$x = @(...)` later
+    turns the array into one string (variable names are case-insensitive);
+  - `ConvertFrom-Json` on a top-level array returns it as ONE object, so
+    `foreach` sees one item; unwrap with `@($raw | ForEach-Object { $_ })`;
+  - `$xl.CutCopyMode = 0` fails; copy formats with
+    `$src.Copy($dst)` (no clipboard) and then `$dst.ClearContents()`;
+  - write the script file as UTF-8 **with BOM**, or Persian sheet names break.
+- Add, never delete: new years go in new columns, new plans in a new sheet,
+  assumptions in clearly marked input cells; leave the user's cells alone and
+  report suspected errors (a typo, a stray value) instead of fixing them.
+- Never leave the user's file open in your own Excel instance; close and quit.
+
 ## 4. Quick router
 
 | Deliverable | Toolpath | Reference |
@@ -4596,5 +4836,6 @@ for cell in row:
 | Slides | python-pptx (or html2pptx via RTL HTML) | pptx.md |
 | Web page / email | RTL HTML/CSS | html-css.md |
 | New PDF | docx or HTML pipeline, NOT raw reportlab | this file §2 |
-| Poster/social image | PIL + raqm (direction='rtl') | this file §1 |
-| Spreadsheet | openpyxl + rightToLeft + Vazirmatn | this file §3 |
+| Poster/social image | PIL + raqm (direction='rtl'), or HTML → render_html.py | this file §1 |
+| Cover, figure, number tiles in a document | HTML → render_html.py | document-design.md |
+| Spreadsheet | openpyxl + rightToLeft + Vazirmatn; existing workbook → this file §3.1 | this file §3 |

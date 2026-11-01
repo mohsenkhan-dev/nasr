@@ -85,7 +85,8 @@ def sentences(t):
     return [p for p in (s.strip() for s in parts) if len(FA_WORD.findall(p)) >= 2]
 
 
-CAPTION = re.compile(r"^\s*(?:[*_][^*_\n].*[*_]|(?:تصویر|جدول|نمودار|شکل)\s*[0-9۰-۹]+\s*[:：].*)\s*$", re.M)
+CAPTION = re.compile(r"^\s*(?:[*_][^*_\n].*[*_]|(?:تصویر|جدول|نمودار|شکل)\s*[0-9۰-۹]+\s*[:：.].*)\s*$", re.M)
+LIST_MARK = "⁣"  # invisible separator: marks a former list item
 
 
 def strip_markup(t):
@@ -94,7 +95,8 @@ def strip_markup(t):
     t = re.sub(r"^\s*\|.*\|\s*$", "", t, flags=re.M)  # Markdown table rows
     t = CAPTION.sub("", t)  # captions are labels, not paragraphs
     t = re.sub(r"^\s{0,3}#{1,6}\s+.*$", "", t, flags=re.M)  # headings are not paragraphs
-    t = re.sub(r"^\s*([-*]|\d+[.)]|[۰-۹]+[.)-])\s+", "", t, flags=re.M)
+    # list items keep a mark: a one-sentence bullet is normal, a one-sentence paragraph is not
+    t = re.sub(r"^\s*([-*•>]|\d+[.)]|[۰-۹]+[.)-])\s+", LIST_MARK, t, flags=re.M)
     return re.sub(r"\n\s*\n", "\n", t)
 
 
@@ -106,7 +108,7 @@ def measure(txt):
     L = [len(FA_WORD.findall(s)) for s in ss]
     k = 1000 / len(words)
     paras = [p for p in txt.split("\n") if len(FA_WORD.findall(p)) >= 8]
-    one_sentence = sum(1 for p in paras if len(sentences(p)) == 1)
+    one_sentence = sum(1 for p in paras if not p.startswith(LIST_MARK) and len(sentences(p)) == 1)
     anchored = sum(1 for p in paras if re.search(r"[0-9۰-۹]|«[^»]+»|\b[A-Z][a-zA-Z]+", p))
     return {
         "sent_median": st.median(L), "para_words": st.median([len(FA_WORD.findall(p)) for p in paras]) if paras else 0,

@@ -16,8 +16,9 @@ cantSplit) apply identically to both libraries.
 border, or a fill, it uses neutral grey/black purely to show the property's
 position. Do NOT reproduce these values as a look. Default to unstyled (black
 text, no accent). Pull real colors only from the user's request, an attached
-brand skill, or a template you're matching. The RTL/pagination structure is the
-reusable part; the styling is not.
+brand skill, a template you're matching, or a design direction the user chose
+(document-design.md, §7 below). The RTL/pagination structure is the reusable
+part; the styling is not.
 
 ## Table of contents
 
@@ -27,6 +28,7 @@ reusable part; the styling is not.
 4. Fonts and PDF conversion workflow
 5. Verification checklist (mandatory)
 6. python-docx equivalents
+7. Designed documents: applying tokens, reusing an existing template
 
 ---
 
@@ -660,3 +662,81 @@ literal, or accept Latin numerals in the footer only.
 your Persian font and nothing else. A `DejaVu` or `OpenSymbol` row means a
 glyph fell back — usually a list bullet or a symbol from §1.4.
 `scripts/verify_pdf.py` flags this automatically.
+
+## 7. Designed documents
+
+Design levels and how a look is chosen: document-design.md. This section is
+the Word side.
+
+### 7.1 Applying a chosen direction's tokens (python-docx)
+
+`design_samples.py` writes the chosen direction's tokens (`head_font`,
+`accent`, `box_bg`, `table_head_bg`, …). Apply them to styles, not run by run,
+so every later paragraph inherits them:
+
+```python
+from docx.shared import RGBColor, Pt
+from docx.oxml.ns import qn
+
+def hexrgb(h): return RGBColor.from_string(h.lstrip("#").upper())
+
+def apply_tokens(doc, tk):
+    for name, size in (("Heading 1", 20), ("Heading 2", 15), ("Heading 3", 13)):
+        st = doc.styles[name]
+        st.font.name = tk["head_font"]; st.font.size = Pt(size)
+        st.font.color.rgb = hexrgb(tk["accent"])
+        rfonts = st.element.get_or_add_rPr().get_or_add_rFonts()
+        for attr in ("w:ascii", "w:hAnsi", "w:cs"):
+            rfonts.set(qn(attr), tk["head_font"])
+    body = doc.styles["Normal"]
+    body.font.color.rgb = hexrgb(tk["ink"])
+
+def shade(cell, hex_fill):
+    tcPr = cell._tc.get_or_add_tcPr()
+    shd = tcPr.makeelement(qn("w:shd"), {qn("w:val"): "clear", qn("w:color"): "auto",
+                                         qn("w:fill"): hex_fill.lstrip("#")})
+    tcPr.append(shd)
+```
+
+- A callout box is a one-cell table with `cantSplit`, shaded with `box_bg`
+  and a start-side border in `box_rule` (§3.2 for the unsplittable card).
+- The header row of a data table is shaded `table_head_bg`, its text
+  `table_head_ink`; mark it `tblHeader` so it repeats across pages (§3.5).
+- Covers and number tiles are images rendered from HTML
+  (document-design.md «Figures»); place them full-width.
+- Lalezar is a display font: headings and covers only, never body text.
+
+### 7.2 Checking a designed DOCX
+
+Run `verify_docx.py` as usual, then export to PDF (LibreOffice, or Word's
+`ExportAsFixedFormat` through COM on Windows) and look at every page as an
+image. Designed documents fail visually, not structurally: a stale figure, a
+cover with the old title, a heading alone at the bottom of a page.
+
+### 7.3 Building on an existing designed document
+
+When the user's own DOCX already has a design (title font, colours, boxes,
+tables, figures), keep it by **cloning its elements as templates** instead of
+recreating styles:
+
+1. Copy the source file and open the copy with python-docx.
+2. List the body elements in order and pick one template for each role: main
+   heading (often with `pageBreakBefore`), sub-heading, body paragraph,
+   bold-lead paragraph («**اجرا.** …»), bullet, caption, callout box (a table),
+   data table, each figure paragraph, the cover, the section breaks.
+3. Build the new body from `copy.deepcopy(template)` and replace only the text:
+   keep the first run of each role (its `rPr` carries the design), set its
+   `w:t`, drop the other runs. For a table with a different number of columns,
+   rebuild `w:tblGrid` and clone header and body cells from the template row.
+4. Keep the cover paragraph and the section-break paragraph first and the final
+   `sectPr` last; remove everything else from the body and append the new
+   elements in order.
+5. Replace stale images by swapping the image part's bytes
+   (`rel.target_part._blob = new_png`) at the same pixel size, so the frame
+   and its position stay.
+6. Add `<w:bidi/>` to every paragraph and `<w:rtl/>` to every run that holds
+   Persian; template files often rely on Word's defaults, and verify_docx
+   then reports a missing base direction.
+7. Convert Persian digits in the new text runs, then run verify_docx with
+   `--fix` and look at the PDF.
+

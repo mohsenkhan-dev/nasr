@@ -331,6 +331,10 @@ def check_remaining(text):
             continue
         if not re.search(FA_LETTER, line):
             continue
+        # A whole-line placeholder for a builder («[CAP تصویر ۱]»، «[TABLE okian]») is
+        # markup, not a paragraph a reader sees.
+        if re.fullmatch(r'\s*\[[A-Z][A-Z_]*(?:\s[^\]]*)?\]\s*', line):
+            continue
         # Paragraph direction: renderers take it from the FIRST strong letter,
         # so a Persian line that opens with a Latin word displays left-to-right.
         segments = line.split('|') if line.lstrip().startswith('|') else \
@@ -387,9 +391,11 @@ def check_remaining(text):
             record('attached-mi', i, line, f'{m.group(0)}: formal register needs می‌{m.group(0)[2:]}')
         scratch = line
         for bad in sorted(TANVIN_FA, key=len, reverse=True):
-            if bad in scratch:
+            # whole words only: «گاها» sits inside «آگاهانه», which is correct
+            pat = FA_B_L + re.escape(bad) + FA_B_R
+            if re.search(pat, scratch):
                 record('fake-tanvin', i, line, f'{bad} → {TANVIN_FA[bad]}')
-                scratch = scratch.replace(bad, '')
+                scratch = re.sub(pat, '', scratch)
         for bare, correct in TANVIN_NEEDED.items():
             if re.search(FA_B_L + bare + FA_B_R, line):
                 record('missing-tanvin', i, line, f'{bare} → {correct}')
@@ -575,4 +581,10 @@ def main():
     sys.exit(exit_code)
 
 if __name__ == '__main__':
+    # Windows consoles default to a legacy code page and crash on Persian output.
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     main()

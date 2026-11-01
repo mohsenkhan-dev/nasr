@@ -23,13 +23,16 @@
    (واقعیت، عدد، تجربه، نقل‌قول). خروجی این مرحله یک «برداشت من» چندخطی است و
    حداکثر سه پرسش. کمبود مصالح همین‌جا با پرسیدن یا جست‌وجو جبران می‌شود، نه با
    ساختن.
-۲. **پیشنهاد سبک.** دو تا چهار کارت سبک که دست‌کم در یک محور با هم فرق دارند؛
-   ترکیب سبک‌ها هم مجاز است.
+۲. **ساختار، واژه‌ها و سبک.** برای متن بخش‌دار، اول ساختار همین متن با تیترهای
+   واقعی‌اش، جدا از جمله‌ای که کار هر بخش را می‌گوید، و فهرست واژه‌ها؛ سبک را خود
+   نثر انتخاب می‌کند و در یک سطر می‌گوید. برای متن یک‌تکه، دو تا چهار کارت سبک،
+   هر کدام با نمونه‌ای کوتاه روی همان موضوع. همه‌ی این‌ها روی «میز کار» می‌آید.
 ۳. **متن نمونه** (در صورت نیاز). پاراگراف آغازین هر کارت روی همان واقعیت‌ها، تا
    تفاوت فقط در سبک دیده شود.
 ۴. **نگارش نهایی.** پیش‌نویس، بررسی واقعیت‌ها، سنجش آهنگ با `style_check.py`،
    ویرایش نگارشی با `persian_cleanup.py` و `fa_lint.py`، و تحویل در قالب
-   خواسته‌شده: Word، PDF، HTML یا اسلاید.
+   خواسته‌شده: Word، PDF، HTML یا اسلاید. سند ساده بی‌رنگ و بی‌جلد است؛ برای سند
+   طراحی‌شده نثر سه یا چهار جهت طراحی روی همان سند نشان می‌دهد تا کاربر انتخاب کند.
 
 ### سبک‌ها از کجا آمده‌اند
 
@@ -125,8 +128,9 @@ AGENTS.md                guidance for any AI agent
 references/              writing-workflow, style-framework, style-moves, style-evidence,
                          writing-style, orthography, content-structures, academic,
                          social-channels, seo-copywriting, fonts, docx-pdf, pptx,
-                         html-css, format-skills-fa, cleanup/
-scripts/                 persian_cleanup, fa_lint, style_check, verify_docx, verify_pdf,
+                         html-css, format-skills-fa, document-design, cleanup/
+scripts/                 persian_cleanup, fa_lint, style_check, storyline, settings,
+                         design_samples, render_html, verify_docx, verify_pdf,
                          check_version, install_fonts, download_fonts, build_universal
 assets/                  fonts (TTF), 453K-word dictionary, style_profiles.json
 universal/               single-file edition for chat-only AIs
@@ -139,6 +143,30 @@ After editing SKILL.md or references, regenerate the single-file edition:
 
 ## Version history
 
+- **2.7.0** — lessons from the first real use (a board strategy document
+  rewritten in a new voice and extended with a second business line, new
+  targets and a requirements section). Structure now comes before style: for
+  sectioned texts the checkpoint is the outline of the actual document, with
+  the printed heading and what each section says kept apart, alternative
+  headings labelled as such, and heading rules applied before anything is
+  shown; the style is chosen and stated in one line. The settings page is
+  rebuilt as a workbench (میز کار): outline first (edit, add, move, nest,
+  live heading checks), then questions and conflicts with answer buttons, a
+  term list, and three styles each with a sample on the real material; the
+  parameter panel is folded away. New rules: lock the terms the user fixes
+  (names, replacements, banned words, taken metaphors); items given «as an
+  example» are examples of a category, so build the complete frame first; a
+  «rewrite and extend» path; read the text inside images and the cover when
+  rewriting. Design: three levels (simple by default, designed with 3–4
+  rendered directions to choose from via `design_samples.py`, or built on the
+  user's own designed file), `render_html.py` for Persian text in images
+  without raqm, and a recipe for cloning an existing DOCX's design. Fixes:
+  UTF-8 output on Windows consoles in every script, `settings.py` creates its
+  output folder, `--ezafe auto` keeps a document's own ezafe style,
+  `fa_lint` no longer flags «آگاهانه» as fake tanvin or builder placeholders as
+  LTR lines, `style_check` no longer counts bullets and callouts as
+  one-sentence paragraphs, docx tests run on Windows, and a warning plus a
+  COM recipe for workbooks openpyxl cannot round-trip.
 - **2.6.0** — the checkpoint. Asked for a new prose text, the skill now
   stops first: «برداشت من», up to three questions, three suggested styles
   (the settings page when files can be written) and the material plan, then

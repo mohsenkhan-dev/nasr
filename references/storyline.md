@@ -67,8 +67,43 @@ The opening sentences follow situation → complication → question → answer:
 - **Answer**: the text's main claim. In a report or research piece it may come later, but the reader must feel the question early.
 
 Then group the sentences under the **main headings**: three to seven, each
-covering one or more storyline sentences. Headings are plain: a short topic
-or a short claim, no colon, no question mark, no slogan.
+covering one or more storyline sentences. Headings follow the rules below.
+
+### Headings
+
+A heading is what the reader sees in the document. The first real use showed
+how easily headings go wrong; the user rejected four of five proposed
+headings, among them «چرا ونچر، و چرا وزنش روی کلمه است؟». Rules:
+- Two to eight words. A noun phrase or a short claim: «مسیر توسعه‌ی سریع»،
+  «اقتضائات رشد سریع»، «تصویر سال ۱۴۱۰».
+- No colon, no question, no «چرا / چگونه / آیا» opening, no full sentence
+  ending in a verb, no slogan, no wordplay.
+- Persian collocations, not translated ones: «ضرورت حرکت به سمت ساختار چابک
+  و مقیاس‌پذیر»، not «چرایی ونچر».
+- The heading names the section's content; the sentence that explains the
+  section's job is a separate thing and is never shown as a heading.
+- Use the user's names for things («پلتفرم هوش مصنوعی اُکیان») and the term
+  list (writing-workflow.md «Lock the terms»).
+- A heading the user wrote is final. Do not «improve» it.
+- When you offer alternatives, offer them for one heading at a time and
+  label them as alternatives.
+
+`fa_lint.py` flags colons and questions in Markdown headings; the workbench
+checks every heading live.
+
+### Examples or a complete list
+
+When the user names a few items and ends with «و …» or «مواردی مثل»
+(«بودجه‌ی کافی، GPU، فضای فیزیکی، جبران خدمات و …»), or gives one item «as
+an example» («نیروی انسانی را مثال زدم»), the items are **examples of a
+category**, not the outline of the section. Build the complete frame of the
+category first, with parts that do not overlap and together cover it, then
+place the user's items in it, and give every part comparable weight. In the
+first real use the agent made the user's example (human capital) the axis of
+the requirements section and summarised everything else; the user called it
+biased and illogical. The frame that worked was: the gap with competitors →
+its five dimensions (capital, compute, people, brand, decision speed) → one
+requirement per dimension → the smart ways to close the gap.
 
 Under each heading, add one line that sets the section's **job, tone and
 rhythm**: its distance, certainty and warmth, and its rhythm profile. Start

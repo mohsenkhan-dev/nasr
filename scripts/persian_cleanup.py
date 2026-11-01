@@ -80,7 +80,7 @@ from typing import Callable, Iterable, List, Optional, Sequence, Union
 # Constants
 # ---------------------------------------------------------------------------
 
-__version__ = "2.6.0"  # keep in sync with SKILL.md and .claude-plugin/plugin.json
+__version__ = "2.7.0"  # keep in sync with SKILL.md and .claude-plugin/plugin.json
 
 # Zero-Width Non-Joiner (نیم‌فاصله) — the heart of Persian typography
 ZWNJ = "\u200c"
@@ -998,8 +998,17 @@ EDITOR_STEPS = [
 ]
 
 
+def ezafe_style(text: str) -> str:
+    """Which ezafe style a text already uses after silent heh: 'hamza' (خانهٔ)
+    or 'ye' (خانه‌ی). A text that uses ‌ی at least three times and more often
+    than ٔ has chosen ‌ی; one stray ‌ی is a typo for the default ٔ."""
+    hamza = len(re.findall(r"[هة]ٔ", text))
+    ye = len(re.findall(r"[هة]" + ZWNJ + r"ی(?![؀-ۿ])", text))
+    return "ye" if ye >= 3 and ye > hamza else "hamza"
+
+
 def edit_persian(text: str, do_spellcheck: bool = False,
-                 protect_code: bool = True) -> str:
+                 protect_code: bool = True, ezafe: str = "auto") -> str:
     """Paknevis-style editorial pass. Conservative — preserves all content
     (links, mentions, hashtags, emojis all stay) but fixes typography:
     ZWNJ placement, Arabic→Persian chars, digits, punctuation, ezafe,
@@ -1013,11 +1022,18 @@ def edit_persian(text: str, do_spellcheck: bool = False,
     genuinely want those rules applied to everything.
 
     If `do_spellcheck=True`, also runs the spell-checker at the end.
+
+    `ezafe` decides the ezafe marker after silent heh: "hamza" turns خانه‌ی into
+    خانهٔ, "ye" leaves خانه‌ی alone, and "auto" (default) keeps whichever style
+    the text already uses, so a rewrite never changes the house style.
     """
+    if ezafe == "auto":
+        ezafe = ezafe_style(text)
+    steps = [s for s in EDITOR_STEPS if not (ezafe == "ye" and s is fix_ezafe)]
     tokens: Sequence[str] = ()
     if protect_code:
         text, tokens = protect_regions(text)
-    for step in EDITOR_STEPS:
+    for step in steps:
         text = step(text)
     if do_spellcheck:
         text = spellcheck(text)
@@ -1196,6 +1212,11 @@ def _parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
              "Combine with --edit, or use alone.",
     )
     p.add_argument(
+        "--ezafe", default="auto", choices=("auto", "hamza", "ye"),
+        help="With --edit: ezafe after silent heh. auto (default) keeps the text's "
+             "own style; hamza writes خانهٔ; ye keeps خانه‌ی.",
+    )
+    p.add_argument(
         "--normalize", action="store_true",
         help="Run normalize_persian() (davat-style comprehensive normalization).",
     )
@@ -1308,7 +1329,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         out = clean(text, steps=steps)
         applied = names
     elif args.edit:
-        out = edit_persian(text, do_spellcheck=args.spellcheck)
+        out = edit_persian(text, do_spellcheck=args.spellcheck, ezafe=args.ezafe)
         applied = ["edit_persian"] + (["spellcheck"] if args.spellcheck else [])
     elif args.bidi:
         out = fix_bidi(text)
@@ -1340,4 +1361,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == "__main__":
+    # Windows consoles default to a legacy code page and crash on Persian output.
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     sys.exit(main())

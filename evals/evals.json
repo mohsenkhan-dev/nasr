@@ -13,7 +13,9 @@
       "name": "humanize-ai-persian",
       "prompt": "این متن رو یه هوش مصنوعی نوشته و کاملاً معلومه. بازنویسیش کن که طبیعی و انسانی بشه، برای صفحه «خدمات» سایت یه آژانس دیجیتال مارکتینگ. همون اطلاعات، همون حجم تقریبی. خروجی رو به صورت فایل markdown بده.",
       "expected_output": "Rewritten Persian retaining all information: no می‌باشد, no لازم به ذکر است, no bold-header bullet furniture, no em dashes, no کارشناسان معتقدند, no در نهایت می‌توان گفت, no chatbot sign-off; correct ZWNJ; direct, warm, specific formal-web register",
-      "files": ["files/ai-sounding-persian.md"]
+      "files": [
+        "files/ai-sounding-persian.md"
+      ]
     },
     {
       "id": 3,
@@ -41,6 +43,13 @@
       "name": "casual-instagram-captions",
       "prompt": "برای پیج اینستاگرام استودیوی طراحی سایتمون ۳ تا کپشن بنویس برای معرفی پکیج «سایت + سئو». مخاطب: صاحبای کسب‌وکارهای کوچیک. هر کپشن با یه هوک شروع بشه و آخرش CTA داشته باشه. خروجی: یه فایل متنی.",
       "expected_output": "3 captions in genuine محاوره‌نویسی (میشه/می‌خوام/رو، particles like دیگه/مگه), warm and punchy, no formal می‌شود register, no bureaucratic phrases, Persian digits, correct ZWNJ in colloquial forms, hooks and CTAs that sound like an Iranian social media manager",
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "rewrite-and-extend-strategy-doc",
+      "prompt": "این سند راهبردی (پیوست) را با لحن تازه بازنویسی کن و کامل کن: کسب‌وکار دوم گروه، یک پلتفرم عمومی هوش مصنوعی با ۲ میلیون کاربر، را هم اضافه کن، اهداف را تهاجمی‌تر کن و یک بخش الزامات بنویس با مواردی مثل بودجه‌ی کافی، GPU داخلی، فضای فیزیکی، جبران خدمات و … . هر جا تغییرات با متن فعلی در تعارض بود بگو. طبق اسکیل و با تنظیمات پیشرفته.",
+      "expected_output": "First reply is a checkpoint, not text: برداشت من; the OUTLINE of this document with real printed headings kept apart from one-line section jobs (no colon/question headings, alternatives labelled as alternatives); the requested requirements section present; a conflicts list (counts, dates, metaphors such as an existing «دو بال»); a term list; style chosen and stated in one line; a workbench page built with settings.py --config whose outline, questions, conflicts, terms and style samples are on the real material. Later: the requirements section is built from a complete frame (gap → dimensions → one requirement each) with the user's items as examples, not centred on one of them; new targets derived from the user's data; images and cover text audited; the original design kept.",
       "files": []
     }
   ]

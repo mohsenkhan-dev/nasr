@@ -15,7 +15,7 @@ description: >
   راست‌چین, ویرایش, مقاله, پایان‌نامه, سئو, کپشن — even if the user never
   mentions this skill.
 metadata:
-  version: 2.6.0
+  version: 2.7.0
 license: MIT (bundled fonts under SIL OFL)
 compatibility: >
   Any agent that reads Markdown skills (Claude, Claude Code, Cursor, Codex,
@@ -54,18 +54,20 @@ read the reference file for your output format before generating anything.
 | Word/.docx or docx→PDF | `references/docx-pdf.md` |
 | PowerPoint/.pptx | `references/pptx.md` |
 | HTML, email templates, HTML→PDF | `references/html-css.md` |
-| Images/posters (PIL), new PDFs (reportlab), Excel | `references/format-skills-fa.md` |
+| Images/posters (PIL), new PDFs (reportlab), Excel, editing an existing workbook | `references/format-skills-fa.md` |
+| A designed document (cover, colours, «زیبا»، «حرفه‌ای»), or building on the user's own designed file | `references/document-design.md`, then the format's reference |
 
-**Visual neutrality — read before copying any code example.** This skill styles
-NOTHING. It governs direction, spacing, fonts-for-shaping and text — never
-colors, accent bars, card backgrounds, or a house look. Every hex, border, and
-fill in the code examples is a stand-in written in plain grey/black; they exist
-to show WHERE a property goes, not what value to use. Default output is black
-text on default background, no accent color. Take colors and visual form ONLY
-from: the user's explicit request, an attached brand/theme skill, or an input
-template being matched. Absent those, do not invent a palette and do not carry
-one over from example to example — unstyled is the correct default, and a
-surprise purple heading is a bug.
+**Visual neutrality, and when to design.** The simple level is the default:
+this skill governs direction, spacing, fonts-for-shaping and text, and every
+hex, border and fill in the code examples is a grey/black stand-in that shows
+WHERE a property goes, not what value to use. Unstyled black text is the
+correct default, and a surprise purple heading is a bug. Design is allowed in
+two cases (document-design.md): the user asks for a designed document or it
+goes to a board, investors, clients or the public, and then you **offer three
+or four rendered directions** (`scripts/design_samples.py`) and build the one
+the user picks; or the user hands over a designed file, and then you build on
+its own elements (docx-pdf.md §7.3). Never invent one look silently, and never
+carry a palette from one user or example to the next.
 
 This skill composes with the general docx/pptx/pdf skills: those handle file
 mechanics; this one overrides and extends them for Persian. When both disagree
@@ -78,9 +80,14 @@ placeholders, and Vazirmatn is just the default font, not a requirement.
 ## Writing workflow: concept → styles → samples → final text
 
 **Checkpoint first.** When the user asks for a new prose text, the first reply
-is never the text. It is «برداشت من», at most three questions, three suggested
-styles (the advanced-settings page when you can write files, text cards
-otherwise) and the material plan; then end the turn and wait. Without a
+is never the text. It is «برداشت من»; for a text with sections, the outline of
+THIS text (printed heading + what the section says, kept apart); at most three
+questions and the list of conflicts; the term list; the style (your call in one
+line for sectioned documents, otherwise three suggestions with short samples
+on the real material); and the material plan. Where you can write files, all
+of it goes on the workbench page (`scripts/settings.py --config`); then end the
+turn and wait. Structure comes before style: in real use users argue about
+sections and headings, not about tone. Without a
 question tool, ask in the message and stop. Skip only when the user says
 «فقط بنویس» or similar, edits their own text, or asks for a short
 transactional text (writing-workflow.md, «The checkpoint rule» and the depth
@@ -97,12 +104,15 @@ statements, explainers, long posts), follow `references/writing-workflow.md`:
    quotations). Show a 4–6-line «برداشت من» and ask at most three questions
    whose answers change the text. Thin material is fixed here, by asking or
    searching, never by inventing.
-2. **Propose styles.** Two to four style cards that differ on an axis
-   (style-framework.md), the recommended one first; combinations are allowed.
-   For fine-tuning, build the advanced-settings page (`scripts/settings.py`,
-   writing-workflow.md «Advanced settings»): every recipe with your three
-   suggestions coloured, a dropdown per parameter with meaningless options
-   disabled, and a settings card the user pastes back.
+2. **Outline, terms, then style.** For sectioned texts, the outline with real
+   headings that pass the heading rules (storyline.md «Headings»), the term
+   list, and the style stated in one line. For single-piece texts, two to four
+   style cards that differ on an axis (style-framework.md), each with a short
+   sample on the real material. The workbench (`scripts/settings.py --config`,
+   writing-workflow.md «The workbench») carries all of it and returns one
+   settings card the user pastes back. When the user names a few items with
+   «و …», they are examples of a category: build the complete frame first
+   (storyline.md «Examples or a complete list»).
 2b. **Storyline before prose** (`references/storyline.md`). For long texts,
    first the high-level storyline (6–10 claim sentences, each answering the
    question the previous one raises, opening situation → complication →
@@ -127,9 +137,12 @@ statements, explainers, long posts), follow `references/writing-workflow.md`:
 (style-framework.md §5.3), move to a near style at each boundary, mark each
 section with `<!-- سبک: … -->` and check with `style_check.py --sections`.
 **Rewriting an existing document** follows the rewrite path in
-writing-workflow.md: extract, measure the original, list inconsistencies for
-the user instead of fixing facts silently, rewrite under the same facts, and
-deliver a side-by-side comparison.
+writing-workflow.md: extract (the text inside images and the cover too),
+measure the original, list inconsistencies for the user instead of fixing
+facts silently, rewrite under the same facts, and deliver a side-by-side
+comparison. **Rewrite and extend** (new voice plus new material) locks the
+original's facts, marks every addition, lists every conflict, and derives new
+targets from the user's data model.
 
 Depth follows the ordered table in writing-workflow.md: «فقط بنویس» → write;
 own-text edit → light; rewrite → rewrite path; short transactional → write;
@@ -255,8 +268,12 @@ cleaning for NLP (`--preset persian`), single functions (`--fn convert_digits`),
 spell-check against the bundled 453K-word frequency dictionary
 (`--edit --spellcheck`), custom pipelines. Persian «ویرایش» requests → `--edit`
 (conservative, content preserved); «پاکسازی/نرمالایز» → `--preset persian`
-(strips links/mentions/emojis). Details: `references/cleanup/`. Note: `--edit`
-applies the خانهٔ ezafe style; drop `fix_ezafe` from `--steps` to keep خانه‌ی.
+(strips links/mentions/emojis). Details: `references/cleanup/`. Ezafe after
+silent heh: `--edit` keeps the text's own style by default (`--ezafe auto`; a
+document that already writes خانه‌ی stays خانه‌ی), `--ezafe hamza` writes خانهٔ.
+
+**On Windows** run the scripts with `python` or `py -3` (`python3` is often a
+Store alias); they set UTF-8 output themselves.
 
 ## Fonts
 
@@ -365,11 +382,14 @@ nasr/
 │   ├── docx-pdf.md             ← RTL docx recipes, pagination, PDF post-processing
 │   ├── pptx.md                 ← RTL PowerPoint via python-pptx / html2pptx
 │   ├── html-css.md             ← RTL web, mixed-direction text, print CSS
-│   └── format-skills-fa.md     ← PIL posters, reportlab PDFs, Excel RTL
+│   ├── format-skills-fa.md     ← PIL posters, reportlab PDFs, Excel RTL, editing existing workbooks
+│   └── document-design.md      ← simple / designed / on the user's template; design directions; figures
 ├── scripts/
 │   ├── persian_cleanup.py      ← FIX: edit/clean/normalize/spell-check (paknevis+davat)
 │   ├── fa_lint.py              ← LINT: report issues needing contextual judgment
-│   ├── settings.py             ← build the advanced-settings page (تنظیمات پیشرفته) with three suggestions
+│   ├── settings.py             ← build the workbench (میز کار): outline, questions, conflicts, terms, styles with samples
+│   ├── design_samples.py       ← render a document in 3–4 design directions; writes the chosen tokens
+│   ├── render_html.py          ← HTML → PNG/PDF with headless Chrome/Edge (Persian text in images)
 │   ├── build_matrix_doc.py     ← regenerate tone-matrix.md from assets/style_matrix.json
 │   ├── storyline.py            ← print headings and paragraph lead sentences; flag announcements
 │   ├── style_check.py          ← measure a draft against a rhythm profile
@@ -381,7 +401,7 @@ nasr/
 └── assets/
     ├── fonts/                  ← Vazirmatn + Lalezar TTFs
     ├── style_matrix.json       ← single source: dimensions, examples, recipes, sections, limits
-    ├── settings.html           ← template of the advanced-settings page
+    ├── settings.html           ← template of the workbench page
     ├── style_profiles.json     ← rhythm ranges per profile (from the reference corpus)
     └── persian_words.txt       ← 453K-word frequency dictionary (spell-check)
 ```

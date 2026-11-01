@@ -7,6 +7,7 @@ Output: universal/nasr-universal.md
 Run after ANY edit to SKILL.md or references/.
 """
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -110,4 +111,10 @@ def main():
 
 
 if __name__ == '__main__':
+    # Windows consoles default to a legacy code page and crash on Persian output.
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     main()

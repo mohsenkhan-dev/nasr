@@ -123,4 +123,10 @@ def main():
     sys.exit(1 if errors else 0)
 
 if __name__ == '__main__':
+    # Windows consoles default to a legacy code page and crash on Persian output.
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     main()

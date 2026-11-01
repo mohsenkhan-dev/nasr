@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>تنظیمات پیشرفته‌ی نثر</title>
+<title>میز کار نثر</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -14,24 +14,51 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;font-size:15.5px}
 .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 90px}
 h1{font-size:1.45rem;margin:0}
-.sub{color:var(--muted);margin:2px 0 18px}
+.sub{color:var(--muted);margin:2px 0 14px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.steps a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px 14px;color:var(--ink);text-decoration:none;font-size:.9rem}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
-.panel h2{font-size:1.02rem;margin:0 0 10px;color:var(--accent)}
-textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);color:var(--ink);resize:vertical}
-button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:3px 14px;cursor:pointer}
+.panel h2{font-size:1.05rem;margin:0 0 4px;color:var(--accent)}
+.help{font-size:.88rem;color:var(--muted);margin:0 0 10px}
+textarea,input[type=text]{width:100%;font:inherit;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--bg);color:var(--ink)}
+textarea{resize:vertical}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:2px 12px;cursor:pointer}
 button.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{border:2px solid var(--c);color:var(--c);border-radius:999px;padding:2px 12px;cursor:pointer;background:var(--card);font-weight:700;font-size:.92rem}
-.chip.on{background:var(--c);color:var(--bg)}
-.chip small{font-weight:400;opacity:.85}
-.why{font-size:.85rem;color:var(--muted);margin-top:6px}
 select{font:inherit;border:1px solid var(--line);border-radius:8px;padding:3px 8px;background:var(--bg);color:var(--ink);width:100%}
 option:disabled{color:var(--no)}
-.recipe-info{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;font-size:.88rem}
-.recipe-info div{background:var(--soft);border-radius:8px;padding:6px 10px}
-.recipe-info b{display:block;color:var(--muted);font-weight:500;font-size:.8rem}
-.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.outline{display:flex;flex-direction:column;gap:10px}
+.sec{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--soft)}
+.sec.l2{margin-inline-start:34px}
+.sec .top{display:flex;gap:8px;align-items:center}
+.sec .num{font-weight:700;color:var(--muted);min-width:34px}
+.sec .title{font-weight:700;font-size:1.02rem}
+.sec .tools{display:flex;gap:4px}
+.sec .tools button{padding:0 8px}
+.sec .lab{font-size:.78rem;color:var(--muted);margin-top:6px}
+.alts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.alt{border:1px dashed var(--line);border-radius:999px;padding:0 10px;font-size:.85rem;cursor:pointer;background:var(--card)}
+.warnline{color:var(--warn);font-size:.82rem;margin-top:4px}
+.src{display:inline-block;font-size:.75rem;border-radius:999px;padding:0 8px;background:var(--accent-soft);color:var(--accent)}
+.tone{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px}
+.q{border-bottom:1px solid var(--line);padding:8px 0}
+.q:last-child{border-bottom:0}
+.q b{display:block}
+.opts{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.opt{border:1px solid var(--line);border-radius:999px;padding:0 12px;cursor:pointer;background:var(--card);font-size:.9rem}
+.opt.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.terms{width:100%;border-collapse:collapse;font-size:.9rem}
+.terms td,.terms th{padding:4px;border-bottom:1px solid var(--line);text-align:start}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.scard{border:2px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;background:var(--card)}
+.scard.on{border-color:var(--c);box-shadow:0 0 0 2px var(--c) inset}
+.scard h3{margin:0;font-size:1rem;color:var(--c)}
+.scard .what{font-size:.86rem;color:var(--muted)}
+.scard .sample{font-size:.9rem;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.scard .sample i{color:var(--muted);font-style:normal;font-size:.8rem;display:block}
+details{margin-top:12px}
+summary{cursor:pointer;color:var(--accent);font-weight:700}
+.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
 .group h3{font-size:.92rem;margin:0 0 6px;color:var(--muted)}
 .param{margin-bottom:12px}
 .param label{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem}
@@ -40,55 +67,56 @@ option:disabled{color:var(--no)}
 .flag{font-size:.78rem;margin-inline-start:6px}
 .flag.rec{color:var(--accent)}.flag.cau{color:var(--warn)}
 .note{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:4px 10px;font-size:.85rem;margin-top:8px;display:none}
-table.sec{width:100%;border-collapse:collapse;font-size:.88rem}
-table.sec th,table.sec td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:start;vertical-align:middle}
-table.sec td select{min-width:90px}
-.warnline{color:var(--warn);font-size:.8rem}
+#card{min-height:260px;background:var(--soft)}
 .legend{font-size:.82rem;color:var(--muted)}
-.legend b{color:var(--ink)}
-#card{font-family:inherit;min-height:220px;background:var(--soft)}
-@media (max-width:860px){.groups,.recipe-info{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.groups,.recipe-info{grid-template-columns:1fr}}
+@media (max-width:860px){.groups,.cards{grid-template-columns:1fr}.tone{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h1>تنظیمات پیشرفته‌ی نثر</h1>
-<p class="sub">نسخه و پارامترهای متن را انتخاب کنید. گزینه‌هایی که برای نسخه یا سیاق انتخاب‌شده معنا ندارند غیرفعال‌اند، و پیشنهاد نثر برای هر پارامتر علامت خورده است. در پایان «کارت تنظیمات» را کپی کنید و در گفت‌وگو بچسبانید.</p>
+<h1>میز کار نثر</h1>
+<p class="sub">پیش از نوشتن، ساختار متن، تصمیم‌ها، واژه‌ها و سبک را این‌جا مرور و اصلاح کنید. هر چه این‌جا تغییر دهید در «کارت تنظیمات» پایین صفحه جمع می‌شود. کارت را کپی کنید و در گفت‌وگو بچسبانید.</p>
+<div class="steps"><a href="#p-outline">۱. ساختار متن</a><a href="#p-q">۲. پرسش‌ها و تعارض‌ها</a><a href="#p-terms">۳. واژه‌ها</a><a href="#p-style">۴. سبک</a><a href="#p-card">۵. کارت تنظیمات</a></div>
 
 <div class="panel">
-<h2>۱. متنی که می‌خواهید بنویسید</h2>
-<textarea id="brief" rows="3" placeholder="موضوع، مخاطب و کاربرد متن را در چند خط بنویسید"></textarea>
-<div class="row"><button id="suggest" class="primary">پیشنهاد نسخه</button><span class="legend">سه پیشنهاد با سه رنگ مشخص می‌شوند. همه‌ی نسخه‌ها در فهرست هستند و می‌شود هر کدام را انتخاب کرد.</span></div>
-<div class="row chips" id="chips"></div>
-<div class="why" id="why"></div>
+<h2>متنی که نوشته می‌شود</h2>
+<textarea id="brief" rows="2" placeholder="موضوع، مخاطب و کاربرد متن"></textarea>
 </div>
 
-<div class="panel">
-<h2>۲. نسخه</h2>
-<select id="recipe"></select>
-<div class="recipe-info" id="rinfo"></div>
+<div class="panel" id="p-outline">
+<h2>۱. ساختار متن</h2>
+<p class="help">هر کادر یک بخش است. <b>تیتر</b> همان چیزی است که در متن چاپ می‌شود. <b>«این بخش چه می‌گوید»</b> فقط برای تصمیم‌گیری شماست و چاپ نمی‌شود. اگر تیتر جایگزین پیشنهاد شده باشد، زیر تیتر آمده است و با کلیک جای تیتر می‌نشیند. ترتیب را با ▲▼ عوض کنید، با ⇥ بخش را زیربخش کنید و با «افزودن بخش» سرفصل تازه بسازید.</p>
+<div class="outline" id="outline"></div>
+<div class="row"><button id="addsec">+ افزودن بخش</button><label class="legend"><input type="checkbox" id="fine"> نمایش لحن هر بخش (اختیاری)</label></div>
 </div>
 
-<div class="panel">
-<h2>۳. پارامترها</h2>
-<p class="legend"><b>(پیشنهادی)</b> پیش‌فرض این نسخه · <b>(با احتیاط)</b> مجاز ولی فقط با دلیل · گزینه‌ی خاکستری برای این نسخه یا این سیاق معنا ندارد.</p>
+<div class="panel" id="p-q">
+<h2>۲. پرسش‌ها و تعارض‌ها</h2>
+<p class="help">پرسش‌هایی که پاسخشان متن را عوض می‌کند، و جاهایی که خواسته‌ی تازه با متن یا داده‌ی موجود نمی‌خواند. برای هر کدام یک گزینه بزنید یا پاسخ خودتان را بنویسید.</p>
+<div id="qs"></div>
+</div>
+
+<div class="panel" id="p-terms">
+<h2>۳. واژه‌ها</h2>
+<p class="help">نام‌های رسمی، واژه‌هایی که باید جایگزین شوند و واژه‌هایی که نباید بیایند. این فهرست در همه‌ی متن، جدول‌ها، زیرنویس‌ها و تصویرها یکسان اجرا می‌شود.</p>
+<table class="terms" id="terms"></table>
+<div class="row"><button id="addterm">+ افزودن واژه</button></div>
+</div>
+
+<div class="panel" id="p-style">
+<h2>۴. سبک</h2>
+<p class="help">سه پیشنهاد، هر کدام با توضیح ساده و یک نمونه‌ی کوتاه روی همین موضوع. یکی را انتخاب کنید. اگر مطمئن نیستید، پیشنهاد اول را نگه دارید.</p>
+<div class="cards" id="scards"></div>
+<details id="finetune"><summary>تنظیم ریزتر سبک (اختیاری)</summary>
+<p class="help">هر گزینه توضیح و مثال دارد. گزینه‌ی خاکستری با این سبک معنا ندارد. «پیشنهادی» پیش‌فرض این سبک است و «با احتیاط» فقط با دلیل.</p>
+<div class="row"><select id="recipe" style="max-width:520px"></select></div>
 <div class="groups" id="params"></div>
 <div class="note" id="pnote"></div>
-<div class="row"><button id="reset">بازگشت به پیشنهاد نسخه</button></div>
+<div class="row"><button id="reset">بازگشت به پیش‌فرض سبک</button></div>
+</details>
 </div>
 
-<div class="panel">
-<h2>۴. متن بلند و بخش‌ها</h2>
-<label><input type="checkbox" id="long"> متن بلند است و چند بخش دارد</label>
-<div id="secwrap" style="display:none;margin-top:10px">
-<p class="legend">بخش‌ها را به ترتیب انتخاب کنید. سیاق و جایگاه در کل متن ثابت‌اند و از بخش ۳ می‌آیند. لحن و آهنگ هر بخش از جدول نوع بخش می‌آید و در هر مرز حداکثر یک پله جابه‌جا می‌شود، تا متن از لحنی به لحن دیگر نپرد.</p>
-<div style="overflow-x:auto"><table class="sec" id="sectable"></table></div>
-<div class="row"><button id="resetsec">بازگشت به پیش‌فرض هموار</button><span class="legend">پیش‌فرض‌ها هموارند؛ هشدار فقط وقتی می‌آید که خودتان لحن یا ترتیب را عوض کنید.</span></div>
-</div>
-</div>
-
-<div class="panel">
+<div class="panel" id="p-card">
 <h2>۵. کارت تنظیمات</h2>
 <textarea id="card" readonly></textarea>
 <div class="row"><button id="copy" class="primary">کپی برای نثر</button><span id="msg" class="legend"></span></div>
@@ -99,16 +127,81 @@ table.sec td select{min-width:90px}
 const MATRIX = /*NASR_MATRIX*/null;
 const CONFIG = /*NASR_CONFIG*/null;
 const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const FA = n => String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
 const DIM = Object.fromEntries(MATRIX.dims.map(d => [d.key, d]));
 const RECIPES = MATRIX.recipes;
+const SECTYPES = MATRIX.sections.map(s => s.name);
 const STEP = {distance: ["دور","میانه","نزدیک"], certainty: ["قاطع","سنجیده","محتاط"], warmth: ["خنثی","گرم","پرشور"]};
-const PER_SECTION = ["distance","certainty","warmth","rhythm"];
+const TONE = ["distance","certainty","warmth","rhythm"];
 const GROUPS = [["سبک", ["purpose","evidence","position","structure"]], ["سیاق و لحن", ["register","distance","certainty","warmth"]], ["آهنگ", ["rhythm"]]];
 const SCOLORS = ["--s1","--s2","--s3"];
-let state = {recipe: RECIPES[0].name, params: {}, suggestions: [], long: false, sections: []};
-try { const s = JSON.parse(localStorage.getItem("nasr-settings") || "null"); if (s && !CONFIG) state = Object.assign(state, s); } catch (e) {}
-const save = () => { try { localStorage.setItem("nasr-settings", JSON.stringify(state)); } catch (e) {} };
+const SOURCES = ["تازه","از متن قبلی","قبلی با افزوده","—"];
+let state = {brief: "", recipe: RECIPES[0].name, params: {}, suggestions: [], outline: [], questions: [], terms: [], fine: false};
 const recipe = () => RECIPES.find(r => r.name === state.recipe);
+
+// ---------- headings: the rules a Persian heading must pass ----------
+function headingWarnings(t) {
+  const w = [], s = (t || "").trim();
+  if (!s) return ["تیتر خالی است"];
+  if (/[:：]/.test(s)) w.push("دونقطه در تیتر فارسی جا ندارد؛ تیتر ساده بنویسید");
+  if (/[؟?]$/.test(s) || /^(چرا|چگونه|آیا|چه)\s/.test(s)) w.push("تیتر پرسشی نباشد؛ خود حرف را بگویید");
+  if (s.split(/\s+/).length > 9) w.push("تیتر بلند است؛ بیش از ۹ کلمه شبیه جمله می‌شود");
+  if (/(می‌شود|است|هستند|می‌کند|می‌کنند|دارد)$/.test(s)) w.push("تیتر با فعل تمام شده و شبیه جمله است");
+  return w;
+}
+function secDefault(type) { const s = MATRIX.sections.find(x => x.name === type) || MATRIX.sections[0]; return Object.assign({}, s.def); }
+function numbering() {
+  let a = 0, b = 0;
+  return state.outline.map(s => s.level === 2 ? `${FA(a)}-${FA(++b)}` : (b = 0, FA(++a)));
+}
+function renderOutline() {
+  const nums = numbering();
+  $("outline").innerHTML = state.outline.map((s, i) => {
+    const warns = headingWarnings(s.title);
+    const tone = state.fine ? `<div class="lab">نوع بخش و لحن</div><div class="tone">
+      <select data-i="${i}" data-f="type">${SECTYPES.map(n => `<option ${n === s.type ? "selected" : ""}>${n}</option>`).join("")}</select>
+      ${TONE.map(k => `<select data-i="${i}" data-t="${k}" title="${DIM[k].name}">${DIM[k].values.map(v => `<option ${s.tone[k] === v.v ? "selected" : ""}>${v.v}</option>`).join("")}</select>`).join("")}</div>` : "";
+    return `<div class="sec ${s.level === 2 ? "l2" : ""}">
+      <div class="top"><span class="num">${nums[i]}</span><input type="text" class="title" data-i="${i}" data-f="title" value="${esc(s.title)}">
+      <span class="tools"><button data-up="${i}" title="بالا">▲</button><button data-down="${i}" title="پایین">▼</button><button data-lvl="${i}" title="زیربخش یا بخش اصلی">${s.level === 2 ? "⇤" : "⇥"}</button><button data-del="${i}" title="حذف">✕</button></span></div>
+      ${s.alts && s.alts.length ? `<div class="lab">تیترهای جایگزین برای همین بخش</div><div class="alts">${s.alts.map((a, j) => `<span class="alt" data-i="${i}" data-a="${j}">${esc(a)}</span>`).join("")}</div>` : ""}
+      ${warns.length ? `<div class="warnline">${warns.join(" · ")}</div>` : ""}
+      <div class="lab">این بخش چه می‌گوید (چاپ نمی‌شود) <select data-i="${i}" data-f="source" style="width:auto;display:inline-block;font-size:.8rem;padding:0 6px">${SOURCES.map(o => `<option ${o === s.source ? "selected" : ""}>${o}</option>`).join("")}</select></div>
+      <textarea rows="2" data-i="${i}" data-f="job">${esc(s.job)}</textarea>${tone}</div>`;
+  }).join("") || `<p class="legend">هنوز بخشی نیست. با «افزودن بخش» شروع کنید.</p>`;
+  const on = (sel, ev, fn) => document.querySelectorAll(sel).forEach(e => e[ev] = () => fn(e));
+  on("#outline [data-f]", "oninput", e => { const s = state.outline[+e.dataset.i]; s[e.dataset.f] = e.value; if (e.dataset.f === "type") s.tone = secDefault(e.value); if (e.dataset.f !== "job") renderOutline(); renderCard(); });
+  on("#outline [data-t]", "onchange", e => { state.outline[+e.dataset.i].tone[e.dataset.t] = e.value; renderCard(); });
+  on("#outline .alt", "onclick", e => { const s = state.outline[+e.dataset.i], old = s.title; s.title = s.alts[+e.dataset.a]; s.alts[+e.dataset.a] = old; renderAll(); });
+  on("[data-up]", "onclick", e => { const i = +e.dataset.up; if (i > 0) { [state.outline[i - 1], state.outline[i]] = [state.outline[i], state.outline[i - 1]]; renderAll(); } });
+  on("[data-down]", "onclick", e => { const i = +e.dataset.down; if (i < state.outline.length - 1) { [state.outline[i + 1], state.outline[i]] = [state.outline[i], state.outline[i + 1]]; renderAll(); } });
+  on("[data-lvl]", "onclick", e => { const s = state.outline[+e.dataset.lvl]; s.level = s.level === 2 ? 1 : 2; renderAll(); });
+  on("[data-del]", "onclick", e => { state.outline.splice(+e.dataset.del, 1); renderAll(); });
+  document.querySelectorAll("#outline input.title").forEach(e => { e.oninput = () => { state.outline[+e.dataset.i].title = e.value; const w = headingWarnings(e.value); const box = e.closest(".sec"); let wl = box.querySelector(".warnline"); if (!wl) { wl = document.createElement("div"); wl.className = "warnline"; e.parentNode.after(wl); } wl.textContent = w.join(" · "); renderCard(); }; });
+}
+
+// ---------- questions and conflicts ----------
+function renderQuestions() {
+  $("qs").innerHTML = state.questions.map((q, i) => `<div class="q"><b>${q.kind === "conflict" ? "تعارض · " : ""}${esc(q.q)}</b>
+    ${q.detail ? `<div class="legend">${esc(q.detail)}</div>` : ""}
+    <div class="opts">${(q.options || []).map((o, j) => `<span class="opt ${q.answer === o ? "on" : ""}" data-q="${i}" data-o="${j}">${esc(o)}</span>`).join("")}</div>
+    <input type="text" data-q="${i}" placeholder="پاسخ یا توضیح خودتان" value="${esc(q.note || "")}"></div>`).join("") || `<p class="legend">پرسش یا تعارضی ثبت نشده است.</p>`;
+  document.querySelectorAll("#qs .opt").forEach(e => e.onclick = () => { const q = state.questions[+e.dataset.q], o = q.options[+e.dataset.o]; q.answer = q.answer === o ? "" : o; renderQuestions(); renderCard(); });
+  document.querySelectorAll("#qs input").forEach(e => e.oninput = () => { state.questions[+e.dataset.q].note = e.value; renderCard(); });
+}
+
+// ---------- terms ----------
+function renderTerms() {
+  $("terms").innerHTML = `<tr><th>واژه یا عبارت</th><th>قاعده</th><th>جایگزین یا شکل درست</th><th></th></tr>` + state.terms.map((t, i) => `<tr>
+    <td><input type="text" data-i="${i}" data-f="from" value="${esc(t.from)}"></td>
+    <td><select data-i="${i}" data-f="rule">${["جایگزین شود","نیاید","همیشه همین شکل"].map(r => `<option ${r === t.rule ? "selected" : ""}>${r}</option>`).join("")}</select></td>
+    <td><input type="text" data-i="${i}" data-f="to" value="${esc(t.to)}"></td><td><button data-tdel="${i}">✕</button></td></tr>`).join("");
+  document.querySelectorAll("#terms [data-f]").forEach(e => e.oninput = () => { state.terms[+e.dataset.i][e.dataset.f] = e.value; renderCard(); });
+  document.querySelectorAll("[data-tdel]").forEach(e => e.onclick = () => { state.terms.splice(+e.dataset.tdel, 1); renderTerms(); renderCard(); });
+}
+
+// ---------- style ----------
 function level(key, v, rec, register) {
   if (!rec.allow[key].includes(v)) return "no";
   const lim = (MATRIX.register_limits[register] || {})[key] || {};
@@ -116,38 +209,25 @@ function level(key, v, rec, register) {
   if (lim[v] === "caution" && rec.def[key] !== v) return "caution";
   return "ok";
 }
-function suggest(text) {
-  const t = (text || "").replace(/\s+/g, " ");
-  const scored = RECIPES.map((r, i) => ({r, i, s: r.keywords.reduce((a, k) => a + (t.includes(k) ? 1 : 0), 0)}));
-  scored.sort((a, b) => b.s - a.s || a.i - b.i);
-  const top = scored.filter(x => x.s > 0).slice(0, 3).map(x => ({name: x.r.name, why: "واژه‌های کلیدی متن: " + x.r.keywords.filter(k => t.includes(k)).join("، ")}));
-  const fallback = ["تحلیل مفهومی","استدلال روزنامه‌ای","توضیح و آموزش"];
-  for (const n of fallback) if (top.length < 3 && !top.find(x => x.name === n)) top.push({name: n, why: "پیشنهاد عمومی؛ متن نشانه‌ی روشنی نداشت"});
-  return top;
-}
-function renderChips() {
-  $("chips").innerHTML = state.suggestions.map((s, i) => `<span class="chip ${s.name === state.recipe ? "on" : ""}" style="--c:var(${SCOLORS[i]})" data-n="${s.name}">پیشنهاد ${"۱۲۳"[i]} · ${s.name}</span>`).join("");
-  $("why").innerHTML = state.suggestions.map((s, i) => `<div><b style="color:var(${SCOLORS[i]})">${s.name}:</b> ${s.why || ""}</div>`).join("");
-  document.querySelectorAll(".chip").forEach(c => c.onclick = () => setRecipe(c.dataset.n));
+function renderStyleCards() {
+  $("scards").innerHTML = state.suggestions.map((s, i) => {
+    const r = RECIPES.find(x => x.name === s.name) || {};
+    return `<div class="scard ${s.name === state.recipe ? "on" : ""}" style="--c:var(${SCOLORS[i]})" data-n="${esc(s.name)}">
+      <h3>${i === 0 ? "پیشنهاد اول · " : ""}${esc(s.name)}</h3>
+      <div class="what">${esc(r.use || "")}. ${esc(s.why || "")}</div>
+      <div class="what">هر بند ${esc(r.unit || "")} می‌آورد و نتیجه ${esc(r.payoff || "")}.</div>
+      <div class="sample"><i>نمونه روی همین موضوع</i>${s.sample ? esc(s.sample) : `<span class="legend">نمونه‌ای ساخته نشده است. اگر لازم دارید، در گفت‌وگو «نمونه‌ی این سبک» بخواهید.</span>`}</div></div>`;
+  }).join("");
+  document.querySelectorAll(".scard").forEach(c => c.onclick = () => setRecipe(c.dataset.n));
 }
 function renderRecipeSelect() {
-  $("recipe").innerHTML = RECIPES.map(r => {
-    const i = state.suggestions.findIndex(s => s.name === r.name);
-    const tag = i >= 0 ? `★ پیشنهاد ${"۱۲۳"[i]} · ` : "";
-    const style = i >= 0 ? `style="color:var(${SCOLORS[i]});font-weight:700"` : "";
-    return `<option value="${r.name}" ${style}>${tag}${r.name} · ${r.use}</option>`;
-  }).join("");
+  $("recipe").innerHTML = RECIPES.map(r => `<option value="${esc(r.name)}">${esc(r.name)} · ${esc(r.use)}</option>`).join("");
   $("recipe").value = state.recipe;
-  const r = recipe();
-  $("rinfo").innerHTML = `<div><b>کاربرد</b>${r.use}</div><div><b>واحد روایت</b>${r.unit}</div><div><b>پرسش پیونددهنده</b>${r.link}</div><div><b>جای نتیجه</b>${r.payoff}</div>`;
 }
 function renderParams() {
   const r = recipe(), reg = state.params.register;
   $("params").innerHTML = GROUPS.map(([g, keys]) => `<div class="group"><h3>${g}</h3>${keys.map(k => {
     const d = DIM[k];
-    if (state.long && PER_SECTION.includes(k)) {
-      return `<div class="param"><label>${d.name}<span>${d.when}</span></label><select disabled><option>در بخش ۴ تنظیم می‌شود</option></select><div class="ex">در متن بلند، ${d.name} از بخشی به بخش دیگر حرکت می‌کند و برای هر بخش جدا تعیین می‌شود.</div></div>`;
-    }
     const opts = d.values.map(v => {
       const lv = level(k, v.v, r, k === "register" ? null : reg);
       const flag = r.def[k] === v.v ? " (پیشنهادی)" : (lv === "caution" ? " (با احتیاط)" : "");
@@ -173,100 +253,56 @@ function normalise() {
   }
   $("pnote").style.display = notes.length ? "block" : "none";
   $("pnote").innerHTML = notes.join("<br>");
-  state.sections.forEach(s => { for (const k of ["distance","certainty","warmth","rhythm"]) if (secLevel(k, s[k]) === "no") s[k] = DIM[k].values.map(v => v.v).find(v => secLevel(k, v) !== "no"); });
 }
-function setRecipe(name) {
-  state.recipe = name; state.params = Object.assign({}, recipe().def);
-  // a new recipe brings its own section plan; the old one would not fit it
-  const recSecs = recipe().sections;
-  if (recSecs) state.sections = defaultSections(recSecs);
-  else if (state.sections.length) state.sections = defaultSections(state.sections.map(s => s.name));
-  normalise(); renderAll();
-}
-function secDefault(name) { const s = MATRIX.sections.find(x => x.name === name); return Object.assign({name}, s.def); }
-// Defaults must never jolt the reader: each tone dimension moves at most one step
-// between consecutive sections, and rhythm moves only to a neighbour. A default
-// that would jump is pulled to the nearest value that does not.
-function smoothFrom(seq, start) {
-  for (let i = Math.max(1, start); i < seq.length; i++) {
-    const prev = seq[i - 1], cur = seq[i];
-    for (const k of ["distance","certainty","warmth"]) {
-      const a = STEP[k].indexOf(prev[k]), b = STEP[k].indexOf(cur[k]);
-      if (Math.abs(a - b) > 1) cur[k] = STEP[k][a + Math.sign(b - a)];
-    }
-    if (cur.rhythm !== prev.rhythm && !(MATRIX.neighbours[prev.rhythm] || []).includes(cur.rhythm)) {
-      const near = MATRIX.neighbours[prev.rhythm] || [];
-      cur.rhythm = near.find(r => r !== "خطابی" && (MATRIX.neighbours[cur.rhythm] || []).includes(r)) || prev.rhythm;
-    }
-  }
-  return seq;
-}
-function defaultSections(names) {
-  const seq = names.map(secDefault), rr = recipe().section_rhythm;
-  if (rr) seq.forEach(s => s.rhythm = rr);
-  return smoothFrom(seq, 1);
-}
-function secLevel(k, v) { const lim = (MATRIX.register_limits[state.params.register] || {})[k] || {}; return lim[v] || "ok"; }
-function renderSections() {
-  $("long").checked = state.long; $("secwrap").style.display = state.long ? "block" : "none";
-  if (!state.long) return;
-  const all = MATRIX.sections.map(s => s.name);
-  const rows = state.sections.map((s, i) => {
-    const sel = k => `<select data-i="${i}" data-k="${k}">${DIM[k].values.map(v => `<option ${secLevel(k, v.v) === "no" ? "disabled" : ""} ${s[k] === v.v ? "selected" : ""}>${v.v}</option>`).join("")}</select>`;
-    const prev = state.sections[i - 1];
-    const warns = [];
-    if (prev) {
-      for (const k of ["distance","certainty","warmth"]) { const a = STEP[k].indexOf(prev[k]), b = STEP[k].indexOf(s[k]); if (Math.abs(a - b) > 1) warns.push(`${DIM[k].name} دو پله پریده؛ یک پله کافی است`); }
-      if (prev.rhythm !== s.rhythm && !(MATRIX.neighbours[prev.rhythm] || []).includes(s.rhythm)) warns.push("آهنگ همسایه نیست، پس آغاز این بخش یک جمله‌ی پل می‌خواهد");
-    }
-    const job = (MATRIX.sections.find(x => x.name === s.name) || {}).job || "";
-    return `<tr><td><b>${s.name}</b><div class="legend">${job}</div>${warns.length ? `<div class="warnline">${warns.join(" · ")}</div>` : ""}</td><td>${sel("distance")}</td><td>${sel("certainty")}</td><td>${sel("warmth")}</td><td>${sel("rhythm")}</td><td><button data-up="${i}">▲</button> <button data-del="${i}">✕</button></td></tr>`;
-  }).join("");
-  $("sectable").innerHTML = `<tr><th>بخش</th><th>فاصله</th><th>قاطعیت</th><th>دما</th><th>آهنگ</th><th></th></tr>${rows}<tr><td colspan="6"><select id="addsec"><option value="">+ افزودن بخش</option>${all.map(n => `<option>${n}</option>`).join("")}</select></td></tr>`;
-  document.querySelectorAll("#sectable select[data-i]").forEach(s => s.onchange = () => { state.sections[+s.dataset.i][s.dataset.k] = s.value; renderAll(); });
-  document.querySelectorAll("[data-del]").forEach(b => b.onclick = () => { state.sections.splice(+b.dataset.del, 1); renderAll(); });
-  document.querySelectorAll("[data-up]").forEach(b => b.onclick = () => { const i = +b.dataset.up; if (i > 0) { [state.sections[i - 1], state.sections[i]] = [state.sections[i], state.sections[i - 1]]; renderAll(); } });
-  $("addsec").onchange = e => { if (e.target.value) { state.sections.push(secDefault(e.target.value)); smoothFrom(state.sections, state.sections.length - 1); renderAll(); } };
-}
+function setRecipe(name) { state.recipe = name; state.params = Object.assign({}, recipe().def); normalise(); renderAll(); }
+
+// ---------- card ----------
 function renderCard() {
-  const r = recipe(), p = state.params;
-  const changed = Object.keys(DIM).filter(k => !(state.long && PER_SECTION.includes(k)) && p[k] !== r.def[k]).map(k => DIM[k].name);
-  const lines = [
-    "تنظیمات نثر",
-    "موضوع: " + ($("brief").value.trim() || "—"),
-    "نسخه: " + r.name + (state.suggestions.findIndex(s => s.name === r.name) >= 0 ? " (از پیشنهادهای نثر)" : " (انتخاب کاربر)"),
-    `سبک: غایت ${p.purpose}، شاهد ${p.evidence}، جایگاه ${p.position}، ساخت ${p.structure}`,
-    `سیاق: ${p.register}`,
-    ...(state.long ? ["لحن و آهنگ: برای هر بخش جدا (پایین)"] : [`لحن: فاصله ${p.distance}، قاطعیت ${p.certainty}، دما ${p.warmth}`, `آهنگ: ${p.rhythm}`]),
-    `روایت: واحد «${r.unit}»، پرسش پیونددهنده «${r.link}»، ${r.payoff}`,
-    "تغییر نسبت به پیشنهاد نسخه: " + (changed.length ? changed.join("، ") : "ندارد")
-  ];
-  if (state.long && state.sections.length) {
-    lines.push("بخش‌ها:");
-    state.sections.forEach((s, i) => lines.push(`  ${i + 1}. ${s.name} · فاصله ${s.distance}، قاطعیت ${s.certainty}، دما ${s.warmth} · آهنگ ${s.rhythm}`));
+  const r = recipe(), p = state.params, nums = numbering();
+  const changed = Object.keys(DIM).filter(k => p[k] !== r.def[k]).map(k => `${DIM[k].name} ${p[k]}`);
+  const L = ["کارت تنظیمات نثر", "موضوع: " + (state.brief.trim() || "—"), "", "ساختار:"];
+  state.outline.forEach((s, i) => {
+    L.push(`  ${nums[i]}. ${s.title}${s.source && s.source !== "—" ? " [" + s.source + "]" : ""}`);
+    if ((s.job || "").trim()) L.push(`      کار بخش: ${s.job.trim()}`);
+    if (state.fine) L.push(`      لحن: ${s.type} · فاصله ${s.tone.distance}، قاطعیت ${s.tone.certainty}، دما ${s.tone.warmth} · آهنگ ${s.tone.rhythm}`);
+  });
+  const answered = state.questions.filter(q => q.answer || (q.note || "").trim());
+  if (state.questions.length) {
+    L.push("", "پاسخ‌ها:");
+    state.questions.forEach((q, i) => L.push(`  ${FA(i + 1)}. ${q.q} ← ${[q.answer, (q.note || "").trim()].filter(Boolean).join(" · ") || "بی‌پاسخ"}`));
   }
-  $("card").value = lines.join("\n");
+  if (state.terms.length) {
+    L.push("", "واژه‌ها:");
+    state.terms.filter(t => t.from).forEach(t => L.push(`  «${t.from}» ${t.rule}${t.to ? " ← «" + t.to + "»" : ""}`));
+  }
+  L.push("", "سبک: " + r.name + (state.suggestions.findIndex(s => s.name === r.name) >= 0 ? " (از پیشنهادها)" : " (انتخاب خودم)"));
+  if (changed.length) L.push("  تغییر نسبت به پیش‌فرض سبک: " + changed.join("، "));
+  $("card").value = L.join("\n");
 }
-function renderAll() { renderChips(); renderRecipeSelect(); renderParams(); renderSections(); renderCard(); save(); }
+function renderAll() { renderOutline(); renderQuestions(); renderTerms(); renderStyleCards(); renderRecipeSelect(); renderParams(); renderCard(); }
+
 $("recipe").onchange = e => setRecipe(e.target.value);
-$("suggest").onclick = () => { state.suggestions = suggest($("brief").value); setRecipe(state.suggestions[0].name); };
 $("reset").onclick = () => setRecipe(state.recipe);
-$("long").onchange = e => { state.long = e.target.checked; if (state.long && !state.sections.length) state.sections = defaultSections(recipe().sections || ["خلاصه‌ی مدیریتی","مسئله و وضعیت","تحلیل و تبیین","چشم‌انداز"]); renderAll(); };
-$("resetsec").onclick = () => { state.sections = defaultSections(recipe().sections || state.sections.map(s => s.name)); renderAll(); };
-$("brief").oninput = () => { state.brief = $("brief").value; renderCard(); save(); };
+$("brief").oninput = () => { state.brief = $("brief").value; renderCard(); };
+$("fine").onchange = e => { state.fine = e.target.checked; renderOutline(); renderCard(); };
+$("addsec").onclick = () => { state.outline.push({title: "", job: "", source: "تازه", level: 1, type: SECTYPES[2], tone: secDefault(SECTYPES[2]), alts: []}); renderAll(); };
+$("addterm").onclick = () => { state.terms.push({from: "", rule: "جایگزین شود", to: ""}); renderTerms(); };
 $("copy").onclick = async () => { try { await navigator.clipboard.writeText($("card").value); $("msg").textContent = "کپی شد؛ در گفت‌وگو بچسبانید."; } catch (e) { $("card").select(); $("msg").textContent = "متن انتخاب شد؛ با Ctrl+C کپی کنید."; } };
-if (CONFIG) {
-  $("brief").value = CONFIG.brief || "";
-  state.suggestions = (CONFIG.suggestions || []).slice(0, 3);
-  state.long = !!CONFIG.long;
-  state.sections = defaultSections((CONFIG.sections || []).map(n => typeof n === "string" ? n : n.name));
-  setRecipe(state.suggestions.length ? state.suggestions[0].name : RECIPES[0].name);
-} else {
-  $("brief").value = state.brief || "";
-  if (!state.suggestions.length) state.suggestions = suggest("");
-  if (!Object.keys(state.params).length) state.params = Object.assign({}, recipe().def);
-  normalise(); renderAll();
-}
+
+// ---------- start ----------
+const C = CONFIG || {};
+state.brief = C.brief || "";
+$("brief").value = state.brief;
+state.suggestions = (C.suggestions || []).slice(0, 3);
+if (!state.suggestions.length) state.suggestions = ["تحلیل مفهومی","استدلال روزنامه‌ای","توضیح و آموزش"].map(n => ({name: n, why: ""}));
+state.outline = (C.outline || []).map(s => {
+  const type = SECTYPES.includes(s.type) ? s.type : SECTYPES[2];
+  return {title: s.title || "", job: s.job || "", source: s.source || "تازه", level: s.level === 2 ? 2 : 1, type, tone: Object.assign(secDefault(type), s.tone || {}), alts: s.alts || []};
+});
+state.questions = (C.questions || []).map(q => Object.assign({kind: "question", options: []}, q));
+(C.conflicts || []).forEach(c => state.questions.push({kind: "conflict", q: c.text, detail: c.detail || "", options: c.options || ["طبق متن قبلی", "طبق خواسته‌ی تازه", "بعداً تصمیم می‌گیرم"]}));
+state.terms = (C.terms || []).map(t => ({from: t.from || "", rule: t.rule || (t.to ? "جایگزین شود" : "نیاید"), to: t.to || ""}));
+setRecipe(state.suggestions[0].name);
 </script>
 </body>
 </html>
