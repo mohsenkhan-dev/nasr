@@ -226,6 +226,23 @@ in English. تحول را «ایجاد می‌کنند»، «پدید می‌آ�
 «از معیار رد شدن» (ambiguous: passed or failed?), «نقش حسگر را دارد». Read
 each verb–noun pair aloud and ask whether an Iranian writer would pair them.
 
+**English sentence logic in Persian words.** Every word can be Persian and the
+sentence still English. «این عدد مشتریان X و مشتریان Y را با هم می‌شمارد»
+(an inanimate figure that "counts") → «این ۱۴ مشتری شامل مشتریان X و Y است».
+«اهداف این نقشه‌ی راه بلندند» (a bare predicate adjective, "the goals are
+high") → «این نقشه‌ی راه اهدافی متهورانه دارد». When a sentence makes a
+number, a document or a goal the actor, try the Persian frame first:
+شامل … است، … دارد، در … آمده است.
+
+### T13a. Redundancy (حشو)
+A sentence that restates what the paragraph, or the document's own structure,
+already makes clear is حشو. Typical forms: a meta-sentence about what the
+document does («این سند مسیر … را در یک جا می‌آورد»، «به همین دلیل این سند
+X را یک مجموعه می‌بیند»), and a balancing sentence that repeats the point just
+made («هر لاین هدف خودش را دارد، … اما هر دو بخشی از یک نقشه‌اند»). Test:
+delete the sentence; if the reader loses no fact and no step of the argument,
+leave it out.
+
 ### T13b. Colons, headings and announcing openers
 - **Colons are rare in Persian prose.** Use «:» only before a list or a quotation. Mid-sentence, replace it with «،»، «یعنی» or a new sentence.
 - **Headings are plain and descriptive**: no «عنوان: زیرعنوان», no question headings, no dramatic phrasing («تصمیمی که پیش روست»، «سقف ظرفیت»). «پیشنهاد تغییر مأموریت کلمه» is a heading; a slogan is not.
